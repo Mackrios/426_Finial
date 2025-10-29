@@ -36,7 +36,7 @@
         <Attr Name="UsedIn" Val="simulation"/>
       </FileInfo>
     </File>
-    <File Path="$PPRDIR/../top_level_tb.vhdl">
+    <File Path="$PPRDIR/../../Downloads/Uni Stuff/426/Lab3-1/top_level_tb.vhdl">
       <FileInfo>
         <Attr Name="AutoDisabled" Val="1"/>
         <Attr Name="UsedIn" Val="synthesis"/>

@@ -2,16 +2,16 @@ library IEEE;
 use IEEE.std_logic_1164.all;
 use IEEE.numeric_std.all;
 
-entity adder_32bit is
+entity adder_16bit is
   port(
-    A, B : in  unsigned(31 downto 0);
+    A, B : in  unsigned(15 downto 0);
     Cin  : in  std_logic;
-    Sum  : out unsigned(31 downto 0);
+    Sum  : out unsigned(15 downto 0);
     Cout : out std_logic
   );
 end entity;
 
-architecture structural of adder_32bit is
+architecture structural of adder_16bit is
   component full_adder
     port(
       A, B, Cin : in  std_logic;
@@ -19,11 +19,11 @@ architecture structural of adder_32bit is
     );
   end component;
 
-  signal carry : std_logic_vector(32 downto 0);
+  signal carry : std_logic_vector(15 downto 0);
 begin
   carry(0) <= Cin;
 
-  gen_adders: for i in 0 to 31 generate
+  gen_adders: for i in 0 to 15 generate
     FA: full_adder
       port map(
         A   => A(i),
@@ -34,5 +34,5 @@ begin
       );
   end generate;
 
-  Cout <= carry(32);
+  Cout <= carry(15);
 end architecture;

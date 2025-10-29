@@ -1,0 +1,487 @@
+/*
+
+Xilinx Vivado v2020.2 (64-bit) [Major: 2020, Minor: 2]
+SW Build: 3064766 on Wed Nov 18 09:12:45 MST 2020
+IP Build: 3064653 on Wed Nov 18 14:17:31 MST 2020
+
+Process ID (PID): 28768
+License: Customer
+Mode: GUI Mode
+
+Current time: 	Wed Oct 29 16:43:11 EDT 2025
+Time zone: 	Eastern Standard Time (America/New_York)
+
+OS: Windows 10
+OS Version: 10.0
+OS Architecture: amd64
+Available processors (cores): 20
+
+Screen size: 2560x1600
+Screen resolution (DPI): 150
+Available screens: 1
+Default font: family=Segoe UI,name=Segoe UI,style=plain,size=18
+Scale size: 27
+
+Java version: 	11.0.2 64-bit
+Java home: 	C:/Xilinx/Vivado/2020.2/tps/win64/jre11.0.2
+Java executable location: 	C:/Xilinx/Vivado/2020.2/tps/win64/jre11.0.2/bin/java.exe
+Java initial memory (-Xms): 	128 MB
+Java maximum memory (-Xmx):	 3 GB
+
+
+User name: 	mackr
+User home directory: C:/Users/mackr
+User working directory: C:/Users/mackr/426_Finial/Lab_3_426
+User country: 	US
+User language: 	en
+User locale: 	en_US
+
+RDI_BASEROOT: C:/Xilinx/Vivado
+HDI_APPROOT: C:/Xilinx/Vivado/2020.2
+RDI_DATADIR: C:/Xilinx/Vivado/2020.2/data
+RDI_BINDIR: C:/Xilinx/Vivado/2020.2/bin
+
+Vivado preferences file location: C:/Users/mackr/AppData/Roaming/Xilinx/Vivado/2020.2/vivado.xml
+Vivado preferences directory: C:/Users/mackr/AppData/Roaming/Xilinx/Vivado/2020.2/
+Vivado layouts directory: C:/Users/mackr/AppData/Roaming/Xilinx/Vivado/2020.2/data/layouts
+PlanAhead jar file location: 	C:/Xilinx/Vivado/2020.2/lib/classes/planAhead.jar
+Vivado log file location: 	C:/Users/mackr/426_Finial/Lab_3_426/vivado.log
+Vivado journal file location: 	C:/Users/mackr/426_Finial/Lab_3_426/vivado.jou
+Engine tmp dir: 	C:/Users/mackr/426_Finial/Lab_3_426/.Xil/Vivado-28768-mackrios
+
+Xilinx Environment Variables
+----------------------------
+XILINX: C:/Xilinx/Vivado/2020.2/ids_lite/ISE
+XILINX_DSP: C:/Xilinx/Vivado/2020.2/ids_lite/ISE
+XILINX_HLS: C:/Xilinx/Vitis_HLS/2020.2
+XILINX_PLANAHEAD: C:/Xilinx/Vivado/2020.2
+XILINX_VIVADO: C:/Xilinx/Vivado/2020.2
+XILINX_VIVADO_HLS: C:/Xilinx/Vivado/2020.2
+
+
+GUI allocated memory:	145 MB
+GUI max memory:		3,072 MB
+Engine allocated memory: 1,033 MB
+
+Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
+
+*/
+
+// TclEventType: START_GUI
+// Tcl Message: start_gui 
+// TclEventType: PROJECT_OPEN_DIALOG
+// bz (cr):  Open Project : addNotify
+// Opening Vivado Project: C:\Users\mackr\426_Finial\Lab_3_426\Lab_3_426.xpr. Version: Vivado v2020.2 
+// TclEventType: DEBUG_PROBE_SET_CHANGE
+// Tcl Message: open_project C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.xpr 
+// HMemoryUtils.trashcanNow. Engine heap size: 1,033 MB. GUI used memory: 64 MB. Current time: 10/29/25, 4:43:12 PM EDT
+// TclEventType: MSGMGR_MOVEMSG
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: FILE_SET_NEW
+// TclEventType: RUN_COMPLETED
+// TclEventType: RUN_STATUS_CHANGE
+// TclEventType: RUN_CURRENT
+// TclEventType: PROJECT_DASHBOARD_NEW
+// TclEventType: PROJECT_DASHBOARD_GADGET_NEW
+// TclEventType: PROJECT_DASHBOARD_GADGET_CHANGE
+// TclEventType: PROJECT_DASHBOARD_GADGET_NEW
+// TclEventType: PROJECT_DASHBOARD_GADGET_CHANGE
+// TclEventType: PROJECT_DASHBOARD_GADGET_NEW
+// TclEventType: PROJECT_DASHBOARD_GADGET_CHANGE
+// TclEventType: PROJECT_DASHBOARD_GADGET_NEW
+// TclEventType: PROJECT_DASHBOARD_GADGET_CHANGE
+// TclEventType: PROJECT_DASHBOARD_GADGET_NEW
+// TclEventType: PROJECT_DASHBOARD_GADGET_CHANGE
+// TclEventType: PROJECT_DASHBOARD_GADGET_NEW
+// TclEventType: PROJECT_DASHBOARD_GADGET_CHANGE
+// TclEventType: PROJECT_NEW
+// Tcl Message: open_project C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.xpr 
+// Tcl Message: INFO: [Project 1-313] Project file moved from 'C:/Users/mackr/Downloads/Uni Stuff/426/Lab3-1/Lab_3_426' since last save. 
+// Tcl Message: Scanning sources... Finished scanning sources 
+// Tcl Message: INFO: [IP_Flow 19-234] Refreshing IP repositories INFO: [IP_Flow 19-1704] No user IP repositories specified 
+// TclEventType: PROJECT_NEW
+// [GUI Memory]: 75 MB (+76345kb) [00:00:19]
+// [Engine Memory]: 1,033 MB (+931330kb) [00:00:19]
+// [GUI Memory]: 96 MB (+17526kb) [00:00:20]
+// [GUI Memory]: 118 MB (+18026kb) [00:00:20]
+// WARNING: HEventQueue.dispatchEvent() is taking  2542 ms.
+// Tcl Message: INFO: [IP_Flow 19-2313] Loaded Vivado IP repository 'C:/Xilinx/Vivado/2020.2/data/ip'. 
+// [GUI Memory]: 125 MB (+1778kb) [00:00:22]
+// Project name: Lab_3_426; location: C:/Users/mackr/426_Finial/Lab_3_426; part: xc7a100tcsg324-1
+// Tcl Message: open_project: Time (s): cpu = 00:00:12 ; elapsed = 00:00:08 . Memory (MB): peak = 1017.820 ; gain = 0.000 
+dismissDialog("Open Project"); // bz
+// Tcl Command: 'rdi::info_commands {device::*}'
+// Tcl Command: 'rdi::info_commands {debug::*}'
+// Tcl Command: 'rdi::info_commands {*}'
+// Tcl Message: update_compile_order -fileset sources_1 
+expandTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, top_level_tb(test) (top_level_tb.vhdl)]", 1); // D
+expandTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, top_level_tb(test) (top_level_tb.vhdl), UUT : top_level(rtl) (top_level.vhd)]", 2); // D
+expandTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, top_level_tb(test) (top_level_tb.vhdl), UUT : top_level(rtl) (top_level.vhd), ALU_Unit : alu(rtl) (alu.vhd)]", 4); // D
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, top_level_tb(test) (top_level_tb.vhdl), UUT : top_level(rtl) (top_level.vhd), ALU_Unit : alu(rtl) (alu.vhd)]", 4, true); // D - Node
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, top_level_tb(test) (top_level_tb.vhdl), UUT : top_level(rtl) (top_level.vhd), ALU_Unit : alu(rtl) (alu.vhd)]", 4, true, false, false, false, false, true); // D - Double Click - Node
+// [GUI Memory]: 136 MB (+4243kb) [00:00:31]
+selectCodeEditor("alu.vhd", 489, 279); // bP
+selectCodeEditor("alu.vhd", 699, 370); // bP
+// Elapsed time: 104 seconds
+selectCodeEditor("alu.vhd", 421, 545); // bP
+selectCodeEditor("alu.vhd", 691, 413); // bP
+selectCodeEditor("alu.vhd", 496, 284); // bP
+selectCodeEditor("alu.vhd", 414, 411); // bP
+// WARNING: HSwingWorker (Refresh Filesets Swing Worker) is taking 1547 ms. Increasing delay to 4641 ms.
+// WARNING: HEventQueue.dispatchEvent() is taking  1367 ms.
+// WARNING: HTimer (ActiveMsgMonitor Process Messages Timer) is taking 206ms to process. Increasing delay to 2000 ms.
+// WARNING: HTimer (StateMonitor Timer) is taking 838ms to process. Increasing delay to 4000 ms.
+// Elapsed time: 281 seconds
+selectCodeEditor("alu.vhd", 361, 582); // bP
+typeControlKey((HResource) null, "alu.vhd", 'c'); // bP
+typeControlKey((HResource) null, "alu.vhd", 'c'); // bP
+// [GUI Memory]: 146 MB (+3362kb) [00:07:15]
+// Elapsed time: 172 seconds
+selectCodeEditor("alu.vhd", 479, 395); // bP
+typeControlKey((HResource) null, "alu.vhd", 'c'); // bP
+typeControlKey((HResource) null, "alu.vhd", 'c'); // bP
+// Elapsed time: 184 seconds
+selectCodeEditor("alu.vhd", 751, 491); // bP
+typeControlKey((HResource) null, "alu.vhd", 'c'); // bP
+typeControlKey((HResource) null, "alu.vhd", 'c'); // bP
+// Elapsed time: 53 seconds
+selectCodeEditor("alu.vhd", 418, 259); // bP
+expandTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, top_level_tb(test) (top_level_tb.vhdl), UUT : top_level(rtl) (top_level.vhd), ALU_Unit : alu(rtl) (alu.vhd)]", 4); // D
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, top_level_tb(test) (top_level_tb.vhdl), UUT : top_level(rtl) (top_level.vhd), ALU_Unit : alu(rtl) (alu.vhd), ADDER_INST : adder_32bit(structural) (adder_32bit.vhd)]", 5, true); // D - Node
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, top_level_tb(test) (top_level_tb.vhdl), UUT : top_level(rtl) (top_level.vhd), ALU_Unit : alu(rtl) (alu.vhd), ADDER_INST : adder_32bit(structural) (adder_32bit.vhd), gen_adders[4].FA : full_adder(rtl) (full_adder.vhd)]", 10, false, false, false, false, false, true); // D - Double Click
+selectCodeEditor("adder_32bit.vhd", 523, 527); // bP
+typeControlKey((HResource) null, "adder_32bit.vhd", 'c'); // bP
+selectCodeEditor("adder_32bit.vhd", 386, 546); // bP
+// Elapsed time: 53 seconds
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "alu.vhd", 1); // m
+// Elapsed time: 13 seconds
+selectCodeEditor("alu.vhd", 756, 366); // bP
+typeControlKey((HResource) null, "alu.vhd", 'c'); // bP
+typeControlKey((HResource) null, "alu.vhd", 'c'); // bP
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "adder_32bit.vhd", 2); // m
+selectCodeEditor("adder_32bit.vhd", 484, 215); // bP
+typeControlKey((HResource) null, "adder_32bit.vhd", 'c'); // bP
+typeControlKey((HResource) null, "adder_32bit.vhd", 'c'); // bP
+typeControlKey((HResource) null, "adder_32bit.vhd", 'c'); // bP
+typeControlKey((HResource) null, "adder_32bit.vhd", 'c'); // bP
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, top_level_tb(test) (top_level_tb.vhdl), UUT : top_level(rtl) (top_level.vhd), ALU_Unit : alu(rtl) (alu.vhd), ADDER_INST : adder_32bit(structural) (adder_32bit.vhd), gen_adders[0].FA : full_adder(rtl) (full_adder.vhd)]", 6, false); // D
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, top_level_tb(test) (top_level_tb.vhdl), UUT : top_level(rtl) (top_level.vhd), ALU_Unit : alu(rtl) (alu.vhd), ADDER_INST : adder_32bit(structural) (adder_32bit.vhd), gen_adders[0].FA : full_adder(rtl) (full_adder.vhd)]", 6, false, false, false, false, false, true); // D - Double Click
+selectCodeEditor("full_adder.vhd", 336, 327); // bP
+typeControlKey((HResource) null, "full_adder.vhd", 'c'); // bP
+typeControlKey((HResource) null, "full_adder.vhd", 'c'); // bP
+typeControlKey((HResource) null, "full_adder.vhd", 'c'); // bP
+// Elapsed time: 50 seconds
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "adder_32bit.vhd", 2); // m
+selectCodeEditor("adder_32bit.vhd", 382, 319); // bP
+selectCodeEditor("adder_32bit.vhd", 288, 163); // bP
+selectCodeEditor("adder_32bit.vhd", 481, 230); // bP
+selectCodeEditor("adder_32bit.vhd", 395, 459); // bP
+selectCodeEditor("adder_32bit.vhd", 707, 460); // bP
+selectCodeEditor("adder_32bit.vhd", 378, 270); // bP
+selectCodeEditor("adder_32bit.vhd", 563, 298); // bP
+typeControlKey(null, null, 'z');
+typeControlKey(null, null, 'z');
+typeControlKey(null, null, 'z');
+typeControlKey(null, null, 'z');
+selectCodeEditor("adder_32bit.vhd", 441, 310); // bP
+selectCodeEditor("adder_32bit.vhd", 383, 339); // bP
+selectCodeEditor("adder_32bit.vhd", 418, 421); // bP
+selectCodeEditor("adder_32bit.vhd", 330, 557); // bP
+selectCodeEditor("adder_32bit.vhd", 635, 488); // bP
+selectCodeEditor("adder_32bit.vhd", 395, 452); // bP
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, top_level_tb(test) (top_level_tb.vhdl), UUT : top_level(rtl) (top_level.vhd), ALU_Unit : alu(rtl) (alu.vhd), ADDER_INST : adder_32bit(structural) (adder_32bit.vhd)]", 5, true); // D - Node
+selectCodeEditor("adder_32bit.vhd", 438, 394); // bP
+// Elapsed time: 57 seconds
+selectCodeEditor("adder_32bit.vhd", 190, 671); // bP
+selectCodeEditor("adder_32bit.vhd", 522, 734); // bP
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "alu.vhd", 1); // m
+selectCodeEditor("alu.vhd", 573, 380); // bP
+selectCodeEditor("alu.vhd", 340, 153); // bP
+typeControlKey(null, null, 'z');
+typeControlKey(null, null, 'z');
+// Elapsed time: 27 seconds
+selectCodeEditor("alu.vhd", 616, 350); // bP
+typeControlKey((HResource) null, "alu.vhd", 'v'); // bP
+selectCodeEditor("alu.vhd", 671, 370); // bP
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// Tcl Message: update_compile_order -fileset sources_1 
+// Elapsed time: 14 seconds
+selectCodeEditor("alu.vhd", 679, 311); // bP
+typeControlKey(null, null, 'z');
+// Elapsed time: 26 seconds
+selectCodeEditor("alu.vhd", 198, 187); // bP
+selectCodeEditor("alu.vhd", 198, 187, false, false, false, false, true); // bP - Double Click
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "adder_32bit.vhd", 2); // m
+selectCodeEditor("adder_32bit.vhd", 162, 103); // bP
+selectCodeEditor("adder_32bit.vhd", 340, 117); // bP
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+selectCodeEditor("adder_32bit.vhd", 391, 342); // bP
+selectCodeEditor("adder_32bit.vhd", 549, 391); // bP
+selectCodeEditor("adder_32bit.vhd", 231, 212); // bP
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// Tcl Message: update_compile_order -fileset sources_1 
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "alu.vhd", 1); // m
+selectCodeEditor("alu.vhd", 455, 209); // bP
+selectCodeEditor("alu.vhd", 628, 140); // bP
+selectCodeEditor("alu.vhd", 628, 207); // bP
+selectCodeEditor("alu.vhd", 290, 282); // bP
+selectCodeEditor("alu.vhd", 259, 296); // bP
+// Elapsed time: 12 seconds
+selectCodeEditor("alu.vhd", 263, 702); // bP
+selectButton(PAResourceCommand.PACommandNames_ADD_SOURCES, "Sources_add_sources"); // E
+// Run Command: PAResourceCommand.PACommandNames_ADD_SOURCES
+// c (cr): Add Sources: addNotify
+selectRadioButton(PAResourceAtoD.AddSrcWizard_SPECIFY_OR_CREATE_CONSTRAINT_FILES, "Add or create constraints"); // a
+selectRadioButton(PAResourceAtoD.AddSrcWizard_SPECIFY_HDL_NETLIST_BLOCK_DESIGN, "Add or create design sources"); // a
+selectButton("NEXT", "Next >"); // JButton
+selectButton(PAResourceQtoS.SrcChooserPanel_ADD_OR_CREATE_SOURCE_FILE, "Add"); // E
+selectMenuItem(PAResourceQtoS.SrcChooserPanel_ADD_HDL_AND_NETLIST_FILES_TO_YOUR_PROJECT, "Add Files..."); // ak
+// Elapsed time: 17 seconds
+dismissFileChooser();
+selectButton(PAResourceQtoS.SrcChooserPanel_CREATE_FILE, "Create File"); // a
+// F (c): Create Source File: addNotify
+setText(PAResourceAtoD.CreateSrcFileDialog_FILE_NAME, "alu_control"); // aa
+selectButton(RDIResource.BaseDialog_OK, "OK"); // a
+dismissDialog("Create Source File"); // F
+selectButton("FINISH", "Finish"); // JButton
+// 'g' command handler elapsed time: 30 seconds
+dismissDialog("Add Sources"); // c
+// Tcl Message: close [ open C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/alu_control.vhd w ] 
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// Tcl Message: add_files C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/alu_control.vhd 
+// I (cr): Define Module: addNotify
+selectButton(RDIResource.BaseDialog_OK, "OK"); // a
+// TclEventType: FILE_SET_CHANGE
+selectButton("OptionPane.button", "Yes"); // JButton
+dismissDialog("Define Module"); // I
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// Tcl Message: update_compile_order -fileset sources_1 
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, alu_control(Behavioral) (alu_control.vhd)]", 6, false); // D
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, alu_control(Behavioral) (alu_control.vhd)]", 6, false, false, false, false, false, true); // D - Double Click
+selectCodeEditor("alu_control.vhd", 408, 435); // bP
+selectCodeEditor("alu_control.vhd", 439, 431); // bP
+typeControlKey((HResource) null, "alu_control.vhd", 'v'); // bP
+selectCodeEditor("alu_control.vhd", 573, 262); // bP
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// [GUI Memory]: 155 MB (+2477kb) [00:22:12]
+// Elapsed time: 70 seconds
+selectButton(PAResourceCommand.PACommandNames_ADD_SOURCES, "Sources_add_sources"); // E
+// Run Command: PAResourceCommand.PACommandNames_ADD_SOURCES
+// c (cr): Add Sources: addNotify
+selectButton("NEXT", "Next >"); // JButton
+selectButton(PAResourceQtoS.SrcChooserPanel_CREATE_FILE, "Create File"); // a
+// F (c): Create Source File: addNotify
+setText(PAResourceAtoD.CreateSrcFileDialog_FILE_NAME, (String) null); // aa
+setText(PAResourceAtoD.CreateSrcFileDialog_FILE_NAME, "control_unit"); // aa
+selectButton(RDIResource.BaseDialog_OK, "OK"); // a
+dismissDialog("Create Source File"); // F
+selectButton("FINISH", "Finish"); // JButton
+// 'g' command handler elapsed time: 14 seconds
+dismissDialog("Add Sources"); // c
+// Tcl Message: close [ open C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/control_unit.vhd w ] 
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// Tcl Message: add_files C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/control_unit.vhd 
+// I (cr): Define Module: addNotify
+selectButton(RDIResource.BaseDialog_OK, "OK"); // a
+// TclEventType: FILE_SET_CHANGE
+selectButton("OptionPane.button", "Yes"); // JButton
+dismissDialog("Define Module"); // I
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// Tcl Message: update_compile_order -fileset sources_1 
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, control_unit(Behavioral) (control_unit.vhd)]", 7, false); // D
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, control_unit(Behavioral) (control_unit.vhd)]", 7, false, false, false, false, false, true); // D - Double Click
+selectCodeEditor("control_unit.vhd", 227, 270); // bP
+// Elapsed time: 13 seconds
+selectCodeEditor("control_unit.vhd", 652, 463); // bP
+typeControlKey((HResource) null, "control_unit.vhd", 'v'); // bP
+selectCodeEditor("control_unit.vhd", 612, 133); // bP
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// Elapsed time: 62 seconds
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "alu_control.vhd", 4); // m
+selectCodeEditor("alu_control.vhd", 621, 258); // bP
+selectCodeEditor("alu_control.vhd", 621, 258, false, false, true, true, false); // bP - Alt Key - Popup Trigger
+// Elapsed time: 34 seconds
+selectCodeEditor("alu_control.vhd", 615, 412); // bP
+typeControlKey((HResource) null, "alu_control.vhd", 'v'); // bP
+selectCodeEditor("alu_control.vhd", 746, 281); // bP
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+typeControlKey(null, null, 'z');
+typeControlKey((HResource) null, "alu_control.vhd", 'v'); // bP
+selectCodeEditor("alu_control.vhd", 499, 502); // bP
+typeControlKey(null, null, 'z');
+typeControlKey((HResource) null, "alu_control.vhd", 'v'); // bP
+selectCodeEditor("alu_control.vhd", 542, 373); // bP
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// Elapsed time: 14 seconds
+selectCodeEditor("alu_control.vhd", 593, 401); // bP
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "control_unit.vhd", 5); // m
+selectCodeEditor("control_unit.vhd", 512, 328); // bP
+selectCodeEditor("control_unit.vhd", 681, 399); // bP
+typeControlKey((HResource) null, "control_unit.vhd", 'v'); // bP
+selectCodeEditor("control_unit.vhd", 729, 458); // bP
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// Tcl Message: update_compile_order -fileset sources_1 
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, top_level_tb(test) (top_level_tb.vhdl), UUT : top_level(rtl) (top_level.vhd), RF : register_file(rtl) (register_file.vhd)]", 3, false); // D
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, top_level_tb(test) (top_level_tb.vhdl), UUT : top_level(rtl) (top_level.vhd), RF : register_file(rtl) (register_file.vhd)]", 3, false, false, false, false, false, true); // D - Double Click
+selectCodeEditor("register_file.vhd", 541, 338); // bP
+typeControlKey((HResource) null, "register_file.vhd", 'c'); // bP
+typeControlKey((HResource) null, "register_file.vhd", 'c'); // bP
+typeControlKey((HResource) null, "register_file.vhd", 'c'); // bP
+// Elapsed time: 42 seconds
+selectCodeEditor("register_file.vhd", 628, 269); // bP
+typeControlKey((HResource) null, "register_file.vhd", 'v'); // bP
+selectCodeEditor("register_file.vhd", 451, 287); // bP
+// Elapsed time: 12 seconds
+selectCodeEditor("register_file.vhd", 128, 318); // bP
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, top_level_tb(test) (top_level_tb.vhdl), UUT : top_level(rtl) (top_level.vhd), ALU_Unit : alu(rtl) (alu.vhd), ADDER_INST : adder_16bit(structural) (control_unit.vhd)]", 5, true); // D - Node
+selectCodeEditor("register_file.vhd", 245, 264); // bP
+collapseTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, top_level_tb(test) (top_level_tb.vhdl), UUT : top_level(rtl) (top_level.vhd), ALU_Unit : alu(rtl) (alu.vhd)]", 4); // D
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, alu(rtl) (control_unit.vhd)]", 6, false); // D
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, alu(rtl) (control_unit.vhd)]", 6, false, false, false, false, false, true); // D - Double Click
+selectCodeEditor("control_unit.vhd", 22, 143); // bP
+selectCodeEditor("control_unit.vhd", 26, 171); // bP
+selectCodeEditor("control_unit.vhd", 917, 137); // bP
+selectCodeEditor("control_unit.vhd", 618, 256); // bP
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// Tcl Message: update_compile_order -fileset sources_1 
+// Elapsed time: 13 seconds
+selectCodeEditor("control_unit.vhd", 101, 250); // bP
+selectCodeEditor("control_unit.vhd", 711, 158); // bP
+selectCodeEditor("control_unit.vhd", 904, 104); // bP
+selectCodeEditor("control_unit.vhd", 383, 123); // bP
+selectCodeEditor("control_unit.vhd", 789, 76); // bP
+selectCodeEditor("control_unit.vhd", 892, 88); // bP
+selectCodeEditor("control_unit.vhd", 244, 165); // bP
+selectCodeEditor("control_unit.vhd", 308, 124); // bP
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, multp(rtl) (multp.vhd)]", 7, false); // D
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, multp(rtl) (multp.vhd)]", 7, false, false, false, false, false, true); // D - Double Click
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, alu_control(rtl) (alu_control.vhd)]", 5, false); // D
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, alu_control(rtl) (alu_control.vhd)]", 5, false, false, false, false, false, true); // D - Double Click
+selectCodeEditor("alu_control.vhd", 393, 174); // bP
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, top_level_tb(test) (top_level_tb.vhdl)]", 1, true); // D - Node
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, top_level_tb(test) (top_level_tb.vhdl)]", 1, true, false, false, false, false, true); // D - Double Click - Node
+expandTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, top_level_tb(test) (top_level_tb.vhdl)]", 1); // D
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, top_level_tb(test) (top_level_tb.vhdl), UUT : top_level(rtl) (top_level.vhd)]", 2, true); // D - Node
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, top_level_tb(test) (top_level_tb.vhdl), UUT : top_level(rtl) (top_level.vhd)]", 2, true, false, false, false, false, true); // D - Double Click - Node
+selectCodeEditor("top_level.vhd", 253, 237); // bP
+typeControlKey((HResource) null, "top_level.vhd", 'c'); // bP
+typeControlKey((HResource) null, "top_level.vhd", 'c'); // bP
+// Elapsed time: 92 seconds
+selectCodeEditor("top_level.vhd", 537, 553); // bP
+selectCodeEditor("top_level.vhd", 631, 452); // bP
+// Elapsed time: 32 seconds
+selectCodeEditor("top_level.vhd", 584, 96); // bP
+// HMemoryUtils.trashcanNow. Engine heap size: 1,033 MB. GUI used memory: 94 MB. Current time: 10/29/25, 5:13:15 PM EDT
+// Elapsed time: 50 seconds
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "top_level_tb.vhdl", 8); // m
+closeView(PAResourceOtoP.PAViews_CODE, "Code"); // F
+selectCodeEditor("register_file.vhd", 575, 561); // bP
+selectCodeEditor("register_file.vhd", 565, 497); // bP
+selectCodeEditor("register_file.vhd", 448, 339); // bP
+selectCodeEditor("register_file.vhd", 527, 257); // bP
+selectCodeEditor("register_file.vhd", 254, 266); // bP
+selectCodeEditor("register_file.vhd", 410, 335); // bP
+selectCodeEditor("register_file.vhd", 461, 260); // bP
+// Elapsed time: 38 seconds
+selectCodeEditor("register_file.vhd", 605, 212); // bP
+selectCodeEditor("register_file.vhd", 597, 216); // bP
+typeControlKey(null, null, 'z');
+typeControlKey(null, null, 'z');
+selectCodeEditor("register_file.vhd", 277, 192); // bP
+selectCodeEditor("register_file.vhd", 548, 208); // bP
+selectCodeEditor("register_file.vhd", 579, 202); // bP
+selectCodeEditor("register_file.vhd", 383, 504); // bP
+selectCodeEditor("register_file.vhd", 666, 452); // bP
+selectCodeEditor("register_file.vhd", 852, 376); // bP
+selectCodeEditor("register_file.vhd", 708, 232); // bP
+typeControlKey(null, null, 'z');
+// Elapsed time: 13 seconds
+selectCodeEditor("register_file.vhd", 449, 294); // bP
+selectCodeEditor("register_file.vhd", 376, 437); // bP
+selectCodeEditor("register_file.vhd", 941, 281); // bP
+selectCodeEditor("register_file.vhd", 743, 392); // bP
+selectCodeEditor("register_file.vhd", 865, 397); // bP
+selectCodeEditor("register_file.vhd", 915, 395); // bP
+selectCodeEditor("register_file.vhd", 915, 395); // bP
+selectCodeEditor("register_file.vhd", 377, 147); // bP
+selectCodeEditor("register_file.vhd", 243, 198); // bP
+selectCodeEditor("register_file.vhd", 625, 376); // bP
+selectCodeEditor("register_file.vhd", 878, 384); // bP
+selectCodeEditor("register_file.vhd", 916, 388); // bP
+selectCodeEditor("register_file.vhd", 253, 205); // bP
+selectCodeEditor("register_file.vhd", 877, 385); // bP
+selectCodeEditor("register_file.vhd", 375, 242); // bP
+selectCodeEditor("register_file.vhd", 415, 218); // bP
+selectCodeEditor("register_file.vhd", 454, 214); // bP
+selectCodeEditor("register_file.vhd", 583, 258); // bP
+selectCodeEditor("register_file.vhd", 401, 379); // bP
+selectCodeEditor("register_file.vhd", 469, 399); // bP
+selectCodeEditor("register_file.vhd", 549, 617); // bP
+selectCodeEditor("register_file.vhd", 505, 594); // bP
+selectCodeEditor("register_file.vhd", 351, 573); // bP
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "control_unit.vhd", 5); // m
+selectCodeEditor("control_unit.vhd", 534, 555); // bP
+selectCodeEditor("control_unit.vhd", 468, 514); // bP
+selectCodeEditor("control_unit.vhd", 529, 457); // bP
+selectCodeEditor("control_unit.vhd", 657, 442); // bP
+selectCodeEditor("control_unit.vhd", 482, 211); // bP
+selectCodeEditor("control_unit.vhd", 846, 236); // bP
+typeControlKey(null, null, 'z');
+typeControlKey(null, null, 'z');
+selectCodeEditor("control_unit.vhd", 592, 200); // bP
+selectCodeEditor("control_unit.vhd", 535, 209); // bP
+selectCodeEditor("control_unit.vhd", 524, 203); // bP
+selectCodeEditor("control_unit.vhd", 695, 268); // bP
+selectCodeEditor("control_unit.vhd", 694, 209); // bP
+selectCodeEditor("control_unit.vhd", 346, 372); // bP
+selectCodeEditor("control_unit.vhd", 630, 393); // bP
+selectCodeEditor("control_unit.vhd", 856, 94); // bP
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "alu_control.vhd", 4); // m
+selectCodeEditor("alu_control.vhd", 709, 265); // bP
+selectCodeEditor("alu_control.vhd", 711, 421); // bP
+selectCodeEditor("alu_control.vhd", 558, 48); // bP
+selectCodeEditor("alu_control.vhd", 558, 48, false, false, false, false, true); // bP - Double Click
+selectCodeEditor("alu_control.vhd", 567, 160); // bP
+selectCodeEditor("alu_control.vhd", 584, 42); // bP
+selectCodeEditor("alu_control.vhd", 584, 42, false, false, false, false, true); // bP - Double Click
+selectCodeEditor("alu_control.vhd", 580, 148); // bP
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "full_adder.vhd", 3); // m
+selectCodeEditor("full_adder.vhd", 402, 234); // bP
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "adder_32bit.vhd", 2); // m
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "alu.vhd", 1); // m
+selectCodeEditor("alu.vhd", 659, 221); // bP
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE

@@ -4,45 +4,36 @@ use IEEE.numeric_std.all;
 
 entity alu is
   port(
-    A, B      : in  unsigned(31 downto 0);
-    ALUctr    : in  unsigned(2 downto 0);
-    Result    : out unsigned(31 downto 0);
-    Zero, Overflow, Carryout : out std_logic
+    A, B      : in  unsigned(15 downto 0);  
+    ALUctr    : in  unsigned(3 downto 0);   
+    shamt     : in  unsigned(2 downto 0);   
+    Result    : out unsigned(15 downto 0);  
+    Zero      : out std_logic;              
+    Overflow  : out std_logic;              
+    Carryout  : out std_logic               
   );
 end entity;
 
 architecture rtl of alu is
-
-  signal adder_B     : unsigned(31 downto 0);
+  signal adder_B     : unsigned(15 downto 0);
   signal adder_Cin   : std_logic;
-  signal adder_Sum   : unsigned(31 downto 0);
+  signal adder_Sum   : unsigned(15 downto 0);
   signal adder_Cout  : std_logic;
-  signal mult_Result : unsigned(31 downto 0);
-  signal mult_Overflow : std_logic;
-
-  component adder_32bit
+  
+  component adder_16bit
     port(
-      A, B : in  unsigned(31 downto 0);
+      A, B : in  unsigned(15 downto 0);
       Cin  : in  std_logic;
-      Sum  : out unsigned(31 downto 0);
+      Sum  : out unsigned(15 downto 0);
       Cout : out std_logic
     );
   end component;
 
-  component multp
-    port(
-      A, B     : in  unsigned(31 downto 0);
-      Result   : out unsigned(31 downto 0);
-      Overflow : out std_logic
-    );
-  end component;
-
 begin
-
-  adder_B   <= not B when ALUctr = "001" else B;
-  adder_Cin <= '1'   when ALUctr = "001" else '0';
-
-  ADDER_INST: adder_32bit
+  adder_B   <= not B when ALUctr = "0001" else B;
+  adder_Cin <= '1'   when ALUctr = "0001" else '0';
+  
+  ADDER_INST: adder_16bit
     port map(
       A    => A,
       B    => adder_B,
@@ -51,65 +42,76 @@ begin
       Cout => adder_Cout
     );
 
-  MULT_INST: multp
-    port map(
-      A        => A,
-      B        => B,
-      Result   => mult_Result,
-      Overflow => mult_Overflow
-    );
-
-  process(A, B, ALUctr, adder_Sum, adder_Cout, mult_Result, mult_Overflow)
-    variable temp_result : unsigned(31 downto 0);
+  -- Main ALU operations
+  process(A, B, ALUctr, shamt, adder_Sum, adder_Cout)
+    variable temp_result : unsigned(15 downto 0);
+    variable shift_amount : integer;
   begin
     Overflow <= '0';
     Carryout <= '0';
-
+    shift_amount := to_integer(shamt);
+    
     case ALUctr is
-      when "000" =>  -- ADD
+      when "0000" =>  -- ADD
         temp_result := adder_Sum;
         Carryout    <= adder_Cout;
-        if (A(31) = B(31)) and (adder_Sum(31) /= A(31)) then
+        if (A(15) = B(15)) and (adder_Sum(15) /= A(15)) then
           Overflow <= '1';
         end if;
-
-      when "001" =>  -- SUB
+        
+      when "0001" =>  -- SUB
         temp_result := adder_Sum;
         Carryout    <= adder_Cout;
-        if (A(31) /= B(31)) and (adder_Sum(31) /= A(31)) then
+        if (A(15) /= B(15)) and (adder_Sum(15) /= A(15)) then
           Overflow <= '1';
         end if;
-
-      when "010" =>  -- AND
+        
+      when "0010" =>  -- AND
         temp_result := A and B;
-
-      when "011" =>  -- OR
+        
+      when "0011" =>  -- OR
         temp_result := A or B;
-
-      when "100" =>  -- logical left shift
-        temp_result := shift_left(A, 1);
-
-      when "101" =>  -- logical right shift
-        temp_result := shift_right(A, 1);
-
-      when "110" =>  -- MULTIPLY (from multp)
-        temp_result := mult_Result;
-        Overflow <= mult_Overflow;
-
-      when "111" =>  -- arithmetic right shift
-        temp_result := unsigned(shift_right(signed(A), 1));
-
+        
+      when "0100" =>  -- XOR
+        temp_result := A xor B;
+        
+      when "0101" =>  -- SLL (Shift Left Logical)
+        temp_result := shift_left(A, shift_amount);
+        
+      when "0110" =>  -- SRL (Shift Right Logical)
+        temp_result := shift_right(A, shift_amount);
+        
+      when "0111" =>  -- SRA (Shift Right Arithmetic)
+        temp_result := unsigned(shift_right(signed(A), shift_amount));
+        
+      when "1000" =>  -- SLT (Set Less Than - signed)
+        if signed(A) < signed(B) then
+          temp_result := to_unsigned(1, 16);
+        else
+          temp_result := to_unsigned(0, 16);
+        end if;
+        
+      when "1001" =>  -- SLTU (Set Less Than Unsigned)
+        if A < B then
+          temp_result := to_unsigned(1, 16);
+        else
+          temp_result := to_unsigned(0, 16);
+        end if;
+        
+      when "1010" =>  -- NOR
+        temp_result := A nor B;
+        
       when others =>
         temp_result := (others => '0');
     end case;
-
+    
     Result <= temp_result;
-
-    if temp_result = to_unsigned(0, temp_result'length) then
+    
+    -- Zero flag
+    if temp_result = to_unsigned(0, 16) then
       Zero <= '1';
     else
       Zero <= '0';
     end if;
   end process;
-
 end architecture;
