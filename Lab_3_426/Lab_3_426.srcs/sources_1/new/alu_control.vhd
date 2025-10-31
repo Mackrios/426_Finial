@@ -4,8 +4,8 @@ use IEEE.numeric_std.all;
 
 entity alu_control is
   port(
-    opcode    : in  unsigned(3 downto 0);   -- Instruction opcode
-    ALU_OP    : in  unsigned(1 downto 0);   -- From main control unit
+    opcode    : in  unsigned(3 downto 0);
+    ALU_OP    : in  unsigned(1 downto 0);   -- from main control
     ALUctr    : out unsigned(3 downto 0)    -- To ALU
   );
 end entity;
@@ -14,17 +14,16 @@ architecture rtl of alu_control is
 begin
   process(opcode, ALU_OP)
   begin
-    -- Default
     ALUctr <= "0000";
     
     case ALU_OP is
-      when "00" =>  -- Memory operations (LW/SW/ADDI) - always ADD
+      when "00" =>  -- memory op lw/sw/addi always ADD
         ALUctr <= "0000";
         
-      when "01" =>  -- Branch operations - always SUB for comparison
+      when "01" =>  -- Branch SUB to check 
         ALUctr <= "0001";
         
-      when "10" =>  -- R-type - use opcode to find op
+      when "10" =>  -- rtype
         case opcode is
           when "0000" =>  -- ADD
             ALUctr <= "0000";

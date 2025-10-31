@@ -2,23 +2,14 @@
 # Vivado v2020.2 (64-bit)
 # SW Build 3064766 on Wed Nov 18 09:12:45 MST 2020
 # IP Build 3064653 on Wed Nov 18 14:17:31 MST 2020
-# Start of session at: Wed Oct 29 16:42:48 2025
-# Process ID: 28768
+# Start of session at: Fri Oct 31 08:47:22 2025
+# Process ID: 1788
 # Current directory: C:/Users/mackr/426_Finial/Lab_3_426
-# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent2240 C:\Users\mackr\426_Finial\Lab_3_426\Lab_3_426.xpr
+# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent20048 C:\Users\mackr\426_Finial\Lab_3_426\Lab_3_426.xpr
 # Log file: C:/Users/mackr/426_Finial/Lab_3_426/vivado.log
 # Journal file: C:/Users/mackr/426_Finial/Lab_3_426\vivado.jou
 #-----------------------------------------------------------
 start_gui
 open_project C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.xpr
 update_compile_order -fileset sources_1
-update_compile_order -fileset sources_1
-update_compile_order -fileset sources_1
-close [ open C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/alu_control.vhd w ]
-add_files C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/alu_control.vhd
-update_compile_order -fileset sources_1
-close [ open C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/control_unit.vhd w ]
-add_files C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/control_unit.vhd
-update_compile_order -fileset sources_1
-update_compile_order -fileset sources_1
-update_compile_order -fileset sources_1
+set_property is_enabled false [get_files  C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/multp.vhd]

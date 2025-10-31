@@ -42,7 +42,6 @@ begin
       Cout => adder_Cout
     );
 
-  -- Main ALU operations
   process(A, B, ALUctr, shamt, adder_Sum, adder_Cout)
     variable temp_result : unsigned(15 downto 0);
     variable shift_amount : integer;
@@ -52,53 +51,53 @@ begin
     shift_amount := to_integer(shamt);
     
     case ALUctr is
-      when "0000" =>  -- ADD
+      when "0000" =>  -- add
         temp_result := adder_Sum;
         Carryout    <= adder_Cout;
         if (A(15) = B(15)) and (adder_Sum(15) /= A(15)) then
           Overflow <= '1';
         end if;
         
-      when "0001" =>  -- SUB
+      when "0001" =>  -- sub
         temp_result := adder_Sum;
         Carryout    <= adder_Cout;
         if (A(15) /= B(15)) and (adder_Sum(15) /= A(15)) then
           Overflow <= '1';
         end if;
         
-      when "0010" =>  -- AND
+      when "0010" =>  -- and
         temp_result := A and B;
         
-      when "0011" =>  -- OR
+      when "0011" =>  -- or
         temp_result := A or B;
         
-      when "0100" =>  -- XOR
+      when "0100" =>  -- xor
         temp_result := A xor B;
         
-      when "0101" =>  -- SLL (Shift Left Logical)
+      when "0101" =>  -- sll
         temp_result := shift_left(A, shift_amount);
         
-      when "0110" =>  -- SRL (Shift Right Logical)
+      when "0110" =>  -- srl 
         temp_result := shift_right(A, shift_amount);
         
-      when "0111" =>  -- SRA (Shift Right Arithmetic)
+      when "0111" =>  -- sra
         temp_result := unsigned(shift_right(signed(A), shift_amount));
         
-      when "1000" =>  -- SLT (Set Less Than - signed)
+      when "1000" =>  -- slt 
         if signed(A) < signed(B) then
           temp_result := to_unsigned(1, 16);
         else
           temp_result := to_unsigned(0, 16);
         end if;
         
-      when "1001" =>  -- SLTU (Set Less Than Unsigned)
+      when "1001" =>  -- sltu 
         if A < B then
           temp_result := to_unsigned(1, 16);
         else
           temp_result := to_unsigned(0, 16);
         end if;
         
-      when "1010" =>  -- NOR
+      when "1010" =>  -- nor
         temp_result := A nor B;
         
       when others =>
@@ -107,7 +106,7 @@ begin
     
     Result <= temp_result;
     
-    -- Zero flag
+    -- zero flag
     if temp_result = to_unsigned(0, 16) then
       Zero <= '1';
     else
