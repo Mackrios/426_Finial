@@ -1,0 +1,4 @@
+Running: xsim.dir/tb_pipelined_cpu_behav/xsimk.exe -simmode gui -wdb tb_pipelined_cpu_behav.wdb -simrunnum 0 -socket 59386
+Design successfully loaded
+Design Loading Memory Usage: 8508 KB (Peak: 8508 KB)
+Design Loading CPU Usage: 61 ms
