@@ -2,10 +2,10 @@
 # Vivado v2020.2 (64-bit)
 # SW Build 3064766 on Wed Nov 18 09:12:45 MST 2020
 # IP Build 3064653 on Wed Nov 18 14:17:31 MST 2020
-# Start of session at: Fri Oct 31 08:47:22 2025
-# Process ID: 1788
+# Start of session at: Thu Nov  6 13:54:54 2025
+# Process ID: 19988
 # Current directory: C:/Users/mackr/426_Finial/Lab_3_426
-# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent20048 C:\Users\mackr\426_Finial\Lab_3_426\Lab_3_426.xpr
+# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent29296 C:\Users\mackr\426_Finial\Lab_3_426\Lab_3_426.xpr
 # Log file: C:/Users/mackr/426_Finial/Lab_3_426/vivado.log
 # Journal file: C:/Users/mackr/426_Finial/Lab_3_426\vivado.jou
 #-----------------------------------------------------------
@@ -17,8 +17,1196 @@ Finished scanning sources
 INFO: [IP_Flow 19-234] Refreshing IP repositories
 INFO: [IP_Flow 19-1704] No user IP repositories specified
 INFO: [IP_Flow 19-2313] Loaded Vivado IP repository 'C:/Xilinx/Vivado/2020.2/data/ip'.
-open_project: Time (s): cpu = 00:00:10 ; elapsed = 00:00:06 . Memory (MB): peak = 1004.531 ; gain = 0.000
+open_project: Time (s): cpu = 00:00:21 ; elapsed = 00:00:12 . Memory (MB): peak = 1006.730 ; gain = 0.000
 update_compile_order -fileset sources_1
-set_property is_enabled false [get_files  C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/multp.vhd]
-exit
-INFO: [Common 17-206] Exiting Vivado at Fri Oct 31 09:18:41 2025...
+set_property is_enabled true [get_files  C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/alu_tb.vhd]
+update_compile_order -fileset sources_1
+set_property top alu_tb [current_fileset]
+update_compile_order -fileset sources_1
+launch_simulation
+Command: launch_simulation 
+INFO: [Vivado 12-5682] Launching behavioral simulation in 'C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.sim/sim_1/behav/xsim'
+INFO: [SIM-utils-51] Simulation object is 'sim_1'
+INFO: [SIM-utils-54] Inspecting design source files for 'top_level_tb' in fileset 'sim_1'...
+INFO: [USF-XSim-97] Finding global include files...
+INFO: [USF-XSim-98] Fetching design files from 'sim_1'...
+INFO: [USF-XSim-2] XSim::Compile design
+INFO: [USF-XSim-61] Executing 'COMPILE and ANALYZE' step in 'C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.sim/sim_1/behav/xsim'
+"xvhdl --incr --relax -prj top_level_tb_vhdl.prj"
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/adder_32bit.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'adder_16bit'
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/alu.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'alu'
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/full_adder.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'full_adder'
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/register_file.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'register_file'
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/top_level.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'top_level'
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/Users/mackr/Downloads/Uni Stuff/426/Lab3-1/top_level_tb.vhdl" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'top_level_tb'
+INFO: [USF-XSim-69] 'compile' step finished in '2' seconds
+INFO: [USF-XSim-3] XSim::Elaborate design
+INFO: [USF-XSim-61] Executing 'ELABORATE' step in 'C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.sim/sim_1/behav/xsim'
+"xelab -wto 6027e09ee84b49bb802594bb50900659 --incr --debug typical --relax --mt 2 -L xil_defaultlib -L secureip --snapshot top_level_tb_behav xil_defaultlib.top_level_tb -log elaborate.log"
+Vivado Simulator 2020.2
+Copyright 1986-1999, 2001-2020 Xilinx, Inc. All Rights Reserved.
+Running: C:/Xilinx/Vivado/2020.2/bin/unwrapped/win64.o/xelab.exe -wto 6027e09ee84b49bb802594bb50900659 --incr --debug typical --relax --mt 2 -L xil_defaultlib -L secureip --snapshot top_level_tb_behav xil_defaultlib.top_level_tb -log elaborate.log 
+Using 2 slave threads.
+Starting static elaboration
+ERROR: [VRFC 10-664] expression has 5 elements ; expected 3 [C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/top_level.vhd:24]
+ERROR: [VRFC 10-664] expression has 32 elements ; expected 16 [C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/top_level.vhd:25]
+ERROR: [VRFC 10-664] expression has 32 elements ; expected 16 [C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/top_level.vhd:26]
+ERROR: [XSIM 43-3321] Static elaboration of top level VHDL design unit top_level_tb in library work failed.
+INFO: [USF-XSim-69] 'elaborate' step finished in '2' seconds
+INFO: [USF-XSim-99] Step results log file:'C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.sim/sim_1/behav/xsim/elaborate.log'
+ERROR: [USF-XSim-62] 'elaborate' step failed with error(s). Please check the Tcl console output or 'C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.sim/sim_1/behav/xsim/elaborate.log' file for more information.
+ERROR: [Vivado 12-4473] Detected error while running simulation. Please correct the issue and retry this operation.
+launch_simulation: Time (s): cpu = 00:00:01 ; elapsed = 00:00:05 . Memory (MB): peak = 1006.730 ; gain = 0.000
+ERROR: [Common 17-39] 'launch_simulation' failed due to earlier errors.
+set_property is_enabled false [get_files  {{C:/Users/mackr/Downloads/Uni Stuff/426/Lab3-1/top_level_tb.vhdl}}]
+set_property is_enabled false [get_files  C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/top_level.vhd]
+launch_simulation
+Command: launch_simulation 
+INFO: [Vivado 12-5682] Launching behavioral simulation in 'C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.sim/sim_1/behav/xsim'
+INFO: [SIM-utils-51] Simulation object is 'sim_1'
+INFO: [SIM-utils-54] Inspecting design source files for 'alu_tb' in fileset 'sim_1'...
+INFO: [USF-XSim-97] Finding global include files...
+INFO: [USF-XSim-98] Fetching design files from 'sim_1'...
+INFO: [USF-XSim-2] XSim::Compile design
+INFO: [USF-XSim-61] Executing 'COMPILE and ANALYZE' step in 'C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.sim/sim_1/behav/xsim'
+"xvhdl --incr --relax -prj alu_tb_vhdl.prj"
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/alu_tb.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'alu_tb'
+INFO: [USF-XSim-69] 'compile' step finished in '1' seconds
+INFO: [USF-XSim-3] XSim::Elaborate design
+INFO: [USF-XSim-61] Executing 'ELABORATE' step in 'C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.sim/sim_1/behav/xsim'
+"xelab -wto 6027e09ee84b49bb802594bb50900659 --incr --debug typical --relax --mt 2 -L xil_defaultlib -L secureip --snapshot alu_tb_behav xil_defaultlib.alu_tb -log elaborate.log"
+Vivado Simulator 2020.2
+Copyright 1986-1999, 2001-2020 Xilinx, Inc. All Rights Reserved.
+Running: C:/Xilinx/Vivado/2020.2/bin/unwrapped/win64.o/xelab.exe -wto 6027e09ee84b49bb802594bb50900659 --incr --debug typical --relax --mt 2 -L xil_defaultlib -L secureip --snapshot alu_tb_behav xil_defaultlib.alu_tb -log elaborate.log 
+Using 2 slave threads.
+Starting static elaboration
+ERROR: [VRFC 10-923] index value <16> is out of range [15:0] of array <carry> [C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/adder_32bit.vhd:33]
+ERROR: [XSIM 43-3321] Static elaboration of top level VHDL design unit alu_tb in library work failed.
+INFO: [USF-XSim-69] 'elaborate' step finished in '2' seconds
+INFO: [USF-XSim-99] Step results log file:'C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.sim/sim_1/behav/xsim/elaborate.log'
+ERROR: [USF-XSim-62] 'elaborate' step failed with error(s). Please check the Tcl console output or 'C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.sim/sim_1/behav/xsim/elaborate.log' file for more information.
+ERROR: [Vivado 12-4473] Detected error while running simulation. Please correct the issue and retry this operation.
+ERROR: [Common 17-39] 'launch_simulation' failed due to earlier errors.
+launch_simulation
+Command: launch_simulation 
+INFO: [Vivado 12-5682] Launching behavioral simulation in 'C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.sim/sim_1/behav/xsim'
+INFO: [SIM-utils-51] Simulation object is 'sim_1'
+INFO: [SIM-utils-54] Inspecting design source files for 'alu_tb' in fileset 'sim_1'...
+INFO: [USF-XSim-97] Finding global include files...
+INFO: [USF-XSim-98] Fetching design files from 'sim_1'...
+INFO: [USF-XSim-2] XSim::Compile design
+INFO: [USF-XSim-61] Executing 'COMPILE and ANALYZE' step in 'C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.sim/sim_1/behav/xsim'
+"xvhdl --incr --relax -prj alu_tb_vhdl.prj"
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/adder_32bit.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'adder_16bit'
+INFO: [USF-XSim-69] 'compile' step finished in '1' seconds
+INFO: [USF-XSim-3] XSim::Elaborate design
+INFO: [USF-XSim-61] Executing 'ELABORATE' step in 'C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.sim/sim_1/behav/xsim'
+"xelab -wto 6027e09ee84b49bb802594bb50900659 --incr --debug typical --relax --mt 2 -L xil_defaultlib -L secureip --snapshot alu_tb_behav xil_defaultlib.alu_tb -log elaborate.log"
+Vivado Simulator 2020.2
+Copyright 1986-1999, 2001-2020 Xilinx, Inc. All Rights Reserved.
+Running: C:/Xilinx/Vivado/2020.2/bin/unwrapped/win64.o/xelab.exe -wto 6027e09ee84b49bb802594bb50900659 --incr --debug typical --relax --mt 2 -L xil_defaultlib -L secureip --snapshot alu_tb_behav xil_defaultlib.alu_tb -log elaborate.log 
+Using 2 slave threads.
+Starting static elaboration
+ERROR: [VRFC 10-923] index value <16> is out of range [15:0] of array <carry> [C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/adder_32bit.vhd:33]
+ERROR: [XSIM 43-3321] Static elaboration of top level VHDL design unit alu_tb in library work failed.
+INFO: [USF-XSim-69] 'elaborate' step finished in '2' seconds
+INFO: [USF-XSim-99] Step results log file:'C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.sim/sim_1/behav/xsim/elaborate.log'
+ERROR: [USF-XSim-62] 'elaborate' step failed with error(s). Please check the Tcl console output or 'C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.sim/sim_1/behav/xsim/elaborate.log' file for more information.
+ERROR: [Vivado 12-4473] Detected error while running simulation. Please correct the issue and retry this operation.
+ERROR: [Common 17-39] 'launch_simulation' failed due to earlier errors.
+launch_simulation
+Command: launch_simulation 
+INFO: [Vivado 12-5682] Launching behavioral simulation in 'C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.sim/sim_1/behav/xsim'
+INFO: [SIM-utils-51] Simulation object is 'sim_1'
+INFO: [SIM-utils-54] Inspecting design source files for 'alu_tb' in fileset 'sim_1'...
+INFO: [USF-XSim-97] Finding global include files...
+INFO: [USF-XSim-98] Fetching design files from 'sim_1'...
+INFO: [USF-XSim-2] XSim::Compile design
+INFO: [USF-XSim-61] Executing 'COMPILE and ANALYZE' step in 'C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.sim/sim_1/behav/xsim'
+"xvhdl --incr --relax -prj alu_tb_vhdl.prj"
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/adder_32bit.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'adder_16bit'
+INFO: [USF-XSim-69] 'compile' step finished in '1' seconds
+INFO: [USF-XSim-3] XSim::Elaborate design
+INFO: [USF-XSim-61] Executing 'ELABORATE' step in 'C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.sim/sim_1/behav/xsim'
+"xelab -wto 6027e09ee84b49bb802594bb50900659 --incr --debug typical --relax --mt 2 -L xil_defaultlib -L secureip --snapshot alu_tb_behav xil_defaultlib.alu_tb -log elaborate.log"
+Vivado Simulator 2020.2
+Copyright 1986-1999, 2001-2020 Xilinx, Inc. All Rights Reserved.
+Running: C:/Xilinx/Vivado/2020.2/bin/unwrapped/win64.o/xelab.exe -wto 6027e09ee84b49bb802594bb50900659 --incr --debug typical --relax --mt 2 -L xil_defaultlib -L secureip --snapshot alu_tb_behav xil_defaultlib.alu_tb -log elaborate.log 
+Using 2 slave threads.
+Starting static elaboration
+Completed static elaboration
+Starting simulation data flow analysis
+Completed simulation data flow analysis
+Time Resolution for simulation is 1ps
+Compiling package std.standard
+Compiling package std.textio
+Compiling package ieee.std_logic_1164
+Compiling package ieee.numeric_std
+Compiling architecture rtl of entity xil_defaultlib.full_adder [full_adder_default]
+Compiling architecture structural of entity xil_defaultlib.adder_16bit [adder_16bit_default]
+Compiling architecture rtl of entity xil_defaultlib.alu [alu_default]
+Compiling architecture test of entity xil_defaultlib.alu_tb
+Built simulation snapshot alu_tb_behav
+
+****** Webtalk v2020.2 (64-bit)
+  **** SW Build 3064766 on Wed Nov 18 09:12:45 MST 2020
+  **** IP Build 3064653 on Wed Nov 18 14:17:31 MST 2020
+    ** Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
+
+source C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.sim/sim_1/behav/xsim/xsim.dir/alu_tb_behav/webtalk/xsim_webtalk.tcl -notrace
+INFO: [Common 17-206] Exiting Webtalk at Thu Nov  6 15:52:26 2025...
+run_program: Time (s): cpu = 00:00:01 ; elapsed = 00:00:06 . Memory (MB): peak = 1006.730 ; gain = 0.000
+INFO: [USF-XSim-69] 'elaborate' step finished in '6' seconds
+INFO: [USF-XSim-4] XSim::Simulate design
+INFO: [USF-XSim-61] Executing 'SIMULATE' step in 'C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.sim/sim_1/behav/xsim'
+INFO: [USF-XSim-98] *** Running xsim
+   with args "alu_tb_behav -key {Behavioral:sim_1:Functional:alu_tb} -tclbatch {alu_tb.tcl} -view {C:/Users/mackr/426_Finial/Lab_3_426/top_level_tb_behav.wcfg} -log {simulate.log}"
+INFO: [USF-XSim-8] Loading simulator feature
+Vivado Simulator 2020.2
+Time resolution is 1 ps
+open_wave_config C:/Users/mackr/426_Finial/Lab_3_426/top_level_tb_behav.wcfg
+WARNING: Simulation object /top_level_tb/clk was not found in the design.
+WARNING: Simulation object /top_level_tb/RegWr was not found in the design.
+WARNING: Simulation object /top_level_tb/Rd was not found in the design.
+WARNING: Simulation object /top_level_tb/Rs was not found in the design.
+WARNING: Simulation object /top_level_tb/Rt was not found in the design.
+WARNING: Simulation object /top_level_tb/ALUctr was not found in the design.
+WARNING: Simulation object /top_level_tb/Zero was not found in the design.
+WARNING: Simulation object /top_level_tb/Overflow was not found in the design.
+WARNING: Simulation object /top_level_tb/Carryout was not found in the design.
+WARNING: Simulation object /top_level_tb/Result was not found in the design.
+WARNING: Simulation object /top_level_tb/clk_period was not found in the design.
+source alu_tb.tcl
+# set curr_wave [current_wave_config]
+# if { [string length $curr_wave] == 0 } {
+#   if { [llength [get_objects]] > 0} {
+#     add_wave /
+#     set_property needs_save false [current_wave_config]
+#   } else {
+#      send_msg_id Add_Wave-1 WARNING "No top level signals found. Simulator will start without a wave window. If you want to open a wave window go to 'File->New Waveform Configuration' or type 'create_wave_config' in the TCL console."
+#   }
+# }
+# run 1000ns
+Note: Starting ALU Testbench...
+Time: 0 ps  Iteration: 0  Process: /alu_tb/line__39  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/alu_tb.vhd
+Note: Test 1: ADD
+Time: 0 ps  Iteration: 0  Process: /alu_tb/line__39  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/alu_tb.vhd
+Note: ADD: 5 + 10 = 15
+Time: 10 ns  Iteration: 0  Process: /alu_tb/line__39  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/alu_tb.vhd
+Note: Test 2: SUB
+Time: 10 ns  Iteration: 0  Process: /alu_tb/line__39  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/alu_tb.vhd
+Note: SUB: 16 - 5 = 11
+Time: 20 ns  Iteration: 0  Process: /alu_tb/line__39  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/alu_tb.vhd
+Note: Test 3: AND
+Time: 20 ns  Iteration: 0  Process: /alu_tb/line__39  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/alu_tb.vhd
+Note: AND: Result = 255
+Time: 30 ns  Iteration: 0  Process: /alu_tb/line__39  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/alu_tb.vhd
+Note: Test 4: OR
+Time: 30 ns  Iteration: 0  Process: /alu_tb/line__39  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/alu_tb.vhd
+Note: OR: Result = 255
+Time: 40 ns  Iteration: 0  Process: /alu_tb/line__39  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/alu_tb.vhd
+Note: Test 5: XOR
+Time: 40 ns  Iteration: 0  Process: /alu_tb/line__39  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/alu_tb.vhd
+Note: XOR: Result = 65280
+Time: 50 ns  Iteration: 0  Process: /alu_tb/line__39  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/alu_tb.vhd
+Note: Test 6: SLL (Shift Left Logical)
+Time: 50 ns  Iteration: 0  Process: /alu_tb/line__39  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/alu_tb.vhd
+Note: SLL: 0x0001 << 2 = 4
+Time: 60 ns  Iteration: 0  Process: /alu_tb/line__39  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/alu_tb.vhd
+Note: Test 7: SRL (Shift Right Logical)
+Time: 60 ns  Iteration: 0  Process: /alu_tb/line__39  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/alu_tb.vhd
+Note: SRL: 0x0008 >> 2 = 2
+Time: 70 ns  Iteration: 0  Process: /alu_tb/line__39  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/alu_tb.vhd
+Note: Test 8: SRA (Shift Right Arithmetic)
+Time: 70 ns  Iteration: 0  Process: /alu_tb/line__39  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/alu_tb.vhd
+Note: SRA: 0x8000 >>> 1 = 49152
+Time: 80 ns  Iteration: 0  Process: /alu_tb/line__39  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/alu_tb.vhd
+Note: Test 9: SLT (Set Less Than)
+Time: 80 ns  Iteration: 0  Process: /alu_tb/line__39  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/alu_tb.vhd
+Note: SLT: 5 < 10 = 1
+Time: 90 ns  Iteration: 0  Process: /alu_tb/line__39  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/alu_tb.vhd
+Note: Test 10: SLT (Set Less Than - false)
+Time: 90 ns  Iteration: 0  Process: /alu_tb/line__39  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/alu_tb.vhd
+Note: SLT: 10 < 5 = 0
+Time: 100 ns  Iteration: 0  Process: /alu_tb/line__39  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/alu_tb.vhd
+Note: Test 11: NOR
+Time: 100 ns  Iteration: 0  Process: /alu_tb/line__39  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/alu_tb.vhd
+Error: NOR failed!
+Time: 110 ns  Iteration: 0  Process: /alu_tb/line__39  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/alu_tb.vhd
+Note: NOR: Result = 61440
+Time: 110 ns  Iteration: 0  Process: /alu_tb/line__39  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/alu_tb.vhd
+Note: Test 12: Zero Flag Test
+Time: 110 ns  Iteration: 0  Process: /alu_tb/line__39  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/alu_tb.vhd
+Note: Zero Flag: '1'
+Time: 120 ns  Iteration: 0  Process: /alu_tb/line__39  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/alu_tb.vhd
+Note: Test 13: Overflow Test
+Time: 120 ns  Iteration: 0  Process: /alu_tb/line__39  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/alu_tb.vhd
+Note: Overflow: '1'
+Time: 130 ns  Iteration: 0  Process: /alu_tb/line__39  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/alu_tb.vhd
+Note: Test 14: Multiply by 4 (0x000F << 2)
+Time: 130 ns  Iteration: 0  Process: /alu_tb/line__39  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/alu_tb.vhd
+Note: 0x000F * 4 = 60
+Time: 140 ns  Iteration: 0  Process: /alu_tb/line__39  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/alu_tb.vhd
+Note: Test 15: Divide by 8 (0x0040 >> 3)
+Time: 140 ns  Iteration: 0  Process: /alu_tb/line__39  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/alu_tb.vhd
+Note: 0x0040 / 8 = 8
+Time: 150 ns  Iteration: 0  Process: /alu_tb/line__39  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/alu_tb.vhd
+Note: ALU Testbench Complete!
+Time: 150 ns  Iteration: 0  Process: /alu_tb/line__39  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/alu_tb.vhd
+INFO: [USF-XSim-96] XSim completed. Design snapshot 'alu_tb_behav' loaded.
+INFO: [USF-XSim-97] XSim simulation ran for 1000ns
+launch_simulation: Time (s): cpu = 00:00:06 ; elapsed = 00:00:12 . Memory (MB): peak = 1006.730 ; gain = 0.000
+relaunch_sim
+Command: launch_simulation -simset sim_1 -mode behavioral
+INFO: [Vivado 12-5682] Launching behavioral simulation in 'C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.sim/sim_1/behav/xsim'
+INFO: [SIM-utils-51] Simulation object is 'sim_1'
+INFO: [SIM-utils-54] Inspecting design source files for 'alu_tb' in fileset 'sim_1'...
+INFO: [USF-XSim-97] Finding global include files...
+INFO: [USF-XSim-98] Fetching design files from 'sim_1'...
+INFO: [USF-XSim-2] XSim::Compile design
+INFO: [USF-XSim-61] Executing 'COMPILE and ANALYZE' step in 'C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.sim/sim_1/behav/xsim'
+"xvhdl --incr --relax -prj alu_tb_vhdl.prj"
+INFO: [USF-XSim-69] 'compile' step finished in '1' seconds
+Command: launch_simulation -simset sim_1 -mode behavioral
+INFO: [Vivado 12-5682] Launching behavioral simulation in 'C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.sim/sim_1/behav/xsim'
+INFO: [USF-XSim-3] XSim::Elaborate design
+INFO: [USF-XSim-61] Executing 'ELABORATE' step in 'C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.sim/sim_1/behav/xsim'
+"xelab -wto 6027e09ee84b49bb802594bb50900659 --incr --debug typical --relax --mt 2 -L xil_defaultlib -L secureip --snapshot alu_tb_behav xil_defaultlib.alu_tb -log elaborate.log"
+Vivado Simulator 2020.2
+Copyright 1986-1999, 2001-2020 Xilinx, Inc. All Rights Reserved.
+Running: C:/Xilinx/Vivado/2020.2/bin/unwrapped/win64.o/xelab.exe -wto 6027e09ee84b49bb802594bb50900659 --incr --debug typical --relax --mt 2 -L xil_defaultlib -L secureip --snapshot alu_tb_behav xil_defaultlib.alu_tb -log elaborate.log 
+Using 2 slave threads.
+Starting static elaboration
+Completed static elaboration
+INFO: [XSIM 43-4323] No Change in HDL. Linking previously generated obj files to create kernel
+INFO: [USF-XSim-69] 'elaborate' step finished in '2' seconds
+Vivado Simulator 2020.2
+Time resolution is 1 ps
+Note: Starting ALU Testbench...
+Time: 0 ps  Iteration: 0  Process: /alu_tb/line__39  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/alu_tb.vhd
+Note: Test 1: ADD
+Time: 0 ps  Iteration: 0  Process: /alu_tb/line__39  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/alu_tb.vhd
+Note: ADD: 5 + 10 = 15
+Time: 10 ns  Iteration: 0  Process: /alu_tb/line__39  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/alu_tb.vhd
+Note: Test 2: SUB
+Time: 10 ns  Iteration: 0  Process: /alu_tb/line__39  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/alu_tb.vhd
+Note: SUB: 16 - 5 = 11
+Time: 20 ns  Iteration: 0  Process: /alu_tb/line__39  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/alu_tb.vhd
+Note: Test 3: AND
+Time: 20 ns  Iteration: 0  Process: /alu_tb/line__39  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/alu_tb.vhd
+Note: AND: Result = 255
+Time: 30 ns  Iteration: 0  Process: /alu_tb/line__39  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/alu_tb.vhd
+Note: Test 4: OR
+Time: 30 ns  Iteration: 0  Process: /alu_tb/line__39  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/alu_tb.vhd
+Note: OR: Result = 255
+Time: 40 ns  Iteration: 0  Process: /alu_tb/line__39  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/alu_tb.vhd
+Note: Test 5: XOR
+Time: 40 ns  Iteration: 0  Process: /alu_tb/line__39  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/alu_tb.vhd
+Note: XOR: Result = 65280
+Time: 50 ns  Iteration: 0  Process: /alu_tb/line__39  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/alu_tb.vhd
+Note: Test 6: SLL (Shift Left Logical)
+Time: 50 ns  Iteration: 0  Process: /alu_tb/line__39  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/alu_tb.vhd
+Note: SLL: 0x0001 << 2 = 4
+Time: 60 ns  Iteration: 0  Process: /alu_tb/line__39  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/alu_tb.vhd
+Note: Test 7: SRL (Shift Right Logical)
+Time: 60 ns  Iteration: 0  Process: /alu_tb/line__39  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/alu_tb.vhd
+Note: SRL: 0x0008 >> 2 = 2
+Time: 70 ns  Iteration: 0  Process: /alu_tb/line__39  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/alu_tb.vhd
+Note: Test 8: SRA (Shift Right Arithmetic)
+Time: 70 ns  Iteration: 0  Process: /alu_tb/line__39  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/alu_tb.vhd
+Note: SRA: 0x8000 >>> 1 = 49152
+Time: 80 ns  Iteration: 0  Process: /alu_tb/line__39  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/alu_tb.vhd
+Note: Test 9: SLT (Set Less Than)
+Time: 80 ns  Iteration: 0  Process: /alu_tb/line__39  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/alu_tb.vhd
+Note: SLT: 5 < 10 = 1
+Time: 90 ns  Iteration: 0  Process: /alu_tb/line__39  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/alu_tb.vhd
+Note: Test 10: SLT (Set Less Than - false)
+Time: 90 ns  Iteration: 0  Process: /alu_tb/line__39  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/alu_tb.vhd
+Note: SLT: 10 < 5 = 0
+Time: 100 ns  Iteration: 0  Process: /alu_tb/line__39  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/alu_tb.vhd
+Note: Test 11: NOR
+Time: 100 ns  Iteration: 0  Process: /alu_tb/line__39  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/alu_tb.vhd
+Error: NOR failed!
+Time: 110 ns  Iteration: 0  Process: /alu_tb/line__39  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/alu_tb.vhd
+Note: NOR: Result = 61440
+Time: 110 ns  Iteration: 0  Process: /alu_tb/line__39  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/alu_tb.vhd
+Note: Test 12: Zero Flag Test
+Time: 110 ns  Iteration: 0  Process: /alu_tb/line__39  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/alu_tb.vhd
+Note: Zero Flag: '1'
+Time: 120 ns  Iteration: 0  Process: /alu_tb/line__39  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/alu_tb.vhd
+Note: Test 13: Overflow Test
+Time: 120 ns  Iteration: 0  Process: /alu_tb/line__39  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/alu_tb.vhd
+Note: Overflow: '1'
+Time: 130 ns  Iteration: 0  Process: /alu_tb/line__39  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/alu_tb.vhd
+Note: Test 14: Multiply by 4 (0x000F << 2)
+Time: 130 ns  Iteration: 0  Process: /alu_tb/line__39  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/alu_tb.vhd
+Note: 0x000F * 4 = 60
+Time: 140 ns  Iteration: 0  Process: /alu_tb/line__39  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/alu_tb.vhd
+Note: Test 15: Divide by 8 (0x0040 >> 3)
+Time: 140 ns  Iteration: 0  Process: /alu_tb/line__39  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/alu_tb.vhd
+Note: 0x0040 / 8 = 8
+Time: 150 ns  Iteration: 0  Process: /alu_tb/line__39  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/alu_tb.vhd
+Note: ALU Testbench Complete!
+Time: 150 ns  Iteration: 0  Process: /alu_tb/line__39  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/alu_tb.vhd
+relaunch_sim: Time (s): cpu = 00:00:01 ; elapsed = 00:00:09 . Memory (MB): peak = 1006.730 ; gain = 0.000
+set_property is_enabled false [get_files  C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/alu_tb.vhd]
+update_compile_order -fileset sources_1
+update_compile_order -fileset sources_1
+close [ open C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/alu_control_tb.vhd w ]
+add_files C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/alu_control_tb.vhd
+update_compile_order -fileset sources_1
+set_property top alu_control_tb [current_fileset]
+update_compile_order -fileset sources_1
+launch_simulation
+Command: launch_simulation 
+boost::filesystem::remove: The process cannot access the file because it is being used by another process: "C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.sim/sim_1/behav/xsim/simulate.log"
+close_sim
+INFO: [Simtcl 6-16] Simulation closed
+launch_simulation
+Command: launch_simulation 
+INFO: [Vivado 12-5682] Launching behavioral simulation in 'C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.sim/sim_1/behav/xsim'
+INFO: [SIM-utils-51] Simulation object is 'sim_1'
+INFO: [SIM-utils-54] Inspecting design source files for 'alu' in fileset 'sim_1'...
+INFO: [USF-XSim-97] Finding global include files...
+INFO: [USF-XSim-98] Fetching design files from 'sim_1'...
+INFO: [USF-XSim-2] XSim::Compile design
+INFO: [USF-XSim-61] Executing 'COMPILE and ANALYZE' step in 'C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.sim/sim_1/behav/xsim'
+"xvhdl --incr --relax -prj alu_vhdl.prj"
+INFO: [USF-XSim-69] 'compile' step finished in '1' seconds
+INFO: [USF-XSim-3] XSim::Elaborate design
+INFO: [USF-XSim-61] Executing 'ELABORATE' step in 'C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.sim/sim_1/behav/xsim'
+"xelab -wto 6027e09ee84b49bb802594bb50900659 --incr --debug typical --relax --mt 2 -L xil_defaultlib -L secureip --snapshot alu_behav xil_defaultlib.alu -log elaborate.log"
+Vivado Simulator 2020.2
+Copyright 1986-1999, 2001-2020 Xilinx, Inc. All Rights Reserved.
+Running: C:/Xilinx/Vivado/2020.2/bin/unwrapped/win64.o/xelab.exe -wto 6027e09ee84b49bb802594bb50900659 --incr --debug typical --relax --mt 2 -L xil_defaultlib -L secureip --snapshot alu_behav xil_defaultlib.alu -log elaborate.log 
+Using 2 slave threads.
+Starting static elaboration
+Completed static elaboration
+Starting simulation data flow analysis
+Completed simulation data flow analysis
+Time Resolution for simulation is 1ps
+Compiling package std.standard
+Compiling package std.textio
+Compiling package ieee.std_logic_1164
+Compiling package ieee.numeric_std
+Compiling architecture rtl of entity xil_defaultlib.full_adder [full_adder_default]
+Compiling architecture structural of entity xil_defaultlib.adder_16bit [adder_16bit_default]
+Compiling architecture rtl of entity xil_defaultlib.alu
+Built simulation snapshot alu_behav
+
+****** Webtalk v2020.2 (64-bit)
+  **** SW Build 3064766 on Wed Nov 18 09:12:45 MST 2020
+  **** IP Build 3064653 on Wed Nov 18 14:17:31 MST 2020
+    ** Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
+
+source C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.sim/sim_1/behav/xsim/xsim.dir/alu_behav/webtalk/xsim_webtalk.tcl -notrace
+INFO: [Common 17-206] Exiting Webtalk at Thu Nov  6 15:57:18 2025...
+INFO: [USF-XSim-69] 'elaborate' step finished in '4' seconds
+INFO: [USF-XSim-4] XSim::Simulate design
+INFO: [USF-XSim-61] Executing 'SIMULATE' step in 'C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.sim/sim_1/behav/xsim'
+INFO: [USF-XSim-98] *** Running xsim
+   with args "alu_behav -key {Behavioral:sim_1:Functional:alu} -tclbatch {alu.tcl} -view {C:/Users/mackr/426_Finial/Lab_3_426/top_level_tb_behav.wcfg} -log {simulate.log}"
+INFO: [USF-XSim-8] Loading simulator feature
+Vivado Simulator 2020.2
+Time resolution is 1 ps
+open_wave_config C:/Users/mackr/426_Finial/Lab_3_426/top_level_tb_behav.wcfg
+WARNING: Simulation object /top_level_tb/clk was not found in the design.
+WARNING: Simulation object /top_level_tb/RegWr was not found in the design.
+WARNING: Simulation object /top_level_tb/Rd was not found in the design.
+WARNING: Simulation object /top_level_tb/Rs was not found in the design.
+WARNING: Simulation object /top_level_tb/Rt was not found in the design.
+WARNING: Simulation object /top_level_tb/ALUctr was not found in the design.
+WARNING: Simulation object /top_level_tb/Zero was not found in the design.
+WARNING: Simulation object /top_level_tb/Overflow was not found in the design.
+WARNING: Simulation object /top_level_tb/Carryout was not found in the design.
+WARNING: Simulation object /top_level_tb/Result was not found in the design.
+WARNING: Simulation object /top_level_tb/clk_period was not found in the design.
+source alu.tcl
+# set curr_wave [current_wave_config]
+# if { [string length $curr_wave] == 0 } {
+#   if { [llength [get_objects]] > 0} {
+#     add_wave /
+#     set_property needs_save false [current_wave_config]
+#   } else {
+#      send_msg_id Add_Wave-1 WARNING "No top level signals found. Simulator will start without a wave window. If you want to open a wave window go to 'File->New Waveform Configuration' or type 'create_wave_config' in the TCL console."
+#   }
+# }
+# run 1000ns
+INFO: [USF-XSim-96] XSim completed. Design snapshot 'alu_behav' loaded.
+INFO: [USF-XSim-97] XSim simulation ran for 1000ns
+launch_simulation: Time (s): cpu = 00:00:03 ; elapsed = 00:00:09 . Memory (MB): peak = 1006.730 ; gain = 0.000
+relaunch_sim
+Command: launch_simulation -simset sim_1 -mode behavioral
+INFO: [Vivado 12-5682] Launching behavioral simulation in 'C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.sim/sim_1/behav/xsim'
+INFO: [SIM-utils-51] Simulation object is 'sim_1'
+INFO: [SIM-utils-54] Inspecting design source files for 'alu' in fileset 'sim_1'...
+INFO: [USF-XSim-97] Finding global include files...
+INFO: [USF-XSim-98] Fetching design files from 'sim_1'...
+INFO: [USF-XSim-2] XSim::Compile design
+INFO: [USF-XSim-61] Executing 'COMPILE and ANALYZE' step in 'C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.sim/sim_1/behav/xsim'
+"xvhdl --incr --relax -prj alu_vhdl.prj"
+INFO: [USF-XSim-69] 'compile' step finished in '1' seconds
+Command: launch_simulation -simset sim_1 -mode behavioral
+INFO: [Vivado 12-5682] Launching behavioral simulation in 'C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.sim/sim_1/behav/xsim'
+INFO: [USF-XSim-3] XSim::Elaborate design
+INFO: [USF-XSim-61] Executing 'ELABORATE' step in 'C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.sim/sim_1/behav/xsim'
+"xelab -wto 6027e09ee84b49bb802594bb50900659 --incr --debug typical --relax --mt 2 -L xil_defaultlib -L secureip --snapshot alu_behav xil_defaultlib.alu -log elaborate.log"
+Vivado Simulator 2020.2
+Copyright 1986-1999, 2001-2020 Xilinx, Inc. All Rights Reserved.
+Running: C:/Xilinx/Vivado/2020.2/bin/unwrapped/win64.o/xelab.exe -wto 6027e09ee84b49bb802594bb50900659 --incr --debug typical --relax --mt 2 -L xil_defaultlib -L secureip --snapshot alu_behav xil_defaultlib.alu -log elaborate.log 
+Using 2 slave threads.
+Starting static elaboration
+Completed static elaboration
+INFO: [XSIM 43-4323] No Change in HDL. Linking previously generated obj files to create kernel
+INFO: [USF-XSim-69] 'elaborate' step finished in '2' seconds
+Vivado Simulator 2020.2
+Time resolution is 1 ps
+relaunch_sim: Time (s): cpu = 00:00:02 ; elapsed = 00:00:10 . Memory (MB): peak = 1006.730 ; gain = 0.000
+set_property is_enabled false [get_files  C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/alu.vhd]
+set_property is_enabled false [get_files  {C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/adder_32bit.vhd C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/control_unit.vhd C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/register_file.vhd}]
+launch_simulation
+Command: launch_simulation 
+boost::filesystem::remove: The process cannot access the file because it is being used by another process: "C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.sim/sim_1/behav/xsim/simulate.log"
+close_sim
+INFO: [Simtcl 6-16] Simulation closed
+launch_simulation
+Command: launch_simulation 
+INFO: [Vivado 12-5682] Launching behavioral simulation in 'C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.sim/sim_1/behav/xsim'
+INFO: [SIM-utils-51] Simulation object is 'sim_1'
+INFO: [SIM-utils-54] Inspecting design source files for 'alu_control_tb' in fileset 'sim_1'...
+INFO: [USF-XSim-97] Finding global include files...
+INFO: [USF-XSim-98] Fetching design files from 'sim_1'...
+INFO: [USF-XSim-2] XSim::Compile design
+INFO: [USF-XSim-61] Executing 'COMPILE and ANALYZE' step in 'C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.sim/sim_1/behav/xsim'
+"xvhdl --incr --relax -prj alu_control_tb_vhdl.prj"
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/alu_control.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'alu_control'
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/alu_control_tb.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'alu_control_tb'
+INFO: [USF-XSim-69] 'compile' step finished in '1' seconds
+INFO: [USF-XSim-3] XSim::Elaborate design
+INFO: [USF-XSim-61] Executing 'ELABORATE' step in 'C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.sim/sim_1/behav/xsim'
+"xelab -wto 6027e09ee84b49bb802594bb50900659 --incr --debug typical --relax --mt 2 -L xil_defaultlib -L secureip --snapshot alu_control_tb_behav xil_defaultlib.alu_control_tb -log elaborate.log"
+Vivado Simulator 2020.2
+Copyright 1986-1999, 2001-2020 Xilinx, Inc. All Rights Reserved.
+Running: C:/Xilinx/Vivado/2020.2/bin/unwrapped/win64.o/xelab.exe -wto 6027e09ee84b49bb802594bb50900659 --incr --debug typical --relax --mt 2 -L xil_defaultlib -L secureip --snapshot alu_control_tb_behav xil_defaultlib.alu_control_tb -log elaborate.log 
+Using 2 slave threads.
+Starting static elaboration
+Completed static elaboration
+Starting simulation data flow analysis
+Completed simulation data flow analysis
+Time Resolution for simulation is 1ps
+Compiling package std.standard
+Compiling package std.textio
+Compiling package ieee.std_logic_1164
+Compiling package ieee.numeric_std
+Compiling architecture rtl of entity xil_defaultlib.alu_control [alu_control_default]
+Compiling architecture test of entity xil_defaultlib.alu_control_tb
+Built simulation snapshot alu_control_tb_behav
+
+****** Webtalk v2020.2 (64-bit)
+  **** SW Build 3064766 on Wed Nov 18 09:12:45 MST 2020
+  **** IP Build 3064653 on Wed Nov 18 14:17:31 MST 2020
+    ** Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
+
+source C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.sim/sim_1/behav/xsim/xsim.dir/alu_control_tb_behav/webtalk/xsim_webtalk.tcl -notrace
+INFO: [Common 17-206] Exiting Webtalk at Thu Nov  6 15:58:54 2025...
+INFO: [USF-XSim-69] 'elaborate' step finished in '5' seconds
+INFO: [USF-XSim-4] XSim::Simulate design
+INFO: [USF-XSim-61] Executing 'SIMULATE' step in 'C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.sim/sim_1/behav/xsim'
+INFO: [USF-XSim-98] *** Running xsim
+   with args "alu_control_tb_behav -key {Behavioral:sim_1:Functional:alu_control_tb} -tclbatch {alu_control_tb.tcl} -view {C:/Users/mackr/426_Finial/Lab_3_426/top_level_tb_behav.wcfg} -log {simulate.log}"
+INFO: [USF-XSim-8] Loading simulator feature
+Vivado Simulator 2020.2
+Time resolution is 1 ps
+open_wave_config C:/Users/mackr/426_Finial/Lab_3_426/top_level_tb_behav.wcfg
+WARNING: Simulation object /top_level_tb/clk was not found in the design.
+WARNING: Simulation object /top_level_tb/RegWr was not found in the design.
+WARNING: Simulation object /top_level_tb/Rd was not found in the design.
+WARNING: Simulation object /top_level_tb/Rs was not found in the design.
+WARNING: Simulation object /top_level_tb/Rt was not found in the design.
+WARNING: Simulation object /top_level_tb/ALUctr was not found in the design.
+WARNING: Simulation object /top_level_tb/Zero was not found in the design.
+WARNING: Simulation object /top_level_tb/Overflow was not found in the design.
+WARNING: Simulation object /top_level_tb/Carryout was not found in the design.
+WARNING: Simulation object /top_level_tb/Result was not found in the design.
+WARNING: Simulation object /top_level_tb/clk_period was not found in the design.
+source alu_control_tb.tcl
+# set curr_wave [current_wave_config]
+# if { [string length $curr_wave] == 0 } {
+#   if { [llength [get_objects]] > 0} {
+#     add_wave /
+#     set_property needs_save false [current_wave_config]
+#   } else {
+#      send_msg_id Add_Wave-1 WARNING "No top level signals found. Simulator will start without a wave window. If you want to open a wave window go to 'File->New Waveform Configuration' or type 'create_wave_config' in the TCL console."
+#   }
+# }
+# run 1000ns
+Note: Starting ALU Control Testbench...
+Time: 0 ps  Iteration: 0  Process: /alu_control_tb/line__29  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/alu_control_tb.vhd
+Note: Test 1: Memory Operations (LW/SW/ADDI)
+Time: 0 ps  Iteration: 0  Process: /alu_control_tb/line__29  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/alu_control_tb.vhd
+Note: Memory Op -> ALUctr = 0 (ADD)
+Time: 10 ns  Iteration: 0  Process: /alu_control_tb/line__29  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/alu_control_tb.vhd
+Note: Test 2: Branch Operations
+Time: 10 ns  Iteration: 0  Process: /alu_control_tb/line__29  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/alu_control_tb.vhd
+Note: Branch Op -> ALUctr = 1 (SUB)
+Time: 20 ns  Iteration: 0  Process: /alu_control_tb/line__29  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/alu_control_tb.vhd
+Note: Test 3: R-Type ADD (opcode = 0000)
+Time: 20 ns  Iteration: 0  Process: /alu_control_tb/line__29  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/alu_control_tb.vhd
+Note: ADD -> ALUctr = 0
+Time: 30 ns  Iteration: 0  Process: /alu_control_tb/line__29  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/alu_control_tb.vhd
+Note: Test 4: R-Type SUB (opcode = 0001)
+Time: 30 ns  Iteration: 0  Process: /alu_control_tb/line__29  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/alu_control_tb.vhd
+Note: SUB -> ALUctr = 1
+Time: 40 ns  Iteration: 0  Process: /alu_control_tb/line__29  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/alu_control_tb.vhd
+Note: Test 5: R-Type AND (opcode = 0010)
+Time: 40 ns  Iteration: 0  Process: /alu_control_tb/line__29  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/alu_control_tb.vhd
+Note: AND -> ALUctr = 2
+Time: 50 ns  Iteration: 0  Process: /alu_control_tb/line__29  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/alu_control_tb.vhd
+Note: Test 6: R-Type OR (opcode = 0011)
+Time: 50 ns  Iteration: 0  Process: /alu_control_tb/line__29  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/alu_control_tb.vhd
+Note: OR -> ALUctr = 3
+Time: 60 ns  Iteration: 0  Process: /alu_control_tb/line__29  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/alu_control_tb.vhd
+Note: Test 7: R-Type SLL (opcode = 0100)
+Time: 60 ns  Iteration: 0  Process: /alu_control_tb/line__29  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/alu_control_tb.vhd
+Note: SLL -> ALUctr = 5
+Time: 70 ns  Iteration: 0  Process: /alu_control_tb/line__29  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/alu_control_tb.vhd
+Note: Test 8: R-Type SRL (opcode = 0101)
+Time: 70 ns  Iteration: 0  Process: /alu_control_tb/line__29  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/alu_control_tb.vhd
+Note: SRL -> ALUctr = 6
+Time: 80 ns  Iteration: 0  Process: /alu_control_tb/line__29  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/alu_control_tb.vhd
+Note: Test 9: R-Type SRA (opcode = 0110)
+Time: 80 ns  Iteration: 0  Process: /alu_control_tb/line__29  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/alu_control_tb.vhd
+Note: SRA -> ALUctr = 7
+Time: 90 ns  Iteration: 0  Process: /alu_control_tb/line__29  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/alu_control_tb.vhd
+Note: Test 10: R-Type XOR (opcode = 0111)
+Time: 90 ns  Iteration: 0  Process: /alu_control_tb/line__29  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/alu_control_tb.vhd
+Note: XOR -> ALUctr = 4
+Time: 100 ns  Iteration: 0  Process: /alu_control_tb/line__29  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/alu_control_tb.vhd
+Note: ALU Control Testbench Complete!
+Time: 100 ns  Iteration: 0  Process: /alu_control_tb/line__29  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/alu_control_tb.vhd
+INFO: [USF-XSim-96] XSim completed. Design snapshot 'alu_control_tb_behav' loaded.
+INFO: [USF-XSim-97] XSim simulation ran for 1000ns
+launch_simulation: Time (s): cpu = 00:00:04 ; elapsed = 00:00:10 . Memory (MB): peak = 1006.730 ; gain = 0.000
+relaunch_sim
+Command: launch_simulation -simset sim_1 -mode behavioral
+INFO: [Vivado 12-5682] Launching behavioral simulation in 'C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.sim/sim_1/behav/xsim'
+INFO: [SIM-utils-51] Simulation object is 'sim_1'
+INFO: [SIM-utils-54] Inspecting design source files for 'alu_control_tb' in fileset 'sim_1'...
+INFO: [USF-XSim-97] Finding global include files...
+INFO: [USF-XSim-98] Fetching design files from 'sim_1'...
+INFO: [USF-XSim-2] XSim::Compile design
+INFO: [USF-XSim-61] Executing 'COMPILE and ANALYZE' step in 'C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.sim/sim_1/behav/xsim'
+"xvhdl --incr --relax -prj alu_control_tb_vhdl.prj"
+INFO: [USF-XSim-69] 'compile' step finished in '1' seconds
+Command: launch_simulation -simset sim_1 -mode behavioral
+INFO: [Vivado 12-5682] Launching behavioral simulation in 'C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.sim/sim_1/behav/xsim'
+INFO: [USF-XSim-3] XSim::Elaborate design
+INFO: [USF-XSim-61] Executing 'ELABORATE' step in 'C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.sim/sim_1/behav/xsim'
+"xelab -wto 6027e09ee84b49bb802594bb50900659 --incr --debug typical --relax --mt 2 -L xil_defaultlib -L secureip --snapshot alu_control_tb_behav xil_defaultlib.alu_control_tb -log elaborate.log"
+Vivado Simulator 2020.2
+Copyright 1986-1999, 2001-2020 Xilinx, Inc. All Rights Reserved.
+Running: C:/Xilinx/Vivado/2020.2/bin/unwrapped/win64.o/xelab.exe -wto 6027e09ee84b49bb802594bb50900659 --incr --debug typical --relax --mt 2 -L xil_defaultlib -L secureip --snapshot alu_control_tb_behav xil_defaultlib.alu_control_tb -log elaborate.log 
+Using 2 slave threads.
+Starting static elaboration
+Completed static elaboration
+INFO: [XSIM 43-4323] No Change in HDL. Linking previously generated obj files to create kernel
+INFO: [USF-XSim-69] 'elaborate' step finished in '2' seconds
+Vivado Simulator 2020.2
+Time resolution is 1 ps
+Note: Starting ALU Control Testbench...
+Time: 0 ps  Iteration: 0  Process: /alu_control_tb/line__29  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/alu_control_tb.vhd
+Note: Test 1: Memory Operations (LW/SW/ADDI)
+Time: 0 ps  Iteration: 0  Process: /alu_control_tb/line__29  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/alu_control_tb.vhd
+Note: Memory Op -> ALUctr = 0 (ADD)
+Time: 10 ns  Iteration: 0  Process: /alu_control_tb/line__29  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/alu_control_tb.vhd
+Note: Test 2: Branch Operations
+Time: 10 ns  Iteration: 0  Process: /alu_control_tb/line__29  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/alu_control_tb.vhd
+Note: Branch Op -> ALUctr = 1 (SUB)
+Time: 20 ns  Iteration: 0  Process: /alu_control_tb/line__29  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/alu_control_tb.vhd
+Note: Test 3: R-Type ADD (opcode = 0000)
+Time: 20 ns  Iteration: 0  Process: /alu_control_tb/line__29  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/alu_control_tb.vhd
+Note: ADD -> ALUctr = 0
+Time: 30 ns  Iteration: 0  Process: /alu_control_tb/line__29  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/alu_control_tb.vhd
+Note: Test 4: R-Type SUB (opcode = 0001)
+Time: 30 ns  Iteration: 0  Process: /alu_control_tb/line__29  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/alu_control_tb.vhd
+Note: SUB -> ALUctr = 1
+Time: 40 ns  Iteration: 0  Process: /alu_control_tb/line__29  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/alu_control_tb.vhd
+Note: Test 5: R-Type AND (opcode = 0010)
+Time: 40 ns  Iteration: 0  Process: /alu_control_tb/line__29  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/alu_control_tb.vhd
+Note: AND -> ALUctr = 2
+Time: 50 ns  Iteration: 0  Process: /alu_control_tb/line__29  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/alu_control_tb.vhd
+Note: Test 6: R-Type OR (opcode = 0011)
+Time: 50 ns  Iteration: 0  Process: /alu_control_tb/line__29  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/alu_control_tb.vhd
+Note: OR -> ALUctr = 3
+Time: 60 ns  Iteration: 0  Process: /alu_control_tb/line__29  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/alu_control_tb.vhd
+Note: Test 7: R-Type SLL (opcode = 0100)
+Time: 60 ns  Iteration: 0  Process: /alu_control_tb/line__29  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/alu_control_tb.vhd
+Note: SLL -> ALUctr = 5
+Time: 70 ns  Iteration: 0  Process: /alu_control_tb/line__29  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/alu_control_tb.vhd
+Note: Test 8: R-Type SRL (opcode = 0101)
+Time: 70 ns  Iteration: 0  Process: /alu_control_tb/line__29  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/alu_control_tb.vhd
+Note: SRL -> ALUctr = 6
+Time: 80 ns  Iteration: 0  Process: /alu_control_tb/line__29  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/alu_control_tb.vhd
+Note: Test 9: R-Type SRA (opcode = 0110)
+Time: 80 ns  Iteration: 0  Process: /alu_control_tb/line__29  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/alu_control_tb.vhd
+Note: SRA -> ALUctr = 7
+Time: 90 ns  Iteration: 0  Process: /alu_control_tb/line__29  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/alu_control_tb.vhd
+Note: Test 10: R-Type XOR (opcode = 0111)
+Time: 90 ns  Iteration: 0  Process: /alu_control_tb/line__29  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/alu_control_tb.vhd
+Note: XOR -> ALUctr = 4
+Time: 100 ns  Iteration: 0  Process: /alu_control_tb/line__29  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/alu_control_tb.vhd
+Note: ALU Control Testbench Complete!
+Time: 100 ns  Iteration: 0  Process: /alu_control_tb/line__29  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/alu_control_tb.vhd
+relaunch_sim: Time (s): cpu = 00:00:01 ; elapsed = 00:00:09 . Memory (MB): peak = 1006.730 ; gain = 0.000
+close [ open C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/control_unit_tb.vhd w ]
+add_files C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/control_unit_tb.vhd
+update_compile_order -fileset sources_1
+set_property is_enabled true [get_files  C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/control_unit.vhd]
+update_compile_order -fileset sources_1
+set_property top control_unit_tb [current_fileset]
+update_compile_order -fileset sources_1
+set_property is_enabled false [get_files  C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/alu_control_tb.vhd]
+update_compile_order -fileset sources_1
+launch_simulation
+Command: launch_simulation 
+boost::filesystem::remove: The process cannot access the file because it is being used by another process: "C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.sim/sim_1/behav/xsim/simulate.log"
+close_sim
+INFO: [Simtcl 6-16] Simulation closed
+launch_simulation
+Command: launch_simulation 
+INFO: [Vivado 12-5682] Launching behavioral simulation in 'C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.sim/sim_1/behav/xsim'
+INFO: [SIM-utils-51] Simulation object is 'sim_1'
+INFO: [SIM-utils-54] Inspecting design source files for 'control_unit_tb' in fileset 'sim_1'...
+INFO: [USF-XSim-97] Finding global include files...
+INFO: [USF-XSim-98] Fetching design files from 'sim_1'...
+INFO: [USF-XSim-2] XSim::Compile design
+INFO: [USF-XSim-61] Executing 'COMPILE and ANALYZE' step in 'C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.sim/sim_1/behav/xsim'
+"xvhdl --incr --relax -prj control_unit_tb_vhdl.prj"
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/control_unit.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'control_unit'
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/control_unit_tb.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'control_unit_tb'
+INFO: [USF-XSim-69] 'compile' step finished in '2' seconds
+INFO: [USF-XSim-3] XSim::Elaborate design
+INFO: [USF-XSim-61] Executing 'ELABORATE' step in 'C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.sim/sim_1/behav/xsim'
+"xelab -wto 6027e09ee84b49bb802594bb50900659 --incr --debug typical --relax --mt 2 -L xil_defaultlib -L secureip --snapshot control_unit_tb_behav xil_defaultlib.control_unit_tb -log elaborate.log"
+Vivado Simulator 2020.2
+Copyright 1986-1999, 2001-2020 Xilinx, Inc. All Rights Reserved.
+Running: C:/Xilinx/Vivado/2020.2/bin/unwrapped/win64.o/xelab.exe -wto 6027e09ee84b49bb802594bb50900659 --incr --debug typical --relax --mt 2 -L xil_defaultlib -L secureip --snapshot control_unit_tb_behav xil_defaultlib.control_unit_tb -log elaborate.log 
+Using 2 slave threads.
+Starting static elaboration
+Completed static elaboration
+Starting simulation data flow analysis
+Completed simulation data flow analysis
+Time Resolution for simulation is 1ps
+Compiling package std.standard
+Compiling package std.textio
+Compiling package ieee.std_logic_1164
+Compiling package ieee.numeric_std
+Compiling architecture rtl of entity xil_defaultlib.control_unit [control_unit_default]
+Compiling architecture test of entity xil_defaultlib.control_unit_tb
+Built simulation snapshot control_unit_tb_behav
+
+****** Webtalk v2020.2 (64-bit)
+  **** SW Build 3064766 on Wed Nov 18 09:12:45 MST 2020
+  **** IP Build 3064653 on Wed Nov 18 14:17:31 MST 2020
+    ** Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
+
+source C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.sim/sim_1/behav/xsim/xsim.dir/control_unit_tb_behav/webtalk/xsim_webtalk.tcl -notrace
+INFO: [Common 17-206] Exiting Webtalk at Thu Nov  6 16:02:42 2025...
+INFO: [USF-XSim-69] 'elaborate' step finished in '4' seconds
+INFO: [USF-XSim-4] XSim::Simulate design
+INFO: [USF-XSim-61] Executing 'SIMULATE' step in 'C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.sim/sim_1/behav/xsim'
+INFO: [USF-XSim-98] *** Running xsim
+   with args "control_unit_tb_behav -key {Behavioral:sim_1:Functional:control_unit_tb} -tclbatch {control_unit_tb.tcl} -view {C:/Users/mackr/426_Finial/Lab_3_426/top_level_tb_behav.wcfg} -log {simulate.log}"
+INFO: [USF-XSim-8] Loading simulator feature
+Vivado Simulator 2020.2
+Time resolution is 1 ps
+open_wave_config C:/Users/mackr/426_Finial/Lab_3_426/top_level_tb_behav.wcfg
+WARNING: Simulation object /top_level_tb/clk was not found in the design.
+WARNING: Simulation object /top_level_tb/RegWr was not found in the design.
+WARNING: Simulation object /top_level_tb/Rd was not found in the design.
+WARNING: Simulation object /top_level_tb/Rs was not found in the design.
+WARNING: Simulation object /top_level_tb/Rt was not found in the design.
+WARNING: Simulation object /top_level_tb/ALUctr was not found in the design.
+WARNING: Simulation object /top_level_tb/Zero was not found in the design.
+WARNING: Simulation object /top_level_tb/Overflow was not found in the design.
+WARNING: Simulation object /top_level_tb/Carryout was not found in the design.
+WARNING: Simulation object /top_level_tb/Result was not found in the design.
+WARNING: Simulation object /top_level_tb/clk_period was not found in the design.
+source control_unit_tb.tcl
+# set curr_wave [current_wave_config]
+# if { [string length $curr_wave] == 0 } {
+#   if { [llength [get_objects]] > 0} {
+#     add_wave /
+#     set_property needs_save false [current_wave_config]
+#   } else {
+#      send_msg_id Add_Wave-1 WARNING "No top level signals found. Simulator will start without a wave window. If you want to open a wave window go to 'File->New Waveform Configuration' or type 'create_wave_config' in the TCL console."
+#   }
+# }
+# run 1000ns
+Note: Starting Control Unit Testbench...
+Time: 0 ps  Iteration: 0  Process: /control_unit_tb/line__44  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/control_unit_tb.vhd
+Note: Test 1: ADD Instruction (opcode = 0000)
+Time: 0 ps  Iteration: 0  Process: /control_unit_tb/line__44  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/control_unit_tb.vhd
+Note: ADD Control Signals: reg_dst='1', ALU_OP=2, reg_write='1'
+Time: 10 ns  Iteration: 0  Process: /control_unit_tb/line__44  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/control_unit_tb.vhd
+Note: Test 2: LW Instruction (opcode = 1000)
+Time: 10 ns  Iteration: 0  Process: /control_unit_tb/line__44  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/control_unit_tb.vhd
+Note: LW Control Signals: mem_read='1', mem_to_reg='1'
+Time: 20 ns  Iteration: 0  Process: /control_unit_tb/line__44  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/control_unit_tb.vhd
+Note: Test 3: SW Instruction (opcode = 1001)
+Time: 20 ns  Iteration: 0  Process: /control_unit_tb/line__44  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/control_unit_tb.vhd
+Note: SW Control Signals: mem_write='1'
+Time: 30 ns  Iteration: 0  Process: /control_unit_tb/line__44  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/control_unit_tb.vhd
+Note: Test 4: ADDI Instruction (opcode = 1010)
+Time: 30 ns  Iteration: 0  Process: /control_unit_tb/line__44  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/control_unit_tb.vhd
+Note: ADDI Control Signals OK
+Time: 40 ns  Iteration: 0  Process: /control_unit_tb/line__44  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/control_unit_tb.vhd
+Note: Test 5: BEQ Instruction (opcode = 1011)
+Time: 40 ns  Iteration: 0  Process: /control_unit_tb/line__44  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/control_unit_tb.vhd
+Note: BEQ Control Signals: branch='1'
+Time: 50 ns  Iteration: 0  Process: /control_unit_tb/line__44  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/control_unit_tb.vhd
+Note: Test 6: BGT Instruction (opcode = 1100)
+Time: 50 ns  Iteration: 0  Process: /control_unit_tb/line__44  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/control_unit_tb.vhd
+Note: BGT Control Signals OK
+Time: 60 ns  Iteration: 0  Process: /control_unit_tb/line__44  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/control_unit_tb.vhd
+Note: Test 7: JUMP Instruction (opcode = 1111)
+Time: 60 ns  Iteration: 0  Process: /control_unit_tb/line__44  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/control_unit_tb.vhd
+Note: JUMP Control Signals: jump='1'
+Time: 70 ns  Iteration: 0  Process: /control_unit_tb/line__44  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/control_unit_tb.vhd
+Note: Test 8-14: All R-Type Instructions
+Time: 70 ns  Iteration: 0  Process: /control_unit_tb/line__44  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/control_unit_tb.vhd
+Note: All R-Type instructions OK
+Time: 150 ns  Iteration: 0  Process: /control_unit_tb/line__44  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/control_unit_tb.vhd
+Note: Control Unit Testbench Complete!
+Time: 150 ns  Iteration: 0  Process: /control_unit_tb/line__44  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/control_unit_tb.vhd
+INFO: [USF-XSim-96] XSim completed. Design snapshot 'control_unit_tb_behav' loaded.
+INFO: [USF-XSim-97] XSim simulation ran for 1000ns
+launch_simulation: Time (s): cpu = 00:00:04 ; elapsed = 00:00:09 . Memory (MB): peak = 1006.730 ; gain = 0.000
+relaunch_sim
+Command: launch_simulation -simset sim_1 -mode behavioral
+INFO: [Vivado 12-5682] Launching behavioral simulation in 'C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.sim/sim_1/behav/xsim'
+INFO: [SIM-utils-51] Simulation object is 'sim_1'
+INFO: [SIM-utils-54] Inspecting design source files for 'control_unit_tb' in fileset 'sim_1'...
+INFO: [USF-XSim-97] Finding global include files...
+INFO: [USF-XSim-98] Fetching design files from 'sim_1'...
+INFO: [USF-XSim-2] XSim::Compile design
+INFO: [USF-XSim-61] Executing 'COMPILE and ANALYZE' step in 'C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.sim/sim_1/behav/xsim'
+"xvhdl --incr --relax -prj control_unit_tb_vhdl.prj"
+INFO: [USF-XSim-69] 'compile' step finished in '1' seconds
+Command: launch_simulation -simset sim_1 -mode behavioral
+INFO: [Vivado 12-5682] Launching behavioral simulation in 'C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.sim/sim_1/behav/xsim'
+INFO: [USF-XSim-3] XSim::Elaborate design
+INFO: [USF-XSim-61] Executing 'ELABORATE' step in 'C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.sim/sim_1/behav/xsim'
+"xelab -wto 6027e09ee84b49bb802594bb50900659 --incr --debug typical --relax --mt 2 -L xil_defaultlib -L secureip --snapshot control_unit_tb_behav xil_defaultlib.control_unit_tb -log elaborate.log"
+Vivado Simulator 2020.2
+Copyright 1986-1999, 2001-2020 Xilinx, Inc. All Rights Reserved.
+Running: C:/Xilinx/Vivado/2020.2/bin/unwrapped/win64.o/xelab.exe -wto 6027e09ee84b49bb802594bb50900659 --incr --debug typical --relax --mt 2 -L xil_defaultlib -L secureip --snapshot control_unit_tb_behav xil_defaultlib.control_unit_tb -log elaborate.log 
+Using 2 slave threads.
+Starting static elaboration
+Completed static elaboration
+INFO: [XSIM 43-4323] No Change in HDL. Linking previously generated obj files to create kernel
+INFO: [USF-XSim-69] 'elaborate' step finished in '1' seconds
+Vivado Simulator 2020.2
+Time resolution is 1 ps
+Note: Starting Control Unit Testbench...
+Time: 0 ps  Iteration: 0  Process: /control_unit_tb/line__44  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/control_unit_tb.vhd
+Note: Test 1: ADD Instruction (opcode = 0000)
+Time: 0 ps  Iteration: 0  Process: /control_unit_tb/line__44  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/control_unit_tb.vhd
+Note: ADD Control Signals: reg_dst='1', ALU_OP=2, reg_write='1'
+Time: 10 ns  Iteration: 0  Process: /control_unit_tb/line__44  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/control_unit_tb.vhd
+Note: Test 2: LW Instruction (opcode = 1000)
+Time: 10 ns  Iteration: 0  Process: /control_unit_tb/line__44  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/control_unit_tb.vhd
+Note: LW Control Signals: mem_read='1', mem_to_reg='1'
+Time: 20 ns  Iteration: 0  Process: /control_unit_tb/line__44  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/control_unit_tb.vhd
+Note: Test 3: SW Instruction (opcode = 1001)
+Time: 20 ns  Iteration: 0  Process: /control_unit_tb/line__44  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/control_unit_tb.vhd
+Note: SW Control Signals: mem_write='1'
+Time: 30 ns  Iteration: 0  Process: /control_unit_tb/line__44  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/control_unit_tb.vhd
+Note: Test 4: ADDI Instruction (opcode = 1010)
+Time: 30 ns  Iteration: 0  Process: /control_unit_tb/line__44  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/control_unit_tb.vhd
+Note: ADDI Control Signals OK
+Time: 40 ns  Iteration: 0  Process: /control_unit_tb/line__44  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/control_unit_tb.vhd
+Note: Test 5: BEQ Instruction (opcode = 1011)
+Time: 40 ns  Iteration: 0  Process: /control_unit_tb/line__44  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/control_unit_tb.vhd
+Note: BEQ Control Signals: branch='1'
+Time: 50 ns  Iteration: 0  Process: /control_unit_tb/line__44  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/control_unit_tb.vhd
+Note: Test 6: BGT Instruction (opcode = 1100)
+Time: 50 ns  Iteration: 0  Process: /control_unit_tb/line__44  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/control_unit_tb.vhd
+Note: BGT Control Signals OK
+Time: 60 ns  Iteration: 0  Process: /control_unit_tb/line__44  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/control_unit_tb.vhd
+Note: Test 7: JUMP Instruction (opcode = 1111)
+Time: 60 ns  Iteration: 0  Process: /control_unit_tb/line__44  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/control_unit_tb.vhd
+Note: JUMP Control Signals: jump='1'
+Time: 70 ns  Iteration: 0  Process: /control_unit_tb/line__44  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/control_unit_tb.vhd
+Note: Test 8-14: All R-Type Instructions
+Time: 70 ns  Iteration: 0  Process: /control_unit_tb/line__44  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/control_unit_tb.vhd
+Note: All R-Type instructions OK
+Time: 150 ns  Iteration: 0  Process: /control_unit_tb/line__44  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/control_unit_tb.vhd
+Note: Control Unit Testbench Complete!
+Time: 150 ns  Iteration: 0  Process: /control_unit_tb/line__44  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/control_unit_tb.vhd
+relaunch_sim: Time (s): cpu = 00:00:02 ; elapsed = 00:00:09 . Memory (MB): peak = 1006.730 ; gain = 0.000
+set_property is_enabled false [get_files  {C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/control_unit_tb.vhd C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/control_unit.vhd C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/alu_control.vhd C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/full_adder.vhd}]
+set_property is_enabled true [get_files  {C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/register_file_tb.vhd C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/register_file.vhd}]
+launch_simulation
+Command: launch_simulation 
+boost::filesystem::remove: The process cannot access the file because it is being used by another process: "C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.sim/sim_1/behav/xsim/simulate.log"
+close_sim
+INFO: [Simtcl 6-16] Simulation closed
+launch_simulation
+Command: launch_simulation 
+INFO: [Vivado 12-5682] Launching behavioral simulation in 'C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.sim/sim_1/behav/xsim'
+INFO: [SIM-utils-51] Simulation object is 'sim_1'
+INFO: [SIM-utils-54] Inspecting design source files for 'register_file_tb' in fileset 'sim_1'...
+INFO: [USF-XSim-97] Finding global include files...
+INFO: [USF-XSim-98] Fetching design files from 'sim_1'...
+INFO: [USF-XSim-2] XSim::Compile design
+INFO: [USF-XSim-61] Executing 'COMPILE and ANALYZE' step in 'C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.sim/sim_1/behav/xsim'
+"xvhdl --incr --relax -prj register_file_tb_vhdl.prj"
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/register_file_tb.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'register_file_tb'
+ERROR: [VRFC 10-1471] type error near busa ; current type unsigned; expected type bit_vector [C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/register_file_tb.vhd:67]
+ERROR: [VRFC 10-1471] type error near busa ; current type unsigned; expected type bit_vector [C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/register_file_tb.vhd:72]
+ERROR: [VRFC 10-1471] type error near busa ; current type unsigned; expected type bit_vector [C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/register_file_tb.vhd:77]
+ERROR: [VRFC 10-1471] type error near busa ; current type unsigned; expected type bit_vector [C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/register_file_tb.vhd:82]
+ERROR: [VRFC 10-1471] type error near busa ; current type unsigned; expected type bit_vector [C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/register_file_tb.vhd:96]
+ERROR: [VRFC 10-1471] type error near busa ; current type unsigned; expected type bit_vector [C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/register_file_tb.vhd:105]
+ERROR: [VRFC 10-1471] type error near busa ; current type unsigned; expected type bit_vector [C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/register_file_tb.vhd:123]
+ERROR: [VRFC 10-3782] unit 'test' ignored due to previous errors [C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/register_file_tb.vhd:8]
+INFO: [VRFC 10-3070] VHDL file 'C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/register_file_tb.vhd' ignored due to errors
+INFO: [USF-XSim-69] 'compile' step finished in '2' seconds
+INFO: [USF-XSim-99] Step results log file:'C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.sim/sim_1/behav/xsim/xvhdl.log'
+ERROR: [USF-XSim-62] 'compile' step failed with error(s). Please check the Tcl console output or 'C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.sim/sim_1/behav/xsim/xvhdl.log' file for more information.
+ERROR: [Vivado 12-4473] Detected error while running simulation. Please correct the issue and retry this operation.
+ERROR: [Common 17-39] 'launch_simulation' failed due to earlier errors.
+launch_simulation
+Command: launch_simulation 
+INFO: [Vivado 12-5682] Launching behavioral simulation in 'C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.sim/sim_1/behav/xsim'
+INFO: [SIM-utils-51] Simulation object is 'sim_1'
+INFO: [SIM-utils-54] Inspecting design source files for 'register_file_tb' in fileset 'sim_1'...
+INFO: [USF-XSim-97] Finding global include files...
+INFO: [USF-XSim-98] Fetching design files from 'sim_1'...
+INFO: [USF-XSim-2] XSim::Compile design
+INFO: [USF-XSim-61] Executing 'COMPILE and ANALYZE' step in 'C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.sim/sim_1/behav/xsim'
+"xvhdl --incr --relax -prj register_file_tb_vhdl.prj"
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/register_file_tb.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'register_file_tb'
+ERROR: [VRFC 10-724] found '0' definitions of operator "=", cannot determine exact overloaded matching definition for "=" [C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/register_file_tb.vhd:135]
+ERROR: [VRFC 10-3782] unit 'test' ignored due to previous errors [C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/register_file_tb.vhd:8]
+INFO: [VRFC 10-3070] VHDL file 'C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/register_file_tb.vhd' ignored due to errors
+INFO: [USF-XSim-69] 'compile' step finished in '2' seconds
+INFO: [USF-XSim-99] Step results log file:'C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.sim/sim_1/behav/xsim/xvhdl.log'
+ERROR: [USF-XSim-62] 'compile' step failed with error(s). Please check the Tcl console output or 'C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.sim/sim_1/behav/xsim/xvhdl.log' file for more information.
+ERROR: [Vivado 12-4473] Detected error while running simulation. Please correct the issue and retry this operation.
+ERROR: [Common 17-39] 'launch_simulation' failed due to earlier errors.
+launch_simulation
+Command: launch_simulation 
+INFO: [Vivado 12-5682] Launching behavioral simulation in 'C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.sim/sim_1/behav/xsim'
+INFO: [SIM-utils-51] Simulation object is 'sim_1'
+INFO: [SIM-utils-54] Inspecting design source files for 'register_file_tb' in fileset 'sim_1'...
+INFO: [USF-XSim-97] Finding global include files...
+INFO: [USF-XSim-98] Fetching design files from 'sim_1'...
+INFO: [USF-XSim-2] XSim::Compile design
+INFO: [USF-XSim-61] Executing 'COMPILE and ANALYZE' step in 'C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.sim/sim_1/behav/xsim'
+"xvhdl --incr --relax -prj register_file_tb_vhdl.prj"
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/register_file_tb.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'register_file_tb'
+ERROR: [VRFC 10-724] found '0' definitions of operator "=", cannot determine exact overloaded matching definition for "=" [C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/register_file_tb.vhd:135]
+ERROR: [VRFC 10-3782] unit 'test' ignored due to previous errors [C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/register_file_tb.vhd:8]
+INFO: [VRFC 10-3070] VHDL file 'C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/register_file_tb.vhd' ignored due to errors
+INFO: [USF-XSim-69] 'compile' step finished in '2' seconds
+INFO: [USF-XSim-99] Step results log file:'C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.sim/sim_1/behav/xsim/xvhdl.log'
+ERROR: [USF-XSim-62] 'compile' step failed with error(s). Please check the Tcl console output or 'C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.sim/sim_1/behav/xsim/xvhdl.log' file for more information.
+ERROR: [Vivado 12-4473] Detected error while running simulation. Please correct the issue and retry this operation.
+ERROR: [Common 17-39] 'launch_simulation' failed due to earlier errors.
+launch_simulation
+Command: launch_simulation 
+INFO: [Vivado 12-5682] Launching behavioral simulation in 'C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.sim/sim_1/behav/xsim'
+INFO: [SIM-utils-51] Simulation object is 'sim_1'
+INFO: [SIM-utils-54] Inspecting design source files for 'register_file_tb' in fileset 'sim_1'...
+INFO: [USF-XSim-97] Finding global include files...
+INFO: [USF-XSim-98] Fetching design files from 'sim_1'...
+INFO: [USF-XSim-2] XSim::Compile design
+INFO: [USF-XSim-61] Executing 'COMPILE and ANALYZE' step in 'C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.sim/sim_1/behav/xsim'
+"xvhdl --incr --relax -prj register_file_tb_vhdl.prj"
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/register_file_tb.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'register_file_tb'
+ERROR: [VRFC 10-3557] near 'std_logic_vector' ; type conversion does not match type 'bit_vector' [C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/register_file_tb.vhd:13]
+ERROR: [VRFC 10-3564] near string '"0000000001000000"' ; 6 visible types match here [C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/register_file_tb.vhd:72]
+ERROR: [VRFC 10-298] ambiguous type: 'std_logic_vector_93' or 'std_ulogic_vector' [C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/register_file_tb.vhd:72]
+ERROR: [VRFC 10-3559] near 'unsigned' ; type conversion expression type cannot be determined uniquely [C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/register_file_tb.vhd:72]
+ERROR: [VRFC 10-1470] type conversion (to unresolved_unsigned) cannot have string literal operand [C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/register_file_tb.vhd:72]
+ERROR: [VRFC 10-3564] near string '"0001000000010000"' ; 6 visible types match here [C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/register_file_tb.vhd:73]
+ERROR: [VRFC 10-298] ambiguous type: 'std_logic_vector_93' or 'std_ulogic_vector' [C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/register_file_tb.vhd:73]
+ERROR: [VRFC 10-3559] near 'unsigned' ; type conversion expression type cannot be determined uniquely [C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/register_file_tb.vhd:73]
+ERROR: [VRFC 10-1470] type conversion (to unresolved_unsigned) cannot have string literal operand [C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/register_file_tb.vhd:73]
+ERROR: [VRFC 10-3564] near string '"0000000000001111"' ; 6 visible types match here [C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/register_file_tb.vhd:77]
+ERROR: [VRFC 10-298] ambiguous type: 'std_logic_vector_93' or 'std_ulogic_vector' [C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/register_file_tb.vhd:77]
+ERROR: [VRFC 10-3559] near 'unsigned' ; type conversion expression type cannot be determined uniquely [C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/register_file_tb.vhd:77]
+ERROR: [VRFC 10-1470] type conversion (to unresolved_unsigned) cannot have string literal operand [C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/register_file_tb.vhd:77]
+ERROR: [VRFC 10-3564] near string '"0000000011110000"' ; 6 visible types match here [C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/register_file_tb.vhd:78]
+ERROR: [VRFC 10-298] ambiguous type: 'std_logic_vector_93' or 'std_ulogic_vector' [C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/register_file_tb.vhd:78]
+ERROR: [VRFC 10-3559] near 'unsigned' ; type conversion expression type cannot be determined uniquely [C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/register_file_tb.vhd:78]
+ERROR: [VRFC 10-1470] type conversion (to unresolved_unsigned) cannot have string literal operand [C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/register_file_tb.vhd:78]
+ERROR: [VRFC 10-3564] near string '"0000000000000000"' ; 6 visible types match here [C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/register_file_tb.vhd:82]
+ERROR: [VRFC 10-298] ambiguous type: 'std_logic_vector_93' or 'std_ulogic_vector' [C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/register_file_tb.vhd:82]
+INFO: [#UNDEF] Sorry, too many errors..
+INFO: [USF-XSim-69] 'compile' step finished in '2' seconds
+INFO: [USF-XSim-99] Step results log file:'C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.sim/sim_1/behav/xsim/xvhdl.log'
+ERROR: [USF-XSim-62] 'compile' step failed with error(s). Please check the Tcl console output or 'C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.sim/sim_1/behav/xsim/xvhdl.log' file for more information.
+ERROR: [Vivado 12-4473] Detected error while running simulation. Please correct the issue and retry this operation.
+ERROR: [Common 17-39] 'launch_simulation' failed due to earlier errors.
+launch_simulation
+Command: launch_simulation 
+INFO: [Vivado 12-5682] Launching behavioral simulation in 'C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.sim/sim_1/behav/xsim'
+INFO: [SIM-utils-51] Simulation object is 'sim_1'
+INFO: [SIM-utils-54] Inspecting design source files for 'register_file_tb' in fileset 'sim_1'...
+INFO: [USF-XSim-97] Finding global include files...
+INFO: [USF-XSim-98] Fetching design files from 'sim_1'...
+INFO: [USF-XSim-2] XSim::Compile design
+INFO: [USF-XSim-61] Executing 'COMPILE and ANALYZE' step in 'C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.sim/sim_1/behav/xsim'
+"xvhdl --incr --relax -prj register_file_tb_vhdl.prj"
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/register_file_tb.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'register_file_tb'
+ERROR: [VRFC 10-3564] near string '"0000000001000000"' ; 6 visible types match here [C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/register_file_tb.vhd:62]
+ERROR: [VRFC 10-298] ambiguous type: 'std_logic_vector_93' or 'std_ulogic_vector' [C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/register_file_tb.vhd:62]
+ERROR: [VRFC 10-3559] near 'unsigned' ; type conversion expression type cannot be determined uniquely [C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/register_file_tb.vhd:62]
+ERROR: [VRFC 10-1470] type conversion (to unresolved_unsigned) cannot have string literal operand [C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/register_file_tb.vhd:62]
+ERROR: [VRFC 10-3564] near string '"0001000000010000"' ; 6 visible types match here [C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/register_file_tb.vhd:63]
+ERROR: [VRFC 10-298] ambiguous type: 'std_logic_vector_93' or 'std_ulogic_vector' [C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/register_file_tb.vhd:63]
+ERROR: [VRFC 10-3559] near 'unsigned' ; type conversion expression type cannot be determined uniquely [C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/register_file_tb.vhd:63]
+ERROR: [VRFC 10-1470] type conversion (to unresolved_unsigned) cannot have string literal operand [C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/register_file_tb.vhd:63]
+ERROR: [VRFC 10-3564] near string '"0000000000001111"' ; 6 visible types match here [C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/register_file_tb.vhd:68]
+ERROR: [VRFC 10-298] ambiguous type: 'std_logic_vector_93' or 'std_ulogic_vector' [C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/register_file_tb.vhd:68]
+ERROR: [VRFC 10-3559] near 'unsigned' ; type conversion expression type cannot be determined uniquely [C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/register_file_tb.vhd:68]
+ERROR: [VRFC 10-1470] type conversion (to unresolved_unsigned) cannot have string literal operand [C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/register_file_tb.vhd:68]
+ERROR: [VRFC 10-3564] near string '"0000000011110000"' ; 6 visible types match here [C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/register_file_tb.vhd:69]
+ERROR: [VRFC 10-298] ambiguous type: 'std_logic_vector_93' or 'std_ulogic_vector' [C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/register_file_tb.vhd:69]
+ERROR: [VRFC 10-3559] near 'unsigned' ; type conversion expression type cannot be determined uniquely [C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/register_file_tb.vhd:69]
+ERROR: [VRFC 10-1470] type conversion (to unresolved_unsigned) cannot have string literal operand [C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/register_file_tb.vhd:69]
+ERROR: [VRFC 10-3564] near string '"0000000000000000"' ; 6 visible types match here [C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/register_file_tb.vhd:74]
+ERROR: [VRFC 10-298] ambiguous type: 'std_logic_vector_93' or 'std_ulogic_vector' [C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/register_file_tb.vhd:74]
+ERROR: [VRFC 10-3559] near 'unsigned' ; type conversion expression type cannot be determined uniquely [C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/register_file_tb.vhd:74]
+INFO: [#UNDEF] Sorry, too many errors..
+INFO: [USF-XSim-69] 'compile' step finished in '1' seconds
+INFO: [USF-XSim-99] Step results log file:'C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.sim/sim_1/behav/xsim/xvhdl.log'
+ERROR: [USF-XSim-62] 'compile' step failed with error(s). Please check the Tcl console output or 'C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.sim/sim_1/behav/xsim/xvhdl.log' file for more information.
+ERROR: [Vivado 12-4473] Detected error while running simulation. Please correct the issue and retry this operation.
+ERROR: [Common 17-39] 'launch_simulation' failed due to earlier errors.
+launch_simulation
+Command: launch_simulation 
+INFO: [Vivado 12-5682] Launching behavioral simulation in 'C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.sim/sim_1/behav/xsim'
+INFO: [SIM-utils-51] Simulation object is 'sim_1'
+INFO: [SIM-utils-54] Inspecting design source files for 'register_file_tb' in fileset 'sim_1'...
+INFO: [USF-XSim-97] Finding global include files...
+INFO: [USF-XSim-98] Fetching design files from 'sim_1'...
+INFO: [USF-XSim-2] XSim::Compile design
+INFO: [USF-XSim-61] Executing 'COMPILE and ANALYZE' step in 'C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.sim/sim_1/behav/xsim'
+"xvhdl --incr --relax -prj register_file_tb_vhdl.prj"
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/register_file_tb.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'register_file_tb'
+INFO: [USF-XSim-69] 'compile' step finished in '2' seconds
+INFO: [USF-XSim-3] XSim::Elaborate design
+INFO: [USF-XSim-61] Executing 'ELABORATE' step in 'C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.sim/sim_1/behav/xsim'
+"xelab -wto 6027e09ee84b49bb802594bb50900659 --incr --debug typical --relax --mt 2 -L xil_defaultlib -L secureip --snapshot register_file_tb_behav xil_defaultlib.register_file_tb -log elaborate.log"
+Vivado Simulator 2020.2
+Copyright 1986-1999, 2001-2020 Xilinx, Inc. All Rights Reserved.
+Running: C:/Xilinx/Vivado/2020.2/bin/unwrapped/win64.o/xelab.exe -wto 6027e09ee84b49bb802594bb50900659 --incr --debug typical --relax --mt 2 -L xil_defaultlib -L secureip --snapshot register_file_tb_behav xil_defaultlib.register_file_tb -log elaborate.log 
+Using 2 slave threads.
+Starting static elaboration
+Completed static elaboration
+Starting simulation data flow analysis
+Completed simulation data flow analysis
+Time Resolution for simulation is 1ps
+Compiling package std.standard
+Compiling package std.textio
+Compiling package ieee.std_logic_1164
+Compiling package ieee.numeric_std
+Compiling architecture rtl of entity xil_defaultlib.register_file [register_file_default]
+Compiling architecture test of entity xil_defaultlib.register_file_tb
+Built simulation snapshot register_file_tb_behav
+
+****** Webtalk v2020.2 (64-bit)
+  **** SW Build 3064766 on Wed Nov 18 09:12:45 MST 2020
+  **** IP Build 3064653 on Wed Nov 18 14:17:31 MST 2020
+    ** Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
+
+source C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.sim/sim_1/behav/xsim/xsim.dir/register_file_tb_behav/webtalk/xsim_webtalk.tcl -notrace
+INFO: [Common 17-206] Exiting Webtalk at Thu Nov  6 16:26:24 2025...
+INFO: [USF-XSim-69] 'elaborate' step finished in '4' seconds
+INFO: [USF-XSim-4] XSim::Simulate design
+INFO: [USF-XSim-61] Executing 'SIMULATE' step in 'C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.sim/sim_1/behav/xsim'
+INFO: [USF-XSim-98] *** Running xsim
+   with args "register_file_tb_behav -key {Behavioral:sim_1:Functional:register_file_tb} -tclbatch {register_file_tb.tcl} -view {C:/Users/mackr/426_Finial/Lab_3_426/top_level_tb_behav.wcfg} -log {simulate.log}"
+INFO: [USF-XSim-8] Loading simulator feature
+Vivado Simulator 2020.2
+Time resolution is 1 ps
+open_wave_config C:/Users/mackr/426_Finial/Lab_3_426/top_level_tb_behav.wcfg
+WARNING: Simulation object /top_level_tb/clk was not found in the design.
+WARNING: Simulation object /top_level_tb/RegWr was not found in the design.
+WARNING: Simulation object /top_level_tb/Rd was not found in the design.
+WARNING: Simulation object /top_level_tb/Rs was not found in the design.
+WARNING: Simulation object /top_level_tb/Rt was not found in the design.
+WARNING: Simulation object /top_level_tb/ALUctr was not found in the design.
+WARNING: Simulation object /top_level_tb/Zero was not found in the design.
+WARNING: Simulation object /top_level_tb/Overflow was not found in the design.
+WARNING: Simulation object /top_level_tb/Carryout was not found in the design.
+WARNING: Simulation object /top_level_tb/Result was not found in the design.
+WARNING: Simulation object /top_level_tb/clk_period was not found in the design.
+source register_file_tb.tcl
+# set curr_wave [current_wave_config]
+# if { [string length $curr_wave] == 0 } {
+#   if { [llength [get_objects]] > 0} {
+#     add_wave /
+#     set_property needs_save false [current_wave_config]
+#   } else {
+#      send_msg_id Add_Wave-1 WARNING "No top level signals found. Simulator will start without a wave window. If you want to open a wave window go to 'File->New Waveform Configuration' or type 'create_wave_config' in the TCL console."
+#   }
+# }
+# run 1000ns
+Note: Starting Register File Testbench...
+Time: 0 ps  Iteration: 0  Process: /register_file_tb/test_process  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/register_file_tb.vhd
+Note: Test 1: Reset and Initial Values
+Time: 0 ps  Iteration: 0  Process: /register_file_tb/test_process  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/register_file_tb.vhd
+Note: Test 2: Verify Initial Register Values
+Time: 20 ns  Iteration: 0  Process: /register_file_tb/test_process  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/register_file_tb.vhd
+Note: $r0 = 0x64, $r1 = 0x4112
+Time: 25 ns  Iteration: 0  Process: /register_file_tb/test_process  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/register_file_tb.vhd
+Note: $r2 = 0x15, $r3 = 0x240
+Time: 30 ns  Iteration: 0  Process: /register_file_tb/test_process  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/register_file_tb.vhd
+Note: $r4 = 0x0, $r5 = 0x16
+Time: 35 ns  Iteration: 0  Process: /register_file_tb/test_process  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/register_file_tb.vhd
+Note: $r6 = 0x5, $r7 = 0x0
+Time: 40 ns  Iteration: 0  Process: /register_file_tb/test_process  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/register_file_tb.vhd
+Note: Test 3: Write to Register $r3
+Time: 40 ns  Iteration: 0  Process: /register_file_tb/test_process  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/register_file_tb.vhd
+Note: $r3 written: 0x4660
+Time: 55 ns  Iteration: 0  Process: /register_file_tb/test_process  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/register_file_tb.vhd
+Note: Test 4: Simultaneous Read
+Time: 55 ns  Iteration: 0  Process: /register_file_tb/test_process  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/register_file_tb.vhd
+Note: Read $r0 and $r1: 0x64, 0x4112
+Time: 60 ns  Iteration: 0  Process: /register_file_tb/test_process  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/register_file_tb.vhd
+Note: Test 5: Write Multiple Registers
+Time: 60 ns  Iteration: 0  Process: /register_file_tb/test_process  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/register_file_tb.vhd
+Note: $r0 = 0x0
+Time: 145 ns  Iteration: 0  Process: /register_file_tb/test_process  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/register_file_tb.vhd
+Note: $r1 = 0x256
+Time: 150 ns  Iteration: 0  Process: /register_file_tb/test_process  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/register_file_tb.vhd
+Note: $r2 = 0x512
+Time: 155 ns  Iteration: 0  Process: /register_file_tb/test_process  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/register_file_tb.vhd
+Note: $r3 = 0x768
+Time: 160 ns  Iteration: 0  Process: /register_file_tb/test_process  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/register_file_tb.vhd
+Note: $r4 = 0x1024
+Time: 165 ns  Iteration: 0  Process: /register_file_tb/test_process  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/register_file_tb.vhd
+Note: $r5 = 0x1280
+Time: 170 ns  Iteration: 0  Process: /register_file_tb/test_process  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/register_file_tb.vhd
+Note: $r6 = 0x1536
+Time: 175 ns  Iteration: 0  Process: /register_file_tb/test_process  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/register_file_tb.vhd
+Note: $r7 = 0x1792
+Time: 180 ns  Iteration: 0  Process: /register_file_tb/test_process  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/register_file_tb.vhd
+Note: Test 6: Write Without Enable
+Time: 180 ns  Iteration: 0  Process: /register_file_tb/test_process  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/register_file_tb.vhd
+Note: Write correctly blocked when RegWr=0
+Time: 200 ns  Iteration: 0  Process: /register_file_tb/test_process  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/register_file_tb.vhd
+Note: Test 7: Phase 1 Test Program Operations
+Time: 200 ns  Iteration: 0  Process: /register_file_tb/test_process  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/register_file_tb.vhd
+Note: $a1 initial = 5
+Time: 225 ns  Iteration: 0  Process: /register_file_tb/test_process  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/register_file_tb.vhd
+Note: $a1 after decrement = 4
+Time: 240 ns  Iteration: 0  Process: /register_file_tb/test_process  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/register_file_tb.vhd
+Note: Register File Testbench Complete!
+Time: 240 ns  Iteration: 0  Process: /register_file_tb/test_process  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/register_file_tb.vhd
+INFO: [USF-XSim-96] XSim completed. Design snapshot 'register_file_tb_behav' loaded.
+INFO: [USF-XSim-97] XSim simulation ran for 1000ns
+launch_simulation: Time (s): cpu = 00:00:03 ; elapsed = 00:00:09 . Memory (MB): peak = 1006.730 ; gain = 0.000
+relaunch_sim
+Command: launch_simulation -simset sim_1 -mode behavioral
+INFO: [Vivado 12-5682] Launching behavioral simulation in 'C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.sim/sim_1/behav/xsim'
+INFO: [SIM-utils-51] Simulation object is 'sim_1'
+INFO: [SIM-utils-54] Inspecting design source files for 'register_file_tb' in fileset 'sim_1'...
+INFO: [USF-XSim-97] Finding global include files...
+INFO: [USF-XSim-98] Fetching design files from 'sim_1'...
+INFO: [USF-XSim-2] XSim::Compile design
+INFO: [USF-XSim-61] Executing 'COMPILE and ANALYZE' step in 'C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.sim/sim_1/behav/xsim'
+"xvhdl --incr --relax -prj register_file_tb_vhdl.prj"
+INFO: [USF-XSim-69] 'compile' step finished in '1' seconds
+Command: launch_simulation -simset sim_1 -mode behavioral
+INFO: [Vivado 12-5682] Launching behavioral simulation in 'C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.sim/sim_1/behav/xsim'
+INFO: [USF-XSim-3] XSim::Elaborate design
+INFO: [USF-XSim-61] Executing 'ELABORATE' step in 'C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.sim/sim_1/behav/xsim'
+"xelab -wto 6027e09ee84b49bb802594bb50900659 --incr --debug typical --relax --mt 2 -L xil_defaultlib -L secureip --snapshot register_file_tb_behav xil_defaultlib.register_file_tb -log elaborate.log"
+Vivado Simulator 2020.2
+Copyright 1986-1999, 2001-2020 Xilinx, Inc. All Rights Reserved.
+Running: C:/Xilinx/Vivado/2020.2/bin/unwrapped/win64.o/xelab.exe -wto 6027e09ee84b49bb802594bb50900659 --incr --debug typical --relax --mt 2 -L xil_defaultlib -L secureip --snapshot register_file_tb_behav xil_defaultlib.register_file_tb -log elaborate.log 
+Using 2 slave threads.
+Starting static elaboration
+Completed static elaboration
+INFO: [XSIM 43-4323] No Change in HDL. Linking previously generated obj files to create kernel
+INFO: [USF-XSim-69] 'elaborate' step finished in '2' seconds
+Vivado Simulator 2020.2
+Time resolution is 1 ps
+Note: Starting Register File Testbench...
+Time: 0 ps  Iteration: 0  Process: /register_file_tb/test_process  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/register_file_tb.vhd
+Note: Test 1: Reset and Initial Values
+Time: 0 ps  Iteration: 0  Process: /register_file_tb/test_process  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/register_file_tb.vhd
+Note: Test 2: Verify Initial Register Values
+Time: 20 ns  Iteration: 0  Process: /register_file_tb/test_process  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/register_file_tb.vhd
+Note: $r0 = 0x64, $r1 = 0x4112
+Time: 25 ns  Iteration: 0  Process: /register_file_tb/test_process  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/register_file_tb.vhd
+Note: $r2 = 0x15, $r3 = 0x240
+Time: 30 ns  Iteration: 0  Process: /register_file_tb/test_process  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/register_file_tb.vhd
+Note: $r4 = 0x0, $r5 = 0x16
+Time: 35 ns  Iteration: 0  Process: /register_file_tb/test_process  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/register_file_tb.vhd
+Note: $r6 = 0x5, $r7 = 0x0
+Time: 40 ns  Iteration: 0  Process: /register_file_tb/test_process  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/register_file_tb.vhd
+Note: Test 3: Write to Register $r3
+Time: 40 ns  Iteration: 0  Process: /register_file_tb/test_process  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/register_file_tb.vhd
+Note: $r3 written: 0x4660
+Time: 55 ns  Iteration: 0  Process: /register_file_tb/test_process  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/register_file_tb.vhd
+Note: Test 4: Simultaneous Read
+Time: 55 ns  Iteration: 0  Process: /register_file_tb/test_process  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/register_file_tb.vhd
+Note: Read $r0 and $r1: 0x64, 0x4112
+Time: 60 ns  Iteration: 0  Process: /register_file_tb/test_process  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/register_file_tb.vhd
+Note: Test 5: Write Multiple Registers
+Time: 60 ns  Iteration: 0  Process: /register_file_tb/test_process  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/register_file_tb.vhd
+Note: $r0 = 0x0
+Time: 145 ns  Iteration: 0  Process: /register_file_tb/test_process  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/register_file_tb.vhd
+Note: $r1 = 0x256
+Time: 150 ns  Iteration: 0  Process: /register_file_tb/test_process  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/register_file_tb.vhd
+Note: $r2 = 0x512
+Time: 155 ns  Iteration: 0  Process: /register_file_tb/test_process  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/register_file_tb.vhd
+Note: $r3 = 0x768
+Time: 160 ns  Iteration: 0  Process: /register_file_tb/test_process  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/register_file_tb.vhd
+Note: $r4 = 0x1024
+Time: 165 ns  Iteration: 0  Process: /register_file_tb/test_process  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/register_file_tb.vhd
+Note: $r5 = 0x1280
+Time: 170 ns  Iteration: 0  Process: /register_file_tb/test_process  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/register_file_tb.vhd
+Note: $r6 = 0x1536
+Time: 175 ns  Iteration: 0  Process: /register_file_tb/test_process  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/register_file_tb.vhd
+Note: $r7 = 0x1792
+Time: 180 ns  Iteration: 0  Process: /register_file_tb/test_process  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/register_file_tb.vhd
+Note: Test 6: Write Without Enable
+Time: 180 ns  Iteration: 0  Process: /register_file_tb/test_process  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/register_file_tb.vhd
+Note: Write correctly blocked when RegWr=0
+Time: 200 ns  Iteration: 0  Process: /register_file_tb/test_process  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/register_file_tb.vhd
+Note: Test 7: Phase 1 Test Program Operations
+Time: 200 ns  Iteration: 0  Process: /register_file_tb/test_process  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/register_file_tb.vhd
+Note: $a1 initial = 5
+Time: 225 ns  Iteration: 0  Process: /register_file_tb/test_process  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/register_file_tb.vhd
+Note: $a1 after decrement = 4
+Time: 240 ns  Iteration: 0  Process: /register_file_tb/test_process  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/register_file_tb.vhd
+Note: Register File Testbench Complete!
+Time: 240 ns  Iteration: 0  Process: /register_file_tb/test_process  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/register_file_tb.vhd
+relaunch_sim: Time (s): cpu = 00:00:01 ; elapsed = 00:00:10 . Memory (MB): peak = 1006.730 ; gain = 0.000

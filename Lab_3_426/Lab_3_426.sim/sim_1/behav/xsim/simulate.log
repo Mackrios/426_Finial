@@ -1,10 +1,46 @@
 Vivado Simulator 2020.2
 Time resolution is 1 ps
-Note: Test 1: ADD R1 + R2 -> R3 (10 + 3 = 13)
-Time: 20 ns  Iteration: 0  Process: /top_level_tb/stimulus  File: C:/Users/mackr/Downloads/Uni Stuff/426/Lab3-1/top_level_tb.vhdl
-Note: Test 2: SUB R1 - R2 -> R4 (10 - 3 = 7)
-Time: 40 ns  Iteration: 0  Process: /top_level_tb/stimulus  File: C:/Users/mackr/Downloads/Uni Stuff/426/Lab3-1/top_level_tb.vhdl
-Note: Test 3: SLL R1 << 1 -> R5 (10 << 1 = 20)
-Time: 60 ns  Iteration: 0  Process: /top_level_tb/stimulus  File: C:/Users/mackr/Downloads/Uni Stuff/426/Lab3-1/top_level_tb.vhdl
-Note: Test 4: MULT R1 * R2 -> R5 (10 * 3 = 30)
-Time: 80 ns  Iteration: 0  Process: /top_level_tb/stimulus  File: C:/Users/mackr/Downloads/Uni Stuff/426/Lab3-1/top_level_tb.vhdl
+Note: Starting Register File Testbench...
+Time: 0 ps  Iteration: 0  Process: /register_file_tb/test_process  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/register_file_tb.vhd
+Note: Test 1: Reset and Initial Values
+Time: 0 ps  Iteration: 0  Process: /register_file_tb/test_process  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/register_file_tb.vhd
+Note: Test 2: Verify Initial Register Values
+Time: 20 ns  Iteration: 0  Process: /register_file_tb/test_process  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/register_file_tb.vhd
+Note: $r0 = 0x64, $r1 = 0x4112
+Time: 25 ns  Iteration: 0  Process: /register_file_tb/test_process  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/register_file_tb.vhd
+Note: $r2 = 0x15, $r3 = 0x240
+Time: 30 ns  Iteration: 0  Process: /register_file_tb/test_process  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/register_file_tb.vhd
+Note: $r4 = 0x0, $r5 = 0x16
+Time: 35 ns  Iteration: 0  Process: /register_file_tb/test_process  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/register_file_tb.vhd
+Note: $r6 = 0x5, $r7 = 0x0
+Time: 40 ns  Iteration: 0  Process: /register_file_tb/test_process  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/register_file_tb.vhd
+Note: Test 3: Write to Register $r3
+Time: 40 ns  Iteration: 0  Process: /register_file_tb/test_process  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/register_file_tb.vhd
+Note: $r3 written: 0x4660
+Time: 55 ns  Iteration: 0  Process: /register_file_tb/test_process  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/register_file_tb.vhd
+Note: Test 4: Simultaneous Read
+Time: 55 ns  Iteration: 0  Process: /register_file_tb/test_process  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/register_file_tb.vhd
+Note: Read $r0 and $r1: 0x64, 0x4112
+Time: 60 ns  Iteration: 0  Process: /register_file_tb/test_process  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/register_file_tb.vhd
+Note: Test 5: Write Multiple Registers
+Time: 60 ns  Iteration: 0  Process: /register_file_tb/test_process  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/register_file_tb.vhd
+Note: $r0 = 0x0
+Time: 145 ns  Iteration: 0  Process: /register_file_tb/test_process  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/register_file_tb.vhd
+Note: $r1 = 0x256
+Time: 150 ns  Iteration: 0  Process: /register_file_tb/test_process  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/register_file_tb.vhd
+Note: $r2 = 0x512
+Time: 155 ns  Iteration: 0  Process: /register_file_tb/test_process  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/register_file_tb.vhd
+Note: $r3 = 0x768
+Time: 160 ns  Iteration: 0  Process: /register_file_tb/test_process  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/register_file_tb.vhd
+Note: $r4 = 0x1024
+Time: 165 ns  Iteration: 0  Process: /register_file_tb/test_process  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/register_file_tb.vhd
+Note: $r5 = 0x1280
+Time: 170 ns  Iteration: 0  Process: /register_file_tb/test_process  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/register_file_tb.vhd
+Note: $r6 = 0x1536
+Time: 175 ns  Iteration: 0  Process: /register_file_tb/test_process  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/register_file_tb.vhd
+Note: $r7 = 0x1792
+Time: 180 ns  Iteration: 0  Process: /register_file_tb/test_process  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/register_file_tb.vhd
+Note: Test 6: Write Without Enable
+Time: 180 ns  Iteration: 0  Process: /register_file_tb/test_process  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/register_file_tb.vhd
+Note: Write correctly blocked when RegWr=0
+Time: 200 ns  Iteration: 0  Process: /registe

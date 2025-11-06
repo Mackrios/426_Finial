@@ -54,24 +54,23 @@
 #endif
 typedef void (*funcp)(char *, char *);
 extern int main(int, char**);
-IKI_DLLESPEC extern void execute_170(char*, char *);
-IKI_DLLESPEC extern void execute_33(char*, char *);
-IKI_DLLESPEC extern void execute_34(char*, char *);
-IKI_DLLESPEC extern void execute_169(char*, char *);
-IKI_DLLESPEC extern void execute_36(char*, char *);
-IKI_DLLESPEC extern void execute_166(char*, char *);
-IKI_DLLESPEC extern void execute_39(char*, char *);
-IKI_DLLESPEC extern void execute_40(char*, char *);
-IKI_DLLESPEC extern void execute_168(char*, char *);
+IKI_DLLESPEC extern void execute_112(char*, char *);
+IKI_DLLESPEC extern void execute_41(char*, char *);
+IKI_DLLESPEC extern void execute_42(char*, char *);
+IKI_DLLESPEC extern void execute_111(char*, char *);
+IKI_DLLESPEC extern void execute_44(char*, char *);
+IKI_DLLESPEC extern void execute_110(char*, char *);
+IKI_DLLESPEC extern void execute_47(char*, char *);
+IKI_DLLESPEC extern void execute_48(char*, char *);
 IKI_DLLESPEC extern void vhdl_transfunc_eventcallback(char*, char*, unsigned, unsigned, unsigned, char *);
-funcp funcTab[10] = {(funcp)execute_170, (funcp)execute_33, (funcp)execute_34, (funcp)execute_169, (funcp)execute_36, (funcp)execute_166, (funcp)execute_39, (funcp)execute_40, (funcp)execute_168, (funcp)vhdl_transfunc_eventcallback};
-const int NumRelocateId= 10;
+funcp funcTab[9] = {(funcp)execute_112, (funcp)execute_41, (funcp)execute_42, (funcp)execute_111, (funcp)execute_44, (funcp)execute_110, (funcp)execute_47, (funcp)execute_48, (funcp)vhdl_transfunc_eventcallback};
+const int NumRelocateId= 9;
 
 void relocate(char *dp)
 {
-	iki_relocate(dp, "xsim.dir/alu_tb_behav/xsim.reloc",  (void **)funcTab, 10);
-	iki_vhdl_file_variable_register(dp + 8080);
-	iki_vhdl_file_variable_register(dp + 8136);
+	iki_relocate(dp, "xsim.dir/alu_tb_behav/xsim.reloc",  (void **)funcTab, 9);
+	iki_vhdl_file_variable_register(dp + 6192);
+	iki_vhdl_file_variable_register(dp + 6248);
 
 
 	/*Populate the transaction function pointer field in the whole net structure */
