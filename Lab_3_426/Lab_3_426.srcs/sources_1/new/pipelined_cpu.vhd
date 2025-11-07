@@ -70,7 +70,7 @@ architecture rtl of pipelined_cpu is
   -- EX STAGE SIGNALS (CORRECTED)
   -- ========================================================================
   signal alu_input_a, alu_input_b : unsigned(15 downto 0);
-  signal alu_control_signal : unsigned(3 downto 0);  -- RENAMED from alu_control
+  signal alu_control_signal : unsigned(3 downto 0);
   signal alu_result : unsigned(15 downto 0);
   signal alu_zero, alu_overflow, alu_carryout : std_logic;
   signal forward_a, forward_b : unsigned(1 downto 0);
@@ -112,7 +112,7 @@ architecture rtl of pipelined_cpu is
   signal stall, flush_if_id, flush_id_ex : std_logic;
   
   -- ========================================================================
-  -- COMPONENT DECLARATIONS (No duplicates)
+  -- COMPONENT DECLARATIONS
   -- ========================================================================
   
   component register_file
@@ -120,7 +120,16 @@ architecture rtl of pipelined_cpu is
       clk, rst, RegWr : in std_logic;
       Rw, Ra, Rb : in unsigned(2 downto 0);
       busW : in unsigned(15 downto 0);
-      busA, busB : out unsigned(15 downto 0)
+      busA, busB : out unsigned(15 downto 0);
+      -- Debug outputs for testbench
+      reg0_out  : out unsigned(15 downto 0);
+      reg1_out  : out unsigned(15 downto 0);
+      reg2_out  : out unsigned(15 downto 0);
+      reg3_out  : out unsigned(15 downto 0);
+      reg4_out  : out unsigned(15 downto 0);
+      reg5_out  : out unsigned(15 downto 0);
+      reg6_out  : out unsigned(15 downto 0);
+      reg7_out  : out unsigned(15 downto 0)
     );
   end component;
   
@@ -239,17 +248,14 @@ begin
   -- STAGE 1: IF (Instruction Fetch)
   -- ========================================================================
   
-  -- Instantiate Instruction Memory
   IMEM: instruction_memory 
     port map(
       address => pc,
       instruction => instruction
     );
   
-  -- PC increment by 2 (half-word aligned)
   pc_plus_2 <= pc + 2;
   
-  -- PC register with stall support
   process(clk, rst)
   begin
     if rst = '1' then
@@ -261,12 +267,10 @@ begin
     end if;
   end process;
   
-  -- PC multiplexer: branch/jump vs sequential
   pc_next <= ex_mem_branch_addr when branch_taken = '1' else
              ("0000" & jump_addr) when jump_taken = '1' else
              pc_plus_2;
   
-  -- IF/ID Pipeline Register
   IF_ID: IF_ID_reg 
     port map(
       clk => clk,
@@ -283,7 +287,6 @@ begin
   -- STAGE 2: ID (Instruction Decode)
   -- ========================================================================
   
-  -- Decode instruction fields
   opcode <= if_id_instr(15 downto 12);
   rs <= if_id_instr(11 downto 9);
   rt <= if_id_instr(8 downto 6);
@@ -292,15 +295,13 @@ begin
   imm_4bit <= if_id_instr(3 downto 0);
   jump_addr <= if_id_instr(11 downto 0);
   
-  -- Sign-extend 4-bit immediate to 16 bits
   imm_extended <= x"FFF" & imm_4bit when imm_4bit(3) = '1' else
                   x"000" & imm_4bit;
   
-  -- Calculate branch target address (PC + offset * 2)
   branch_offset <= signed(imm_extended);
   branch_target <= unsigned(signed(if_id_pc) + (branch_offset(14 downto 0) & '0'));
   
-  -- Register File instantiation
+  -- Register File instantiation with debug outputs
   RF: register_file 
     port map(
       clk => clk,
@@ -311,10 +312,17 @@ begin
       Rb => rt,
       busW => write_back_data,
       busA => read_data1,
-      busB => read_data2
+      busB => read_data2,
+      reg0_out => reg0,
+      reg1_out => reg1,
+      reg2_out => reg2,
+      reg3_out => reg3,
+      reg4_out => reg4,
+      reg5_out => reg5,
+      reg6_out => reg6,
+      reg7_out => reg7
     );
   
-  -- Control Unit instantiation
   CTRL: control_unit 
     port map(
       opcode => opcode,
@@ -329,10 +337,8 @@ begin
       reg_write => reg_write
     );
   
-  -- Jump control
   jump_taken <= jump;
   
-  -- ID/EX Pipeline Register
   ID_EX: ID_EX_reg 
     port map(
       clk => clk,
@@ -376,46 +382,37 @@ begin
     );
   
   -- ========================================================================
-  -- STAGE 3: EX (Execute) - CORRECTED
+  -- STAGE 3: EX (Execute)
   -- ========================================================================
   
-  -- Forwarding multiplexers for operand A
   with forward_a select forwarded_a <=
-    id_ex_rd1 when "00",              -- No forwarding
-    write_back_data when "01",         -- Forward from WB stage
-    ex_mem_alu_result when "10",       -- Forward from MEM stage
+    id_ex_rd1 when "00",
+    write_back_data when "01",
+    ex_mem_alu_result when "10",
     (others => '0') when others;
     
-  -- Forwarding multiplexers for operand B
   with forward_b select forwarded_b <=
-    id_ex_rd2 when "00",              -- No forwarding
-    write_back_data when "01",         -- Forward from WB stage
-    ex_mem_alu_result when "10",       -- Forward from MEM stage
+    id_ex_rd2 when "00",
+    write_back_data when "01",
+    ex_mem_alu_result when "10",
     (others => '0') when others;
   
-  -- ALU input A is always forwarded register A
   alu_input_a <= forwarded_a;
-  
-  -- ALU input B: immediate or forwarded register B
   alu_input_b <= id_ex_imm when id_ex_alu_src = '1' else forwarded_b;
-  
-  -- Write register selection: rd for R-type, rt for I-type
   write_reg_ex <= id_ex_rd when id_ex_reg_dst = '1' else id_ex_rt;
   
-  -- ALU Control Unit instantiation (CORRECTED)
   ALU_CTRL: alu_control 
     port map(
       opcode => id_ex_opcode,
       ALU_OP => id_ex_alu_op,
-      ALUctr => alu_control_signal    -- Now uses renamed signal
+      ALUctr => alu_control_signal
     );
   
-  -- ALU instantiation (CORRECTED)
   ALU_UNIT: alu 
     port map(
       A => alu_input_a,
       B => alu_input_b,
-      ALUctr => alu_control_signal,   -- Now uses renamed signal
+      ALUctr => alu_control_signal,
       shamt => id_ex_shamt,
       Result => alu_result,
       Zero => alu_zero,
@@ -423,7 +420,6 @@ begin
       Carryout => alu_carryout
     );
   
-  -- EX/MEM Pipeline Register
   EX_MEM: EX_MEM_reg 
     port map(
       clk => clk,
@@ -454,10 +450,8 @@ begin
   -- STAGE 4: MEM (Memory Access)
   -- ========================================================================
   
-  -- Branch decision: branch instruction AND zero flag
   branch_taken <= ex_mem_branch and ex_mem_zero;
   
-  -- Data Memory instantiation
   DMEM: data_memory 
     port map(
       clk => clk,
@@ -468,7 +462,6 @@ begin
       read_data => mem_read_data
     );
   
-  -- MEM/WB Pipeline Register
   MEM_WB: MEM_WB_reg 
     port map(
       clk => clk,
@@ -489,7 +482,6 @@ begin
   -- STAGE 5: WB (Write Back)
   -- ========================================================================
   
-  -- Write-back data multiplexer: memory data or ALU result
   write_back_data <= mem_wb_mem_data when mem_wb_mem_to_reg = '1' 
                      else mem_wb_alu_result;
   
@@ -522,17 +514,6 @@ begin
   -- ========================================================================
   
   pc_out <= pc;
-  
-  -- Note: To actually output register values, you would need to modify
-  -- your register_file to add debug read ports, or use a testbench to
-  -- access internal signals. For now, these are set to zero.
-  reg0 <= (others => '0');
-  reg1 <= (others => '0');
-  reg2 <= (others => '0');
-  reg3 <= (others => '0');
-  reg4 <= (others => '0');
-  reg5 <= (others => '0');
-  reg6 <= (others => '0');
-  reg7 <= (others => '0');
+  -- Register outputs now connected from register_file component
   
 end architecture rtl;

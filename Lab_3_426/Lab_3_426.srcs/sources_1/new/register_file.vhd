@@ -12,7 +12,16 @@ entity register_file is
     Rb        : in  unsigned(2 downto 0);     
     busW      : in  unsigned(15 downto 0);     
     busA      : out unsigned(15 downto 0);     
-    busB      : out unsigned(15 downto 0)
+    busB      : out unsigned(15 downto 0);
+    -- Debug outputs for testbench
+    reg0_out  : out unsigned(15 downto 0);
+    reg1_out  : out unsigned(15 downto 0);
+    reg2_out  : out unsigned(15 downto 0);
+    reg3_out  : out unsigned(15 downto 0);
+    reg4_out  : out unsigned(15 downto 0);
+    reg5_out  : out unsigned(15 downto 0);
+    reg6_out  : out unsigned(15 downto 0);
+    reg7_out  : out unsigned(15 downto 0)
   );
 end entity;
 
@@ -50,7 +59,18 @@ begin
     end if;
   end process;
   
+  -- Normal read ports
   busA <= Regs(to_integer(Ra));
   busB <= Regs(to_integer(Rb));
+  
+  -- Debug outputs for testbench
+  reg0_out <= Regs(0);
+  reg1_out <= Regs(1);
+  reg2_out <= Regs(2);
+  reg3_out <= Regs(3);
+  reg4_out <= Regs(4);
+  reg5_out <= Regs(5);
+  reg6_out <= Regs(6);
+  reg7_out <= Regs(7);
   
 end architecture;

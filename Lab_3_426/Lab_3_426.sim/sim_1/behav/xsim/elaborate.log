@@ -1,7 +1,29 @@
 Vivado Simulator 2020.2
 Copyright 1986-1999, 2001-2020 Xilinx, Inc. All Rights Reserved.
-Running: C:/Xilinx/Vivado/2020.2/bin/unwrapped/win64.o/xelab.exe -wto 6027e09ee84b49bb802594bb50900659 --incr --debug typical --relax --mt 2 -L xil_defaultlib -L secureip --snapshot tb_pipelined_cpu_behav xil_defaultlib.tb_pipelined_cpu -log elaborate.log 
+Running: C:/Xilinx/Vivado/2020.2/bin/unwrapped/win64.o/xelab.exe -wto 6027e09ee84b49bb802594bb50900659 --incr --debug typical --relax --mt 2 -L xil_defaultlib -L secureip --snapshot tb_mips_pipeline_behav xil_defaultlib.tb_mips_pipeline -log elaborate.log 
 Using 2 slave threads.
 Starting static elaboration
 Completed static elaboration
-INFO: [XSIM 43-4323] No Change in HDL. Linking previously generated obj files to create kernel
+Starting simulation data flow analysis
+Completed simulation data flow analysis
+Time Resolution for simulation is 1ps
+Compiling package std.standard
+Compiling package std.textio
+Compiling package ieee.std_logic_1164
+Compiling package ieee.numeric_std
+Compiling architecture rtl of entity xil_defaultlib.instruction_memory [instruction_memory_default]
+Compiling architecture rtl of entity xil_defaultlib.IF_ID_reg [if_id_reg_default]
+Compiling architecture rtl of entity xil_defaultlib.register_file [register_file_default]
+Compiling architecture rtl of entity xil_defaultlib.control_unit [control_unit_default]
+Compiling architecture rtl of entity xil_defaultlib.ID_EX_reg [id_ex_reg_default]
+Compiling architecture rtl of entity xil_defaultlib.alu_control [alu_control_default]
+Compiling architecture rtl of entity xil_defaultlib.full_adder [full_adder_default]
+Compiling architecture structural of entity xil_defaultlib.adder_16bit [adder_16bit_default]
+Compiling architecture rtl of entity xil_defaultlib.alu [alu_default]
+Compiling architecture rtl of entity xil_defaultlib.EX_MEM_reg [ex_mem_reg_default]
+Compiling architecture rtl of entity xil_defaultlib.data_memory [data_memory_default]
+Compiling architecture rtl of entity xil_defaultlib.MEM_WB_reg [mem_wb_reg_default]
+Compiling architecture rtl of entity xil_defaultlib.hazard_unit [hazard_unit_default]
+Compiling architecture rtl of entity xil_defaultlib.pipelined_cpu [pipelined_cpu_default]
+Compiling architecture testbench of entity xil_defaultlib.tb_mips_pipeline
+Built simulation snapshot tb_mips_pipeline_behav

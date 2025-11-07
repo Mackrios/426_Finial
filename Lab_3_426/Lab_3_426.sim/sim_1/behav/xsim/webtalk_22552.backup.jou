@@ -2,11 +2,11 @@
 # Webtalk v2020.2 (64-bit)
 # SW Build 3064766 on Wed Nov 18 09:12:45 MST 2020
 # IP Build 3064653 on Wed Nov 18 14:17:31 MST 2020
-# Start of session at: Thu Nov  6 16:26:23 2025
-# Process ID: 7000
+# Start of session at: Fri Nov  7 11:08:41 2025
+# Process ID: 22552
 # Current directory: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.sim/sim_1/behav/xsim
-# Command line: wbtcv.exe -mode batch -source C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.sim/sim_1/behav/xsim/xsim.dir/register_file_tb_behav/webtalk/xsim_webtalk.tcl -notrace
+# Command line: wbtcv.exe -mode batch -source C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.sim/sim_1/behav/xsim/xsim.dir/pipelined_cpu_behav/webtalk/xsim_webtalk.tcl -notrace
 # Log file: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.sim/sim_1/behav/xsim/webtalk.log
 # Journal file: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.sim/sim_1/behav/xsim\webtalk.jou
 #-----------------------------------------------------------
-source C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.sim/sim_1/behav/xsim/xsim.dir/register_file_tb_behav/webtalk/xsim_webtalk.tcl -notrace
+source C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.sim/sim_1/behav/xsim/xsim.dir/pipelined_cpu_behav/webtalk/xsim_webtalk.tcl -notrace
