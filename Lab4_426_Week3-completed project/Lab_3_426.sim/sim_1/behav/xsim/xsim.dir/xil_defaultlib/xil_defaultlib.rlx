@@ -1,0 +1,16 @@
+0.7
+2020.2
+Oct 13 2023
+20:47:58
+C:/Users/anshp/Downloads/426_Finial-Week-3/426_Finial-Week-3/Lab_3_426/Lab_3_426.srcs/sources_1/new/Tb_opcode_takein.vhd,1762557285,vhdl,,,,tb_mips_pipeline,,,,,,,,
+C:/Users/anshp/Downloads/426_Finial-Week-3/426_Finial-Week-3/Lab_3_426/Lab_3_426.srcs/sources_1/new/adder_32bit.vhd,1762558164,vhdl,,,,adder_16bit,,,,,,,,
+C:/Users/anshp/Downloads/426_Finial-Week-3/426_Finial-Week-3/Lab_3_426/Lab_3_426.srcs/sources_1/new/alu.vhd,1762556241,vhdl,,,,alu,,,,,,,,
+C:/Users/anshp/Downloads/426_Finial-Week-3/426_Finial-Week-3/Lab_3_426/Lab_3_426.srcs/sources_1/new/alu_control.vhd,1762556241,vhdl,,,,alu_control,,,,,,,,
+C:/Users/anshp/Downloads/426_Finial-Week-3/426_Finial-Week-3/Lab_3_426/Lab_3_426.srcs/sources_1/new/control_unit.vhd,1762556241,vhdl,,,,control_unit,,,,,,,,
+C:/Users/anshp/Downloads/426_Finial-Week-3/426_Finial-Week-3/Lab_3_426/Lab_3_426.srcs/sources_1/new/data_memory.vhd,1762556241,vhdl,,,,data_memory,,,,,,,,
+C:/Users/anshp/Downloads/426_Finial-Week-3/426_Finial-Week-3/Lab_3_426/Lab_3_426.srcs/sources_1/new/full_adder.vhd,1762556241,vhdl,,,,full_adder,,,,,,,,
+C:/Users/anshp/Downloads/426_Finial-Week-3/426_Finial-Week-3/Lab_3_426/Lab_3_426.srcs/sources_1/new/hazard_unit.vhd,1762558186,vhdl,,,,hazard_unit,,,,,,,,
+C:/Users/anshp/Downloads/426_Finial-Week-3/426_Finial-Week-3/Lab_3_426/Lab_3_426.srcs/sources_1/new/instruction_memory.vhd,1762558186,vhdl,,,,instruction_memory,,,,,,,,
+C:/Users/anshp/Downloads/426_Finial-Week-3/426_Finial-Week-3/Lab_3_426/Lab_3_426.srcs/sources_1/new/pipeline_registers.vhd,1762556241,vhdl,,,,ex_mem_reg;id_ex_reg;if_id_reg;mem_wb_reg,,,,,,,,
+C:/Users/anshp/Downloads/426_Finial-Week-3/426_Finial-Week-3/Lab_3_426/Lab_3_426.srcs/sources_1/new/pipelined_cpu.vhd,1762556241,vhdl,,,,pipelined_cpu,,,,,,,,
+C:/Users/anshp/Downloads/426_Finial-Week-3/426_Finial-Week-3/Lab_3_426/Lab_3_426.srcs/sources_1/new/register_file.vhd,1762556241,vhdl,,,,register_file,,,,,,,,
