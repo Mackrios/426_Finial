@@ -1,3 +1,8 @@
+--------------------------------------------------------------------------------
+-- MIPS Pipeline Testbench
+-- Tests a pipelined CPU implementation with assembled opcodes
+--------------------------------------------------------------------------------
+
 library IEEE;
 use IEEE.std_logic_1164.all;
 use IEEE.numeric_std.all;
@@ -6,15 +11,25 @@ entity tb_mips_pipeline is
 end entity;
 
 architecture testbench of tb_mips_pipeline is
+
+  --------------------------------------------------------------------------------
+  -- Constants
+  --------------------------------------------------------------------------------
   constant CLK_PERIOD : time := 10 ns;
   constant MAX_INSTRUCTIONS : integer := 256;
   
+  --------------------------------------------------------------------------------
+  -- CPU Interface Signals
+  --------------------------------------------------------------------------------
   signal clk    : std_logic := '0';
   signal rst    : std_logic := '1';
   signal pc_out : unsigned(15 downto 0);
   signal reg0, reg1, reg2, reg3 : unsigned(15 downto 0);
   signal reg4, reg5, reg6, reg7 : unsigned(15 downto 0);
   
+  --------------------------------------------------------------------------------
+  -- Component Declaration
+  --------------------------------------------------------------------------------
   component pipelined_cpu
     port(
       clk    : in  std_logic;
@@ -31,24 +46,32 @@ architecture testbench of tb_mips_pipeline is
     );
   end component;
   
+  --------------------------------------------------------------------------------
+  -- Simulation Control
+  --------------------------------------------------------------------------------
   signal sim_done : boolean := false;
   
-
+  --------------------------------------------------------------------------------
+  -- Test Program - Assembled Opcodes
+  --------------------------------------------------------------------------------
   type opcode_array is array (0 to MAX_INSTRUCTIONS-1) of unsigned(15 downto 0);
   
   signal opcodes : opcode_array := (
-
-    0 => x"0060",  -- Opcode 0
-    1 => x"1228",  -- Opcode 1
-    2 => x"24F0",  -- Opcode 2
-    3 => x"34F8",  -- Opcode 3
-    4 => x"74E0",  -- Opcode 4
-    5 => x"422A",  -- Opcode 5
-    6 => x"5231",  -- Opcode 6
-    7 => x"A485",  -- Opcode 7
+    0 => x"0060",
+    1 => x"1228",
+    2 => x"24F0",
+    3 => x"34F8",
+    4 => x"74E0",
+    5 => x"422A",
+    6 => x"5231",
+    7 => x"A485",
     others => (others => '0')
   );
   
+  --------------------------------------------------------------------------------
+  -- Utility Functions
+  --------------------------------------------------------------------------------
+  -- Converts unsigned value to hex string for reporting
   function to_hex_string(value : unsigned) return string is
     variable hex_chars : string(1 to 16) := "0123456789ABCDEF";
     variable result : string(1 to 4);
@@ -64,7 +87,10 @@ architecture testbench of tb_mips_pipeline is
   
 begin
   
-  UUT: pipelined_cpu port map(
+  --------------------------------------------------------------------------------
+  -- Device Under Test Instantiation
+  --------------------------------------------------------------------------------
+  DUT: pipelined_cpu port map(
     clk    => clk,
     rst    => rst,
     pc_out => pc_out,
@@ -78,7 +104,10 @@ begin
     reg7   => reg7
   );
   
-  -- Clock generation
+  --------------------------------------------------------------------------------
+  -- Clock Generation Process
+  -- Generates 50% duty cycle clock until simulation completes
+  --------------------------------------------------------------------------------
   clk_process: process
   begin
     while not sim_done loop
@@ -90,7 +119,14 @@ begin
     wait;
   end process;
   
-  -- Main stimulus and verification
+  --------------------------------------------------------------------------------
+  -- Main Stimulus and Verification Process
+  -- 1. Resets the CPU
+  -- 2. Loads and displays test program
+  -- 3. Runs CPU for 120 cycles
+  -- 4. Monitors PC progression and register values
+  -- 5. Performs final verification checks
+  --------------------------------------------------------------------------------
   stim_process: process
     variable cycle : integer := 0;
     variable prev_pc : unsigned(15 downto 0) := (others => '0');
@@ -98,10 +134,12 @@ begin
     variable test_fail : integer := 0;
     variable num_opcodes : integer := 8;
   begin
+    -- Reset sequence
     rst <= '1';
     wait for CLK_PERIOD * 2;
     rst <= '0';
     
+    -- Print test header and loaded program
     report "";
     report "================================================================================";
     report "  MIPS CPU TESTBENCH - USING ASSEMBLED OPCODES";
@@ -110,7 +148,6 @@ begin
     report "Program size: " & integer'image(num_opcodes * 2) & " bytes";
     report "";
     
-    -- Display loaded opcodes
     report "Loaded Opcodes:";
     for i in 0 to num_opcodes-1 loop
       report "  [" & integer'image(i) & "] 0x" & to_hex_string(opcodes(i));
@@ -119,15 +156,16 @@ begin
     report "Starting CPU execution...";
     report "";
     
+    -- Initialize PC tracking
     wait for CLK_PERIOD;
     prev_pc := pc_out;
     
-    -- Run for 120+ cycles
+    -- Main execution loop - run for 120 cycles
     for i in 0 to 120 loop
       wait for CLK_PERIOD;
       cycle := i;
       
-      -- Periodic reporting
+      -- Periodic status reporting every 5 cycles
       if i mod 5 = 0 then
         report "";
         report "--- CYCLE " & integer'image(i) & " ---";
@@ -138,17 +176,20 @@ begin
                 "  R6=0x" & to_hex_string(reg6) & "  R7=0x" & to_hex_string(reg7);
       end if;
       
-      -- PC progression check
+      -- Check PC progression to detect branches and jumps
       if pc_out /= prev_pc then
         if (pc_out - prev_pc) = 2 then
+          -- Normal sequential execution
           if i < 10 then
             report "  [PASS] Sequential PC increment";
           end if;
           test_pass := test_pass + 1;
         elsif pc_out < prev_pc then
+          -- Backward branch detected
           report "  [BRANCH] Backward branch: 0x" & to_hex_string(prev_pc) & 
                  " -> 0x" & to_hex_string(pc_out);
         elsif (pc_out - prev_pc) > 2 then
+          -- Forward jump detected
           report "  [JUMP] Non-sequential: 0x" & to_hex_string(prev_pc) & 
                  " -> 0x" & to_hex_string(pc_out);
         end if;
@@ -157,7 +198,7 @@ begin
       prev_pc := pc_out;
     end loop;
     
-    -- Final report
+    -- Print execution summary
     report "";
     report "================================================================================";
     report "  SIMULATION COMPLETE";
@@ -178,10 +219,11 @@ begin
     report "  R7: 0x" & to_hex_string(reg7);
     report "================================================================================";
     
-    -- Verification
+    -- Verification checks
     report "";
     report "Pipeline Stage Verification:";
     
+    -- Check 1: PC should have advanced
     if pc_out > x"0000" then
       report "  [PASS] IF Stage: PC advanced to 0x" & to_hex_string(pc_out);
       test_pass := test_pass + 1;
@@ -190,6 +232,7 @@ begin
       test_fail := test_fail + 1;
     end if;
     
+    -- Check 2: Sufficient cycles executed
     if cycle >= 5 then
       report "  [PASS] Pipeline: Executed " & integer'image(cycle + 1) & " cycles";
       test_pass := test_pass + 1;
@@ -198,6 +241,7 @@ begin
       test_fail := test_fail + 1;
     end if;
     
+    -- Check 3: PC alignment (should be even for 16-bit instructions)
     if pc_out(0) = '0' then
       report "  [PASS] Alignment: PC is word-aligned";
       test_pass := test_pass + 1;
@@ -206,6 +250,7 @@ begin
       test_fail := test_fail + 1;
     end if;
     
+    -- Final test results
     report "";
     report "TEST RESULTS: " & integer'image(test_pass) & " PASSED, " & 
             integer'image(test_fail) & " FAILED";
@@ -215,8 +260,11 @@ begin
     wait;
   end process;
   
-  -- Watchdog timer
-  watchdog: process
+  --------------------------------------------------------------------------------
+  -- Timeout Checker Process
+  -- Terminates simulation after 300 cycles if not completed normally
+  --------------------------------------------------------------------------------
+  timeout_checker: process
   begin
     for i in 0 to 300 loop
       wait for CLK_PERIOD;
@@ -225,7 +273,7 @@ begin
       end if;
     end loop;
     if not sim_done then
-      report "WATCHDOG TIMEOUT" severity failure;
+      report "TIMEOUT: Simulation exceeded 300 cycles" severity failure;
     end if;
     wait;
   end process;

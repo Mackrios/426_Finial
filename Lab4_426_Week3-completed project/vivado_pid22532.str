@@ -184,3 +184,21 @@ collapseTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sou
 selectTab(PAResourceEtoH.FileSetView_TABBED_PANE, (HResource) null, "Libraries", 1); // g (PAResourceEtoH.FileSetView_TABBED_PANE, SourcesView)
 selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, VHDL, xil_defaultlib, tb_pipelined_cpu.vhd]", 15, false); // E (PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE)
 selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, VHDL, xil_defaultlib, tb_pipelined_cpu.vhd]", 15, false, false, false, false, false, true); // E (PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE) - Double Click
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// Elapsed Time for: 'L.f': 20m:35s
+// Elapsed Time for: 'L.f': 20m:37s
+// HMemoryUtils.trashcanNow. Engine heap size: 1,179 MB. GUI used memory: 83 MB. Current time: 11/7/25, 8:07:05 PM EST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,181 MB. GUI used memory: 82 MB. Current time: 11/7/25, 8:37:08 PM EST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,186 MB. GUI used memory: 64 MB. Current time: 11/7/25, 9:07:12 PM EST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,188 MB. GUI used memory: 63 MB. Current time: 11/7/25, 9:37:15 PM EST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,188 MB. GUI used memory: 63 MB. Current time: 11/7/25, 10:07:19 PM EST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,188 MB. GUI used memory: 63 MB. Current time: 11/7/25, 10:37:22 PM EST
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// Elapsed Time for: 'L.f': 03h:30m:06s
+// Elapsed Time for: 'L.f': 03h:30m:08s
+// HMemoryUtils.trashcanNow. Engine heap size: 1,189 MB. GUI used memory: 49 MB. Current time: 11/7/25, 11:07:25 PM EST
+// Elapsed time: 12545 seconds
+closeView(PAResourceOtoP.PAViews_CODE, "Code"); // J (PAResourceOtoP.PAViews_CODE, PlanAheadTabCode)
+// TclEventType: FILE_SET_CHANGE
