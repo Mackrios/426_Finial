@@ -1,0 +1,56 @@
+#-----------------------------------------------------------
+# Vivado v2020.2 (64-bit)
+# SW Build 3064766 on Wed Nov 18 09:12:45 MST 2020
+# IP Build 3064653 on Wed Nov 18 14:17:31 MST 2020
+# Start of session at: Fri Nov  7 10:56:36 2025
+# Process ID: 28752
+# Current directory: C:/Users/mackr/426_Finial/Lab_3_426
+# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent8988 C:\Users\mackr\426_Finial\Lab_3_426\Lab_3_426.xpr
+# Log file: C:/Users/mackr/426_Finial/Lab_3_426/vivado.log
+# Journal file: C:/Users/mackr/426_Finial/Lab_3_426\vivado.jou
+#-----------------------------------------------------------
+start_gui
+open_project C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.xpr
+update_compile_order -fileset sources_1
+launch_simulation
+launch_simulation
+open_wave_config C:/Users/mackr/426_Finial/Lab_3_426/top_level_tb_behav.wcfg
+source tb_pipelined_cpu.tcl
+relaunch_sim
+update_compile_order -fileset sources_1
+launch_simulation
+launch_simulation
+close_sim
+launch_simulation
+open_wave_config C:/Users/mackr/426_Finial/Lab_3_426/top_level_tb_behav.wcfg
+source pipelined_cpu.tcl
+relaunch_sim
+# Disabling source management mode.  This is to allow the top design properties to be set without GUI intervention.
+set_property source_mgmt_mode None [current_project]
+set_property top tb_mips_pipeline [current_fileset]
+# Re-enabling previously disabled source management mode.
+set_property source_mgmt_mode All [current_project]
+update_compile_order -fileset sources_1
+launch_simulation
+close_sim
+launch_simulation
+open_wave_config C:/Users/mackr/426_Finial/Lab_3_426/top_level_tb_behav.wcfg
+source tb_mips_pipeline.tcl
+relaunch_sim
+save_wave_config {C:/Users/mackr/426_Finial/Lab_3_426/top_level_tb_behav.wcfg}
+close_sim
+launch_simulation
+open_wave_config C:/Users/mackr/426_Finial/Lab_3_426/top_level_tb_behav.wcfg
+source tb_mips_pipeline.tcl
+close_sim
+launch_simulation
+open_wave_config C:/Users/mackr/426_Finial/Lab_3_426/top_level_tb_behav.wcfg
+source tb_mips_pipeline.tcl
+close_sim
+launch_simulation
+open_wave_config C:/Users/mackr/426_Finial/Lab_3_426/top_level_tb_behav.wcfg
+source tb_mips_pipeline.tcl
+close_sim
+launch_simulation
+open_wave_config C:/Users/mackr/426_Finial/Lab_3_426/top_level_tb_behav.wcfg
+source tb_mips_pipeline.tcl
