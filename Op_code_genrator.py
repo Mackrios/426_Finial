@@ -105,9 +105,6 @@ def main():
     and r6, r2, r3          # R6 = R2 AND R3
     or r7, r2, r3           # R7 = R2 OR R3
     xor r4, r2, r3          # R4 = R2 XOR R3
-    sll r5, r1, 2           # R5 = R1 << 2
-    srl r6, r1, 1           # R6 = R1 >> 1
-    addi r2, r2, 5          # R2 = R2 + 5
     """
     
     print("="*80)
