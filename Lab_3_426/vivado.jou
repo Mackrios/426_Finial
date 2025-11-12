@@ -11,3 +11,38 @@
 #-----------------------------------------------------------
 start_gui
 open_project C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.xpr
+update_compile_order -fileset sources_1
+launch_simulation
+launch_simulation
+launch_simulation
+open_wave_config C:/Users/mackr/426_Finial/Lab_3_426/top_level_tb_behav.wcfg
+source tb_mips_pipeline.tcl
+relaunch_sim
+close_sim
+launch_simulation
+open_wave_config C:/Users/mackr/426_Finial/Lab_3_426/top_level_tb_behav.wcfg
+source tb_mips_pipeline.tcl
+relaunch_sim
+relaunch_sim
+close_sim
+launch_simulation
+open_wave_config C:/Users/mackr/426_Finial/Lab_3_426/top_level_tb_behav.wcfg
+source tb_mips_pipeline.tcl
+relaunch_sim
+close_sim
+launch_simulation
+open_wave_config C:/Users/mackr/426_Finial/Lab_3_426/top_level_tb_behav.wcfg
+source tb_mips_pipeline.tcl
+relaunch_sim
+close_sim
+launch_simulation
+open_wave_config C:/Users/mackr/426_Finial/Lab_3_426/top_level_tb_behav.wcfg
+source tb_mips_pipeline.tcl
+relaunch_sim
+save_wave_config {C:/Users/mackr/426_Finial/Lab_3_426/top_level_tb_behav.wcfg}
+close_sim
+launch_simulation
+open_wave_config C:/Users/mackr/426_Finial/Lab_3_426/top_level_tb_behav.wcfg
+source tb_mips_pipeline.tcl
+save_wave_config {C:/Users/mackr/426_Finial/Lab_3_426/top_level_tb_behav.wcfg}
+close_sim

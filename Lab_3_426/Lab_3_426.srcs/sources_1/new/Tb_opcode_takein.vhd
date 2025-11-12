@@ -21,16 +21,17 @@ architecture testbench of tb_mips_pipeline is
     signal clk    : std_logic := '0';
     signal rst    : std_logic := '1';
     
-    -- CPU Output Signals (Descriptive Names)
+    -- CPU Output Signals (signals mapping to the content inside each register)
     signal Program_Counter_PC : unsigned(15 downto 0);
     signal Reg0_Contents, Reg1_Contents, Reg2_Contents, Reg3_Contents : unsigned(15 downto 0);
     signal Reg4_Contents, Reg5_Contents, Reg6_Contents, Reg7_Contents : unsigned(15 downto 0);
     
-    -- Pipeline Stage Enumeration
+    -- Pipeline Stage Enumeration for state machine (Pipeline Stage)
     type pipeline_stage is (EMPTY, IF_STAGE, ID_STAGE, EX_STAGE, MEM_STAGE, WB_STAGE, COMPLETE);
     
+    -- created pipeline component for the testbench
     component pipelined_cpu
-        port(
+        port( 
             clk    : in  std_logic;
             rst    : in  std_logic;
             pc_out : out unsigned(15 downto 0);
@@ -54,8 +55,8 @@ architecture testbench of tb_mips_pipeline is
         Instr_Number : integer;                    -- Which instruction (0, 1, 2, ...)
         Opcode_Bits : unsigned(3 downto 0);       -- Operation code (ADD, SUB, etc.)
         Dest_Register : integer;                   -- Rd - destination register
-        Source1_Register : integer;                -- Rs - first source register
-        Source2_Register : integer;                -- Rt - second source register
+        Source1_Register : integer;                -- Rs - first source register (Data 1)
+        Source2_Register : integer;                -- Rt - second source register (Data 2)
         Pipeline_Stage : pipeline_stage;           -- Current stage in pipeline
         Entry_Cycle : integer;                     -- Cycle when entered pipeline
         Cycles_In_Current_Stage : integer;         -- How long in current stage
@@ -66,21 +67,21 @@ architecture testbench of tb_mips_pipeline is
     
     signal Pipeline_Tracker : pipeline_array;
     
-    -- Individual stage status signals for easy waveform viewing
+    
     signal IF_Stage_Status : pipeline_stage;
     signal ID_Stage_Status : pipeline_stage;
     signal EX_Stage_Status : pipeline_stage;
     signal MEM_Stage_Status : pipeline_stage;
     signal WB_Stage_Status : pipeline_stage;
     
-    -- Additional tracking signals for waveform clarity
+    -- more tracking signals for waveform clarity
     signal IF_Instr_Number : integer;
     signal ID_Instr_Number : integer;
     signal EX_Instr_Number : integer;
     signal MEM_Instr_Number : integer;
     signal WB_Instr_Number : integer;
 
-    -- File reading function
+    -- File reading function, reads in python file with MIPS instructions
     impure function read_opcodes_from_file(filename : string) return opcode_array is
         file f : text; 
         variable line_buf : line;
@@ -267,7 +268,6 @@ begin
             -- Shift stages: MEM->WB, EX->MEM, ID->EX, IF->ID
             for j in 4 downto 1 loop
                 if pipeline_state(j-1).Instr_Number >= 0 then
-                    -- Copy instruction data
                     pipeline_state(j) := pipeline_state(j-1);
                     
                     -- Update stage
