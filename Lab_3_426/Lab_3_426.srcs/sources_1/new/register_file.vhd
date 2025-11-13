@@ -13,7 +13,6 @@ entity register_file is
     busW      : in  unsigned(15 downto 0);     
     busA      : out unsigned(15 downto 0);     
     busB      : out unsigned(15 downto 0);
-    -- Debug outputs for testbench
     reg0_out  : out unsigned(15 downto 0);
     reg1_out  : out unsigned(15 downto 0);
     reg2_out  : out unsigned(15 downto 0);
@@ -29,14 +28,21 @@ architecture rtl of register_file is
   type reg_array is array(0 to 7) of unsigned(15 downto 0);
   
   signal Regs : reg_array := (
-    0 => x"0040",  -- $r0 = $v0 = 0x0040 64 
-    1 => x"1010",  -- $r1 = $v1 = 0x1010 4112
-    2 => x"000F",  -- $r2 = $v2 = 0x000F 15
-    3 => x"00F0",  -- $r3 = $v3 = 0x00F0 240 
-    4 => x"0000",  -- $r4 = $t0 = 0x0000 temp register
-    5 => x"0010",  -- $r5 = $a0 = 0x0010 memory pon at 16
-    6 => x"0005",  -- $r6 = $a1 = 0x0005 loop counter 5 counts
-    7 => x"0000"   -- $r7 = res
+    -- CORRECTED FOR MEMORY STORAGE AT mem[16-25]
+    -- R0 = base address for loading constants from mem[4-6]
+    0 => x"0000",  -- R0 = 0x0000 (base for constant loads)
+    
+    -- R1 = base address for storing results to mem[16-25]
+    -- Byte address 0x0020 maps to word index 16
+    -- address(7 downto 1) extracts: 0x0020[7:1] = 16
+    1 => x"0020",  -- R1 = 0x0020 (CRITICAL: points to mem[16])
+    
+    2 => x"000F",  -- R2 = 0x000F (loop counter, 15 iterations)
+    3 => x"00F0",  -- R3 = 0x00F0 (V1 - will be modified)
+    4 => x"0000",  -- R4 = 0x0000 (T0 - temp for loads)
+    5 => x"0010",  -- R5 = 0x0010 (V2 - will be modified)
+    6 => x"0005",  -- R6 = 0x0005 (V3 - comparison/temp)
+    7 => x"0000"   -- R7 = 0x0000 (temp for stores)
   );
   
 begin
@@ -44,14 +50,14 @@ begin
   process(clk, rst)
   begin
     if rst = '1' then
-      Regs(0) <= x"0040";  -- $v0
-      Regs(1) <= x"1010";  -- $v1
-      Regs(2) <= x"000F";  -- $v2
-      Regs(3) <= x"00F0";  -- $v3
-      Regs(4) <= x"0000";  -- $t0
-      Regs(5) <= x"0010";  -- $a0
-      Regs(6) <= x"0005";  -- $a1
-      Regs(7) <= x"0000";  -- res
+      Regs(0) <= x"0000";
+      Regs(1) <= x"0020";  -- KEY: Byte address for mem[16]
+      Regs(2) <= x"000F";
+      Regs(3) <= x"00F0";
+      Regs(4) <= x"0000";
+      Regs(5) <= x"0010";
+      Regs(6) <= x"0005";
+      Regs(7) <= x"0000";
     elsif rising_edge(clk) then
       if RegWr = '1' then
         Regs(to_integer(Rw)) <= busW;
@@ -59,11 +65,9 @@ begin
     end if;
   end process;
   
-  -- Normal read ports
   busA <= Regs(to_integer(Ra));
   busB <= Regs(to_integer(Rb));
   
-  -- Debug outputs for testbench
   reg0_out <= Regs(0);
   reg1_out <= Regs(1);
   reg2_out <= Regs(2);

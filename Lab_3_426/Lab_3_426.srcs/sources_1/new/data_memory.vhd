@@ -16,23 +16,39 @@ end entity;
 architecture rtl of data_memory is
   type mem_array is array(0 to 255) of unsigned(15 downto 0);
   
-  -- Initialize with your test data from lab document
+  -- Memory layout:
+  -- mem[0-3]     = 0x0000 (unused)
+  -- mem[4-6]     = Constants (0x0100, 0x00FF, 0xFF00)
+  -- mem[7-15]    = 0x0000 (unused)
+  -- mem[16-25]   = Results storage area (will be filled by program)
+  -- mem[26-255]  = 0x0000 (unused)
+  
   signal mem : mem_array := (
-    -- Memory starting at address 0x0010 ($a0 initial value)
-    8  => x"0101",  -- $a0 (0x0010 / 2 = index 8)
-    9  => x"0110",  -- $a0 + 2
-    10 => x"0011",  -- $a0 + 4
-    11 => x"00F0",  -- $a0 + 6
-    12 => x"00FF",  -- $a0 + 8
-    -- Constants at addresses 48, 50, 52
-    24 => x"0100",  -- address 48 (0x0030)
-    25 => x"00FF",  -- address 50 (0x0032)
-    26 => x"FF00",  -- address 52 (0x0034)
+    -- Constants at addresses 4, 5, 6
+    -- These are loaded by: lw $r6, 4($r0)  etc.
+    4  => x"0100",  -- Comparison threshold (for BGT instruction)
+    5  => x"00FF",  -- ELSE branch value (00FF for left shift + XOR)
+    6  => x"FF00",  -- THEN branch value (FF00 for right shift + OR)
+    
+    -- Results storage area (word addresses 16-25)
+    -- These will be written to by SW instructions
+    -- Starting address R1 = 0x0020 (byte) ? word index 16
+    16 => x"0000",  -- Reserved for program results
+    17 => x"0000",
+    18 => x"0000",
+    19 => x"0000",
+    20 => x"0000",
+    21 => x"0000",
+    22 => x"0000",
+    23 => x"0000",
+    24 => x"0000",
+    25 => x"0000",
+    
     others => (others => '0')
   );
   
 begin
-  -- Write process (synchronous)
+  -- Synchronous write
   process(clk)
   begin
     if rising_edge(clk) then
@@ -42,7 +58,7 @@ begin
     end if;
   end process;
   
-  -- Read process (combinational)
+  -- Asynchronous read
   read_data <= mem(to_integer(address(7 downto 1))) when mem_read = '1' 
                else (others => '0');
 end architecture;

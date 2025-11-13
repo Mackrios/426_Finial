@@ -11,14 +11,14 @@
    </db_ref_list>
    <zoom_setting>
       <ZoomStartTime time="0fs"></ZoomStartTime>
-      <ZoomEndTime time="61501fs"></ZoomEndTime>
-      <Cursor1Time time="103439fs"></Cursor1Time>
+      <ZoomEndTime time="1000001fs"></ZoomEndTime>
+      <Cursor1Time time="338762fs"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
       <NameColumnWidth column_width="250"></NameColumnWidth>
-      <ValueColumnWidth column_width="120"></ValueColumnWidth>
+      <ValueColumnWidth column_width="102"></ValueColumnWidth>
    </column_width_setting>
-   <WVObjectSize size="18" />
+   <WVObjectSize size="35" />
    <wvobject fp_name="/tb_mips_pipeline/clk" type="logic">
       <obj_property name="ElementShortName">clk</obj_property>
       <obj_property name="ObjectShortName">clk</obj_property>
@@ -30,10 +30,6 @@
    <wvobject fp_name="/tb_mips_pipeline/Program_Counter_PC" type="array">
       <obj_property name="ElementShortName">Program_Counter_PC[15:0]</obj_property>
       <obj_property name="ObjectShortName">Program_Counter_PC[15:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_mips_pipeline/opcodes" type="array">
-      <obj_property name="ElementShortName">opcodes[0:255][15:0]</obj_property>
-      <obj_property name="ObjectShortName">opcodes[0:255][15:0]</obj_property>
    </wvobject>
    <wvobject fp_name="/tb_mips_pipeline/Reg0_Contents" type="array">
       <obj_property name="ElementShortName">Reg0_Contents[15:0]</obj_property>
@@ -67,54 +63,33 @@
       <obj_property name="ElementShortName">Reg7_Contents[15:0]</obj_property>
       <obj_property name="ObjectShortName">Reg7_Contents[15:0]</obj_property>
    </wvobject>
+   <wvobject fp_name="/tb_mips_pipeline/sim_done" type="other">
+      <obj_property name="ElementShortName">sim_done</obj_property>
+      <obj_property name="ObjectShortName">sim_done</obj_property>
+   </wvobject>
    <wvobject fp_name="/tb_mips_pipeline/Pipeline_Tracker" type="array">
       <obj_property name="ElementShortName">Pipeline_Tracker[0:4]</obj_property>
       <obj_property name="ObjectShortName">Pipeline_Tracker[0:4]</obj_property>
-      <wvobject fp_name="/tb_mips_pipeline/Pipeline_Tracker[0]" type="array">
-         <obj_property name="ElementShortName">[0]</obj_property>
-         <obj_property name="ObjectShortName">[0]</obj_property>
-         <obj_property name="isExpanded"></obj_property>
-      </wvobject>
-      <wvobject fp_name="/tb_mips_pipeline/Pipeline_Tracker[1]" type="array">
-         <obj_property name="ElementShortName">[1]</obj_property>
-         <obj_property name="ObjectShortName">[1]</obj_property>
-         <obj_property name="isExpanded"></obj_property>
-      </wvobject>
-      <wvobject fp_name="/tb_mips_pipeline/Pipeline_Tracker[2]" type="array">
-         <obj_property name="ElementShortName">[2]</obj_property>
-         <obj_property name="ObjectShortName">[2]</obj_property>
-         <obj_property name="isExpanded"></obj_property>
-      </wvobject>
-      <wvobject fp_name="/tb_mips_pipeline/Pipeline_Tracker[3]" type="array">
-         <obj_property name="ElementShortName">[3]</obj_property>
-         <obj_property name="ObjectShortName">[3]</obj_property>
-         <obj_property name="isExpanded"></obj_property>
-      </wvobject>
-      <wvobject fp_name="/tb_mips_pipeline/Pipeline_Tracker[4]" type="array">
-         <obj_property name="ElementShortName">[4]</obj_property>
-         <obj_property name="ObjectShortName">[4]</obj_property>
-         <obj_property name="isExpanded"></obj_property>
-      </wvobject>
-      <wvobject fp_name="/tb_mips_pipeline/Pipeline_Tracker[0]" type="array">
-         <obj_property name="ElementShortName">[0]</obj_property>
-         <obj_property name="ObjectShortName">[0]</obj_property>
-      </wvobject>
-      <wvobject fp_name="/tb_mips_pipeline/Pipeline_Tracker[1]" type="array">
-         <obj_property name="ElementShortName">[1]</obj_property>
-         <obj_property name="ObjectShortName">[1]</obj_property>
-      </wvobject>
-      <wvobject fp_name="/tb_mips_pipeline/Pipeline_Tracker[2]" type="array">
-         <obj_property name="ElementShortName">[2]</obj_property>
-         <obj_property name="ObjectShortName">[2]</obj_property>
-      </wvobject>
-      <wvobject fp_name="/tb_mips_pipeline/Pipeline_Tracker[3]" type="array">
-         <obj_property name="ElementShortName">[3]</obj_property>
-         <obj_property name="ObjectShortName">[3]</obj_property>
-      </wvobject>
-      <wvobject fp_name="/tb_mips_pipeline/Pipeline_Tracker[4]" type="array">
-         <obj_property name="ElementShortName">[4]</obj_property>
-         <obj_property name="ObjectShortName">[4]</obj_property>
-      </wvobject>
+   </wvobject>
+   <wvobject fp_name="/tb_mips_pipeline/IF_Stage_Status" type="other">
+      <obj_property name="ElementShortName">IF_Stage_Status</obj_property>
+      <obj_property name="ObjectShortName">IF_Stage_Status</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_mips_pipeline/ID_Stage_Status" type="other">
+      <obj_property name="ElementShortName">ID_Stage_Status</obj_property>
+      <obj_property name="ObjectShortName">ID_Stage_Status</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_mips_pipeline/EX_Stage_Status" type="other">
+      <obj_property name="ElementShortName">EX_Stage_Status</obj_property>
+      <obj_property name="ObjectShortName">EX_Stage_Status</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_mips_pipeline/MEM_Stage_Status" type="other">
+      <obj_property name="ElementShortName">MEM_Stage_Status</obj_property>
+      <obj_property name="ObjectShortName">MEM_Stage_Status</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_mips_pipeline/WB_Stage_Status" type="other">
+      <obj_property name="ElementShortName">WB_Stage_Status</obj_property>
+      <obj_property name="ObjectShortName">WB_Stage_Status</obj_property>
    </wvobject>
    <wvobject fp_name="/tb_mips_pipeline/IF_Instr_Number" type="other">
       <obj_property name="ElementShortName">IF_Instr_Number</obj_property>
@@ -135,5 +110,54 @@
    <wvobject fp_name="/tb_mips_pipeline/WB_Instr_Number" type="other">
       <obj_property name="ElementShortName">WB_Instr_Number</obj_property>
       <obj_property name="ObjectShortName">WB_Instr_Number</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_mips_pipeline/opcodes" type="array">
+      <obj_property name="ElementShortName">opcodes[0:255][15:0]</obj_property>
+      <obj_property name="ObjectShortName">opcodes[0:255][15:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_mips_pipeline/CLK_PERIOD" type="other">
+      <obj_property name="ElementShortName">CLK_PERIOD</obj_property>
+      <obj_property name="ObjectShortName">CLK_PERIOD</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_mips_pipeline/MAX_INSTRUCTIONS" type="other">
+      <obj_property name="ElementShortName">MAX_INSTRUCTIONS</obj_property>
+      <obj_property name="ObjectShortName">MAX_INSTRUCTIONS</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_mips_pipeline/MAX_CYCLES" type="other">
+      <obj_property name="ElementShortName">MAX_CYCLES</obj_property>
+      <obj_property name="ObjectShortName">MAX_CYCLES</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_mips_pipeline/OPCODE_FILE" type="array">
+      <obj_property name="ElementShortName">OPCODE_FILE[1:11]</obj_property>
+      <obj_property name="ObjectShortName">OPCODE_FILE[1:11]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_mips_pipeline/DUT/DMEM/clk" type="logic">
+      <obj_property name="ElementShortName">clk</obj_property>
+      <obj_property name="ObjectShortName">clk</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_mips_pipeline/DUT/DMEM/address" type="array">
+      <obj_property name="ElementShortName">address[15:0]</obj_property>
+      <obj_property name="ObjectShortName">address[15:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_mips_pipeline/DUT/DMEM/write_data" type="array">
+      <obj_property name="ElementShortName">write_data[15:0]</obj_property>
+      <obj_property name="ObjectShortName">write_data[15:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_mips_pipeline/DUT/DMEM/mem_write" type="logic">
+      <obj_property name="ElementShortName">mem_write</obj_property>
+      <obj_property name="ObjectShortName">mem_write</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_mips_pipeline/DUT/DMEM/mem_read" type="logic">
+      <obj_property name="ElementShortName">mem_read</obj_property>
+      <obj_property name="ObjectShortName">mem_read</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_mips_pipeline/DUT/DMEM/read_data" type="array">
+      <obj_property name="ElementShortName">read_data[15:0]</obj_property>
+      <obj_property name="ObjectShortName">read_data[15:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_mips_pipeline/DUT/DMEM/mem" type="array">
+      <obj_property name="ElementShortName">mem[0:255][15:0]</obj_property>
+      <obj_property name="ObjectShortName">mem[0:255][15:0]</obj_property>
+      <obj_property name="isExpanded"></obj_property>
    </wvobject>
 </wave_config>
