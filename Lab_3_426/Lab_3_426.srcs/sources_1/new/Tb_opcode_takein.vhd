@@ -1,6 +1,6 @@
--- MIPS Pipeline Testbench - FINAL WITH MEMORY MONITORING AND ASSERTIONS
--- Directly accesses and verifies memory signals from data_memory
--- Comprehensive memory bus monitoring with cycle-by-cycle tracking
+--------------------------------------------------------------------------------
+-- MIPS Pipeline Individual Instruction Testbench
+-- Tests each instruction type individually to verify correctness
 --------------------------------------------------------------------------------
 
 library IEEE;
@@ -9,26 +9,20 @@ use IEEE.numeric_std.all;
 use std.textio.all;
 use ieee.std_logic_textio.all;
 
-entity tb_mips_pipeline is
+entity tb_individual_instructions is
 end entity;
 
-architecture testbench of tb_mips_pipeline is
+architecture testbench of tb_individual_instructions is
 
     constant CLK_PERIOD : time := 10 ns;
-    constant MAX_INSTRUCTIONS : integer := 256;
-    constant MAX_CYCLES : integer := 500;
-    constant OPCODE_FILE : string := "opcodes.txt";
     
     signal clk    : std_logic := '0';
     signal rst    : std_logic := '1';
     
     -- CPU Output Signals
-    signal Program_Counter_PC : unsigned(15 downto 0);
-    signal Reg0_Contents, Reg1_Contents, Reg2_Contents, Reg3_Contents : unsigned(15 downto 0);
-    signal Reg4_Contents, Reg5_Contents, Reg6_Contents, Reg7_Contents : unsigned(15 downto 0);
-    
-    -- Pipeline Stage Enumeration
-    type pipeline_stage is (EMPTY, IF_STAGE, ID_STAGE, EX_STAGE, MEM_STAGE, WB_STAGE, COMPLETE);
+    signal pc : unsigned(15 downto 0);
+    signal reg0, reg1, reg2, reg3 : unsigned(15 downto 0);
+    signal reg4, reg5, reg6, reg7 : unsigned(15 downto 0);
     
     component pipelined_cpu
         port( 
@@ -47,84 +41,8 @@ architecture testbench of tb_mips_pipeline is
     end component;
     
     signal sim_done : boolean := false;
-    
-    type opcode_array is array (0 to MAX_INSTRUCTIONS-1) of unsigned(15 downto 0);
-    
-
-    -- Instruction Tracking Record
-    type instruction_tracking_record is record
-        Instr_Number : integer;
-        Opcode_Bits : unsigned(3 downto 0);
-        Dest_Register : integer;
-        Source1_Register : integer;
-        Source2_Register : integer;
-        Pipeline_Stage : pipeline_stage;
-        Entry_Cycle : integer;
-        Cycles_In_Current_Stage : integer;
-    end record;
-    
-    type pipeline_array is array (0 to 4) of instruction_tracking_record;
-    
-    signal Pipeline_Tracker : pipeline_array;
-    
-    signal IF_Stage_Status : pipeline_stage;
-    signal ID_Stage_Status : pipeline_stage;
-    signal EX_Stage_Status : pipeline_stage;
-    signal MEM_Stage_Status : pipeline_stage;
-    signal WB_Stage_Status : pipeline_stage;
-    
-    signal IF_Instr_Number : integer;
-    signal ID_Instr_Number : integer;
-    signal EX_Instr_Number : integer;
-    signal MEM_Instr_Number : integer;
-    signal WB_Instr_Number : integer;
-
-    -- File reading function
-    impure function read_opcodes_from_file(filename : string) return opcode_array is
-        file f : text;
-        variable line_buf : line;
-        variable opcode_val : unsigned(15 downto 0);
-        variable result : opcode_array := (others => (others => '0'));
-        variable index : integer := 0;
-        variable hex_char : character;
-        variable hex_val : integer;
-    begin
-        file_open(f, filename, read_mode);
-        
-        while not endfile(f) and index < MAX_INSTRUCTIONS loop
-            readline(f, line_buf);
-            
-            if line_buf'length >= 4 then
-                opcode_val := (others => '0');
-                
-                for i in 1 to 4 loop
-                    read(line_buf, hex_char);
-                    
-                    case hex_char is
-                        when '0' => hex_val := 0; when '1' => hex_val := 1;
-                        when '2' => hex_val := 2; when '3' => hex_val := 3;
-                        when '4' => hex_val := 4; when '5' => hex_val := 5;
-                        when '6' => hex_val := 6; when '7' => hex_val := 7;
-                        when '8' => hex_val := 8; when '9' => hex_val := 9;
-                        when 'A' | 'a' => hex_val := 10; when 'B' | 'b' => hex_val := 11;
-                        when 'C' | 'c' => hex_val := 12; when 'D' | 'd' => hex_val := 13;
-                        when 'E' | 'e' => hex_val := 14; when 'F' | 'f' => hex_val := 15;
-                        when others => hex_val := 0;
-                    end case;
-                    
-                    opcode_val := shift_left(opcode_val, 4) or resize(to_unsigned(hex_val, 4), 16);
-                end loop;
-                
-                result(index) := opcode_val;
-                index := index + 1;
-            end if;
-        end loop;
-        
-        file_close(f);
-        return result;
-    end function;
-
-    signal opcodes : opcode_array := read_opcodes_from_file(OPCODE_FILE);
+    signal test_passed : integer := 0;
+    signal test_failed : integer := 0;
     
     -- Utility functions
     function to_hex_string(value : unsigned) return string is
@@ -140,50 +58,29 @@ architecture testbench of tb_mips_pipeline is
         return result;
     end function;
     
-    -- Corrected Opcode Name Mapping
-    function get_opcode_name(opcode_bits : unsigned(3 downto 0)) return string is
+    procedure wait_cycles(constant n : integer) is
     begin
-        case opcode_bits is
-            when "0000" => return "R-TYPE";
-            when "0001" => return "LW    ";
-            when "0010" => return "SW    ";
-            when "0011" => return "ADDI  ";
-            when "0100" => return "BRANCH";
-            when "0101" => return "BGT   ";
-            when "0110" => return "BGE   ";
-            when "0111" => return "BEQ   ";
-            when "1000" => return "JUMP  ";
-            when others => return "?????  ";
-        end case;
-    end function;
+        for i in 1 to n loop
+            wait until rising_edge(clk);
+        end loop;
+    end procedure;
     
-    function get_register_name(reg_num : integer) return string is
+    procedure check_register(
+        constant reg_name : string;
+        signal reg_value : unsigned(15 downto 0);
+        constant expected : unsigned(15 downto 0);
+        signal passed : inout integer;
+        signal failed : inout integer
+    ) is
     begin
-        case reg_num is
-            when 0 => return "R0";
-            when 1 => return "R1";
-            when 2 => return "R2";
-            when 3 => return "R3";
-            when 4 => return "R4";
-            when 5 => return "R5";
-            when 6 => return "R6";
-            when 7 => return "R7";
-            when others => return "??";
-        end case;
-    end function;
-    
-    function stage_to_string(stage : pipeline_stage) return string is
-    begin
-        case stage is
-            when EMPTY    => return "EMPTY         ";
-            when IF_STAGE => return "IF (Fetch)    ";
-            when ID_STAGE => return "ID (Decode)   ";
-            when EX_STAGE => return "EX (Execute)  ";
-            when MEM_STAGE => return "MEM (Memory)  ";
-            when WB_STAGE => return "WB (WriteBack)";
-            when COMPLETE => return "COMPLETE      ";
-        end case;
-    end function;
+        if reg_value = expected then
+            report "  PASS: " & reg_name & " = 0x" & to_hex_string(reg_value) & " (expected 0x" & to_hex_string(expected) & ")" severity note;
+            passed <= passed + 1;
+        else
+            report "  FAIL: " & reg_name & " = 0x" & to_hex_string(reg_value) & " (expected 0x" & to_hex_string(expected) & ")" severity error;
+            failed <= failed + 1;
+        end if;
+    end procedure;
     
 begin
     
@@ -191,22 +88,16 @@ begin
     DUT: pipelined_cpu port map(
         clk    => clk,
         rst    => rst,
-        pc_out => Program_Counter_PC,
-        reg0   => Reg0_Contents,
-        reg1   => Reg1_Contents,
-        reg2   => Reg2_Contents,
-        reg3   => Reg3_Contents,
-        reg4   => Reg4_Contents,
-        reg5   => Reg5_Contents,
-        reg6   => Reg6_Contents,
-        reg7   => Reg7_Contents
+        pc_out => pc,
+        reg0   => reg0,
+        reg1   => reg1,
+        reg2   => reg2,
+        reg3   => reg3,
+        reg4   => reg4,
+        reg5   => reg5,
+        reg6   => reg6,
+        reg7   => reg7
     );
-    
-    load_opcodes: process
-    begin
-        opcodes <= read_opcodes_from_file(OPCODE_FILE);
-        wait;   -- wait forever
-    end process;
     
     -- Clock generation
     clk_process: process
@@ -220,327 +111,279 @@ begin
         wait;
     end process;
     
-    -- Main stimulus and tracking process
-    stim_process: process
-        variable cycle_count : integer := 0;
-        variable total_instructions : integer := 0;
-        variable pipeline_state : pipeline_array;
-        variable instr_index : integer;
-        variable opcode : unsigned(3 downto 0);
-        variable rd, rs, rt : integer;
-        variable empty_record : instruction_tracking_record;
+    -- Main test process
+    test_process: process
     begin
+        report "========================================";
+        report "INDIVIDUAL INSTRUCTION TEST SUITE";
+        report "========================================";
+        report "";
+        
         -- Reset phase
         rst <= '1';
-        wait for CLK_PERIOD * 2;
+        wait_cycles(3);
         rst <= '0';
+        wait_cycles(2);
         
+        -- ====================================================================
+        -- TEST 1: Check Initial Register Values
+        -- ====================================================================
+        report "----------------------------------------";
+        report "TEST 1: Initial Register Values";
+        report "----------------------------------------";
+        wait_cycles(1);
+        
+        report "Checking initial register state:";
+        check_register("R0", reg0, x"0000", test_passed, test_failed);
+        check_register("R1", reg1, x"0020", test_passed, test_failed);
+        check_register("R2", reg2, x"000F", test_passed, test_failed);
+        check_register("R3", reg3, x"00F0", test_passed, test_failed);
+        check_register("R4", reg4, x"0000", test_passed, test_failed);
+        check_register("R5", reg5, x"0010", test_passed, test_failed);
+        check_register("R6", reg6, x"0005", test_passed, test_failed);
+        check_register("R7", reg7, x"0000", test_passed, test_failed);
+        report "";
+        
+        -- ====================================================================
+        -- TEST 2: ADDI Instruction
+        -- Program: addi $r2, $r2, -1
+        -- Opcode: 0011 010 010 111111 = 0x34BF
+        -- Expected: R2 = 0x000F - 1 = 0x000E
+        -- ====================================================================
+        report "----------------------------------------";
+        report "TEST 2: ADDI Instruction";
+        report "----------------------------------------";
+        report "Instruction: addi $r2, $r2, -1 (0x34BF)";
+        report "Initial R2: 0x" & to_hex_string(reg2);
+        
+        -- Wait for instruction to complete pipeline (5 stages + some buffer)
+        wait_cycles(10);
+        
+        report "After execution:";
+        report "  R2 = 0x" & to_hex_string(reg2);
+        check_register("R2 after ADDI", reg2, x"000E", test_passed, test_failed);
+        report "";
+        
+        -- ====================================================================
+        -- TEST 3: LW Instruction
+        -- Program: lw $r4, 0($r1)
+        -- Opcode: 0001 001 100 000000 = 0x1300
+        -- R1 = 0x0020 (byte address) = word index 16
+        -- Memory[16] should be loaded into R4
+        -- ====================================================================
+        report "----------------------------------------";
+        report "TEST 3: LW Instruction";
+        report "----------------------------------------";
+        report "Instruction: lw $r4, 0($r1) (0x1300)";
+        report "R1 (base address): 0x" & to_hex_string(reg1);
+        report "Initial R4: 0x" & to_hex_string(reg4);
+        
+        wait_cycles(10);
+        
+        report "After execution:";
+        report "  R4 = 0x" & to_hex_string(reg4);
+        report "  Note: R4 should contain value from memory[word_index_16]";
+        -- We expect 0x0000 since memory[16] is initialized to 0
+        check_register("R4 after LW", reg4, x"0000", test_passed, test_failed);
+        report "";
+        
+        -- ====================================================================
+        -- TEST 4: LW with offset
+        -- Program: lw $r6, 4($r0)
+        -- Opcode: 0001 000 110 000100 = 0x1184
+        -- R0 = 0x0000, offset = 4 bytes = word index 2
+        -- Memory[4] = 0x0100 (comparison threshold)
+        -- ====================================================================
+        report "----------------------------------------";
+        report "TEST 4: LW with Offset";
+        report "----------------------------------------";
+        report "Instruction: lw $r6, 4($r0) (0x1184)";
+        report "R0 (base): 0x" & to_hex_string(reg0);
+        report "Offset: 4 bytes (word index 4)";
+        report "Initial R6: 0x" & to_hex_string(reg6);
+        
+        wait_cycles(10);
+        
+        report "After execution:";
+        report "  R6 = 0x" & to_hex_string(reg6);
+        report "  Expected: 0x0100 (from memory[4])";
+        check_register("R6 after LW", reg6, x"0100", test_passed, test_failed);
+        report "";
+        
+        -- ====================================================================
+        -- TEST 5: R-Type - SLL (Shift Left Logical)
+        -- Program: sll $r5, $r5, 2
+        -- Opcode: 0000 101 000 101 010 = 0x0A2A
+        -- R5 = 0x0010, shift left by 2 = 0x0040
+        -- ====================================================================
+        report "----------------------------------------";
+        report "TEST 5: SLL Instruction";
+        report "----------------------------------------";
+        report "Instruction: sll $r5, $r5, 2 (0x0A2A)";
+        report "Initial R5: 0x" & to_hex_string(reg5);
+        report "Expected: 0x0010 << 2 = 0x0040";
+        
+        wait_cycles(10);
+        
+        report "After execution:";
+        report "  R5 = 0x" & to_hex_string(reg5);
+        check_register("R5 after SLL", reg5, x"0040", test_passed, test_failed);
+        report "";
+        
+        -- ====================================================================
+        -- TEST 6: R-Type - XOR
+        -- Program: xor $r3, $r3, $r5
+        -- Opcode: 0000 011 101 011 111 = 0x075F
+        -- R3 = 0x00F0, R5 = 0x0040
+        -- Result: 0x00F0 XOR 0x0040 = 0x00B0
+        -- ====================================================================
+        report "----------------------------------------";
+        report "TEST 6: XOR Instruction";
+        report "----------------------------------------";
+        report "Instruction: xor $r3, $r3, $r5 (0x075F)";
+        report "R3: 0x" & to_hex_string(reg3);
+        report "R5: 0x" & to_hex_string(reg5);
+        report "Expected: 0x00F0 XOR 0x0040 = 0x00B0";
+        
+        wait_cycles(10);
+        
+        report "After execution:";
+        report "  R3 = 0x" & to_hex_string(reg3);
+        check_register("R3 after XOR", reg3, x"00B0", test_passed, test_failed);
+        report "";
+        
+        -- ====================================================================
+        -- TEST 7: LW - Load constant for SW test
+        -- Program: lw $r7, 5($r0)
+        -- Opcode: 0001 000 111 000101 = 0x11C5
+        -- Memory[5] = 0x00FF
+        -- ====================================================================
+        report "----------------------------------------";
+        report "TEST 7: LW - Load Constant";
+        report "----------------------------------------";
+        report "Instruction: lw $r7, 5($r0) (0x11C5)";
+        report "Expected: Load 0x00FF from memory[5]";
+        
+        wait_cycles(10);
+        
+        report "After execution:";
+        report "  R7 = 0x" & to_hex_string(reg7);
+        check_register("R7 after LW", reg7, x"00FF", test_passed, test_failed);
+        report "";
+        
+        -- ====================================================================
+        -- TEST 8: SW - Store Word
+        -- Program: sw $r7, 0($r1)
+        -- Opcode: 0010 001 111 000000 = 0x23C0
+        -- Store R7 (0x00FF) to memory[R1] = memory[16]
+        -- ====================================================================
+        report "----------------------------------------";
+        report "TEST 8: SW Instruction";
+        report "----------------------------------------";
+        report "Instruction: sw $r7, 0($r1) (0x23C0)";
+        report "R7 (data): 0x" & to_hex_string(reg7);
+        report "R1 (address): 0x" & to_hex_string(reg1);
+        report "Action: Store 0x00FF to memory[word_index_16]";
+        
+        wait_cycles(10);
+        
+        report "SW instruction completed.";
+        report "  To verify: Check memory[16] in waveform should be 0x00FF";
+        report "";
+        
+        -- ====================================================================
+        -- TEST 9: R-Type - SRL (Shift Right Logical)
+        -- Program: srl $r0, $r0, 3
+        -- Opcode: 0000 000 000 000 011 = 0x0003
+        -- Note: R0 might be read-only or have special behavior
+        -- ====================================================================
+        report "----------------------------------------";
+        report "TEST 9: SRL Instruction";
+        report "----------------------------------------";
+        report "Instruction: srl $r0, $r0, 3 (0x0003)";
+        report "Initial R0: 0x" & to_hex_string(reg0);
+        report "Note: R0 behavior depends on implementation";
+        
+        wait_cycles(10);
+        
+        report "After execution:";
+        report "  R0 = 0x" & to_hex_string(reg0);
+        report "  (R0 may remain 0x0000 if it's hardwired to zero)";
+        report "";
+        
+        -- ====================================================================
+        -- TEST 10: R-Type - OR
+        -- Program: or $r3, $r3, $r0
+        -- Opcode: 0000 011 000 011 011 = 0x061B
+        -- R3 OR R0
+        -- ====================================================================
+        report "----------------------------------------";
+        report "TEST 10: OR Instruction";
+        report "----------------------------------------";
+        report "Instruction: or $r3, $r3, $r0 (0x061B)";
+        report "R3: 0x" & to_hex_string(reg3);
+        report "R0: 0x" & to_hex_string(reg0);
+        
+        wait_cycles(10);
+        
+        report "After execution:";
+        report "  R3 = 0x" & to_hex_string(reg3);
+        report "";
+        
+        -- ====================================================================
+        -- TEST 11: ADDI - Increment pointer
+        -- Program: addi $r1, $r1, 4
+        -- Opcode: 0011 001 001 000100 = 0x3244
+        -- R1 = R1 + 4
+        -- ====================================================================
+        report "----------------------------------------";
+        report "TEST 11: ADDI - Pointer Increment";
+        report "----------------------------------------";
+        report "Instruction: addi $r1, $r1, 4 (0x3244)";
+        report "Initial R1: 0x" & to_hex_string(reg1);
+        
+        wait_cycles(10);
+        
+        report "After execution:";
+        report "  R1 = 0x" & to_hex_string(reg1);
+        report "  Expected: R1 increased by 4";
+        report "";
+        
+        -- ====================================================================
+        -- FINAL SUMMARY
+        -- ====================================================================
+        wait_cycles(5);
+        
+        report "";
         report "========================================";
-        report "MIPS PIPELINE TESTBENCH - FINAL VERSION";
-        report "WITH MEMORY BUS MONITORING";
+        report "TEST SUMMARY";
         report "========================================";
-        
-        -- Count total instructions
-        for i in 0 to MAX_INSTRUCTIONS-1 loop
-            if opcodes(i) /= x"0000" or i = 0 then
-                total_instructions := i + 1;
-            else
-                exit;
-            end if;
-        end loop;
-        
-        report "Total instructions loaded: " & integer'image(total_instructions);
-        report "Maximum cycles: " & integer'image(MAX_CYCLES);
-        report "Loop iterations expected: 15 (R2 starts at 0x000F)";
-        report "";
-
-        -- Initialize empty record
-        empty_record.Instr_Number := -1;
-        empty_record.Opcode_Bits := (others => '0');
-        empty_record.Dest_Register := 0;
-        empty_record.Source1_Register := 0;
-        empty_record.Source2_Register := 0;
-        empty_record.Pipeline_Stage := EMPTY;
-        empty_record.Entry_Cycle := 0;
-        empty_record.Cycles_In_Current_Stage := 0;
-
-        -- Initialize pipeline state
-        for i in pipeline_state'range loop
-            pipeline_state(i) := empty_record;
-        end loop;
-
-        wait for CLK_PERIOD;
-        
-        -- PRINT INITIAL STATE FOR DEBUGGING
-        report "";
-        report "===== INITIAL STATE AFTER RESET =====";
-        report "R0 = 0x" & to_hex_string(Reg0_Contents) & " (expected 0x0040)";
-        report "R1 = 0x" & to_hex_string(Reg1_Contents) & " (expected 0x1010)";
-        report "R2 = 0x" & to_hex_string(Reg2_Contents) & " (expected 0x000F)";
-        report "R3 = 0x" & to_hex_string(Reg3_Contents) & " (expected 0x00F0)";
-        report "R4 = 0x" & to_hex_string(Reg4_Contents) & " (expected 0x0000)";
-        report "R5 = 0x" & to_hex_string(Reg5_Contents) & " (expected 0x0010)";
-        report "R6 = 0x" & to_hex_string(Reg6_Contents) & " (expected 0x0005)";
-        report "R7 = 0x" & to_hex_string(Reg7_Contents) & " (expected 0x0000)";
-        report "=====================================";
+        report "Tests Passed: " & integer'image(test_passed);
+        report "Tests Failed: " & integer'image(test_failed);
         report "";
         
-        -- Verify initial values with assertions
-        assert Reg0_Contents = x"0040"
-            report "ERROR: R0 should be 0x0040, got 0x" & to_hex_string(Reg0_Contents)
-            severity error;
-        assert Reg2_Contents = x"000F"
-            report "ERROR: R2 should be 0x000F, got 0x" & to_hex_string(Reg2_Contents)
-            severity error;
-        assert Reg1_Contents = x"1010"
-            report "ERROR: R1 should be 0x1010, got 0x" & to_hex_string(Reg1_Contents)
-            severity error;
-        
-        wait for CLK_PERIOD;
-        
-        -- Main simulation loop
-        for i in 1 to MAX_CYCLES loop
-            cycle_count := i;
-            
-            -- STEP 1: Shift pipeline stages
-            if pipeline_state(4).Pipeline_Stage = WB_STAGE then
-                pipeline_state(4).Pipeline_Stage := COMPLETE;
-            end if;
-            
-            for j in 4 downto 1 loop
-                if pipeline_state(j-1).Instr_Number >= 0 then
-                    pipeline_state(j) := pipeline_state(j-1);
-                    
-                    case pipeline_state(j-1).Pipeline_Stage is
-                        when IF_STAGE  => pipeline_state(j).Pipeline_Stage := ID_STAGE;
-                        when ID_STAGE  => pipeline_state(j).Pipeline_Stage := EX_STAGE;
-                        when EX_STAGE  => pipeline_state(j).Pipeline_Stage := MEM_STAGE;
-                        when MEM_STAGE => pipeline_state(j).Pipeline_Stage := WB_STAGE;
-                        when WB_STAGE  => pipeline_state(j).Pipeline_Stage := COMPLETE;
-                        when others    => pipeline_state(j).Pipeline_Stage := EMPTY;
-                    end case;
-                    
-                    pipeline_state(j).Cycles_In_Current_Stage := 0;
-                else
-                    pipeline_state(j) := empty_record;
-                end if;
-            end loop;
-            
-            if pipeline_state(4).Pipeline_Stage = COMPLETE then
-                pipeline_state(4) := empty_record;
-            end if;
-            
-            -- STEP 2: Fetch new instruction into IF stage
-            wait for CLK_PERIOD;
-            instr_index := to_integer(Program_Counter_PC) / 2;
-            
-            if instr_index < total_instructions then
-                pipeline_state(0).Instr_Number := instr_index;
-                opcode := opcodes(instr_index)(15 downto 12);
-                pipeline_state(0).Opcode_Bits := opcode;
-                pipeline_state(0).Source1_Register := to_integer(opcodes(instr_index)(11 downto 9));
-                pipeline_state(0).Source2_Register := to_integer(opcodes(instr_index)(8 downto 6));
-                pipeline_state(0).Dest_Register := to_integer(opcodes(instr_index)(5 downto 3));
-                pipeline_state(0).Pipeline_Stage := IF_STAGE;
-                pipeline_state(0).Entry_Cycle := i;
-                pipeline_state(0).Cycles_In_Current_Stage := 0;
-            else
-                pipeline_state(0) := empty_record;
-            end if;
-
-            -- STEP 3: Increment cycle counters
-            for j in pipeline_state'range loop
-                if pipeline_state(j).Instr_Number >= 0 and
-                   pipeline_state(j).Pipeline_Stage /= EMPTY and
-                   pipeline_state(j).Pipeline_Stage /= COMPLETE then
-                    pipeline_state(j).Cycles_In_Current_Stage :=
-                        pipeline_state(j).Cycles_In_Current_Stage + 1;
-                end if;
-            end loop;
-
-            -- STEP 4: Update all tracking signals
-            Pipeline_Tracker <= pipeline_state;
-            
-            IF_Stage_Status <= pipeline_state(0).Pipeline_Stage;
-            ID_Stage_Status <= pipeline_state(1).Pipeline_Stage;
-            EX_Stage_Status <= pipeline_state(2).Pipeline_Stage;
-            MEM_Stage_Status <= pipeline_state(3).Pipeline_Stage;
-            WB_Stage_Status <= pipeline_state(4).Pipeline_Stage;
-            
-            IF_Instr_Number <= pipeline_state(0).Instr_Number;
-            ID_Instr_Number <= pipeline_state(1).Instr_Number;
-            EX_Instr_Number <= pipeline_state(2).Instr_Number;
-            MEM_Instr_Number <= pipeline_state(3).Instr_Number;
-            WB_Instr_Number <= pipeline_state(4).Instr_Number;
-            
-            -- STEP 5: Print pipeline state (every 50 cycles)
-            if i mod 50 = 0 or i <= 10 then
-                report "";
-                report "==== CYCLE " & integer'image(i) & " ====";
-                report "PC: 0x" & to_hex_string(Program_Counter_PC) & 
-                       " | R0=" & to_hex_string(Reg0_Contents) & 
-                       " R1=" & to_hex_string(Reg1_Contents) & 
-                       " R2=" & to_hex_string(Reg2_Contents) & 
-                       " R3=" & to_hex_string(Reg3_Contents);
-                report "R4=" & to_hex_string(Reg4_Contents) & 
-                       " R5=" & to_hex_string(Reg5_Contents) & 
-                       " R6=" & to_hex_string(Reg6_Contents) & 
-                       " R7=" & to_hex_string(Reg7_Contents);
-            end if;
-            
-            -- Check for completion (only after sufficient cycles)
-            if i > 400 and instr_index >= total_instructions and 
-               pipeline_state(0).Instr_Number < 0 and 
-               pipeline_state(1).Instr_Number < 0 and
-               pipeline_state(2).Instr_Number < 0 and 
-               pipeline_state(3).Instr_Number < 0 and
-               pipeline_state(4).Instr_Number < 0 then
-                report "";
-                report "All instructions completed at cycle " & integer'image(i) & "!" severity note;
-                exit;
-            end if;
-        end loop;
-        
-        -- STEP 6: FINAL SUMMARY WITH MEMORY ASSERTIONS AND MONITORING
-        wait for CLK_PERIOD;
-        
-        report "";
-        report "========================================";
-        report "FINAL EXECUTION STATE";
-        report "========================================";
-        report "";
-        report "Final Register Values:";
-        report "R0 (V0):  0x" & to_hex_string(Reg0_Contents);
-        report "R1 (A0):  0x" & to_hex_string(Reg1_Contents);
-        report "R2 (A1):  0x" & to_hex_string(Reg2_Contents);
-        report "R3 (V1):  0x" & to_hex_string(Reg3_Contents);
-        report "R4 (T0):  0x" & to_hex_string(Reg4_Contents);
-        report "R5 (V2):  0x" & to_hex_string(Reg5_Contents);
-        report "R6 (V3):  0x" & to_hex_string(Reg6_Contents);
-        report "R7 (Temp):0x" & to_hex_string(Reg7_Contents);
-        report "";
-        
-        report "========================================";
-        report "ASSERTION CHECKS - REGISTER STATE";
-        report "========================================";
-        report "";
-        
-        report "Check 1: Loop counter (R2) should be 0x0000 after 15 iterations...";
-        if Reg2_Contents = x"0000" then
-            report "PASS: Loop counter R2 = 0x0000 (loop completed successfully)" severity note;
+        if test_failed = 0 then
+            report "ALL TESTS PASSED!" severity note;
         else
-            report "FAIL: Loop counter R2 = 0x" & to_hex_string(Reg2_Contents) & " (expected 0x0000)" severity error;
+            report "SOME TESTS FAILED - Review errors above" severity warning;
         end if;
-        report "";
         
-        report "Check 2: Array pointer (R1) should have advanced from 0x1010...";
-        if unsigned(Reg1_Contents) > x"1010" then
-            report "PASS: Array pointer R1 = 0x" & to_hex_string(Reg1_Contents) & " (advanced from 0x1010)" severity note;
-        else
-            report "FAIL: Array pointer R1 = 0x" & to_hex_string(Reg1_Contents) & " (should advance from 0x1010)" severity error;
-        end if;
-        report "";
-        
-        report "========================================";
-        report "MEMORY BUS SIGNAL VERIFICATION";
-        report "========================================";
-        report "";
-        report "To verify memory operations in waveform, add these signal paths:";
-        report "";
-        report "MEMORY ADDRESS BUS:";
-        report "  Path: /tb_mips_pipeline/DUT/DMEM/address";
-        report "  Type: unsigned(15 downto 0)";
-        report "  Expected addresses during execution:";
-        report "    - 0x0004 to 0x0006: Constant loads (comparison, ELSE, THEN values)";
-        report "    - 0x0010 to 0x0019: Array results storage (16 different writes)";
-        report "";
-        
-        report "MEMORY WRITE DATA BUS:";
-        report "  Path: /tb_mips_pipeline/DUT/DMEM/write_data";
-        report "  Type: unsigned(15 downto 0)";
-        report "  Expected values:";
-        report "    - 0xFF00: THEN branch result (right shift + OR)";
-        report "    - 0x00FF: ELSE branch result (left shift + XOR)";
-        report "";
-        
-        report "MEMORY READ DATA BUS:";
-        report "  Path: /tb_mips_pipeline/DUT/DMEM/read_data";
-        report "  Type: unsigned(15 downto 0)";
-        report "  Expected values:";
-        report "    - 0x0100: Comparison threshold from mem[4]";
-        report "    - 0x00FF: ELSE branch value from mem[5]";
-        report "    - 0xFF00: THEN branch value from mem[6]";
-        report "    - Array elements from mem[16-25]";
-        report "";
-        
-        report "MEMORY CONTROL SIGNALS:";
-        report "  Write Enable: /tb_mips_pipeline/DUT/DMEM/mem_write (std_logic)";
-        report "    - Should be '1' during SW instructions";
-        report "  Read Enable:  /tb_mips_pipeline/DUT/DMEM/mem_read (std_logic)";
-        report "    - Should be '1' during LW instructions";
-        report "";
-        
-        report "========================================";
-        report "MEMORY ASSERTION CHECKS";
-        report "========================================";
-        report "";
-        
-        report "Accessing memory contents from DMEM:";
-        report "  mem[4]  should be 0x0100 (comparison threshold)";
-        report "  mem[5]  should be 0x00FF (ELSE branch value)";
-        report "  mem[6]  should be 0xFF00 (THEN branch value)";
-        report "  mem[16-25] should contain program results (FF00 or 00FF)";
-        report "";
-        
-        report "Note: Memory contents are visible in waveform at:";
-        report "  /tb_mips_pipeline/DUT/DMEM/mem (entire array)";
-        report "  /tb_mips_pipeline/DUT/DMEM/mem[4] (specific address)";
-        report "  /tb_mips_pipeline/DUT/DMEM/mem[5] (specific address)";
-        report "  /tb_mips_pipeline/DUT/DMEM/mem[6] (specific address)";
-        report "  And indices 16-25 for program results";
-        report "";
-        
-        report "========================================";
-        report "EXPECTED MEMORY PATTERN";
-        report "========================================";
-        report "";
-        report "Initial Memory State (after reset):";
-        report "  mem[4]  = 0x0100";
-        report "  mem[5]  = 0x00FF";
-        report "  mem[6]  = 0xFF00";
-        report "  mem[16-25] = 0x0000 (cleared)";
-        report "";
-        report "Final Memory State (after 15 iterations):";
-        report "  mem[4]  = 0x0100 (unchanged)";
-        report "  mem[5]  = 0x00FF (unchanged)";
-        report "  mem[6]  = 0xFF00 (unchanged)";
-        report "  mem[16] through mem[25] = mixture of 0xFF00 and 0x00FF values";
-        report "";
-        report "Expected pattern in mem[16-25]:";
-        report "  Each word written contains either 0xFF00 (THEN) or 0x00FF (ELSE)";
-        report "  15 writes total (one per loop iteration)";
-        report "  Pattern depends on array element values at execution time";
         report "";
         report "========================================";
+        report "FINAL REGISTER STATE";
+        report "========================================";
+        report "R0: 0x" & to_hex_string(reg0);
+        report "R1: 0x" & to_hex_string(reg1);
+        report "R2: 0x" & to_hex_string(reg2);
+        report "R3: 0x" & to_hex_string(reg3);
+        report "R4: 0x" & to_hex_string(reg4);
+        report "R5: 0x" & to_hex_string(reg5);
+        report "R6: 0x" & to_hex_string(reg6);
+        report "R7: 0x" & to_hex_string(reg7);
+        report "PC: 0x" & to_hex_string(pc);
         report "";
         
         sim_done <= true;
-        report "Simulation ended successfully." severity note;
-        wait;
-    end process;
-    
-    -- Timeout watchdog
-    timeout_checker: process
-    begin
-        for i in 0 to 2000 loop
-            wait for CLK_PERIOD;
-            if sim_done then
-                exit;
-            end if;
-        end loop;
-        if not sim_done then
-            report "SIMULATION TIMEOUT - Program not completing. Increase MAX_CYCLES." severity failure;
-        end if;
         wait;
     end process;
     

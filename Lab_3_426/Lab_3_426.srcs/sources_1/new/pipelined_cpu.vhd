@@ -1,3 +1,8 @@
+-- CRITICAL FIXES:
+-- 1. Changed imm_4bit to imm_6bit (bits 5:0, not 3:0)
+-- 2. Added proper function field extraction for R-type
+-- 3. Fixed sign extension to use 6-bit immediate
+
 library IEEE;
 use IEEE.std_logic_1164.all;
 use IEEE.numeric_std.all;
@@ -29,8 +34,10 @@ architecture rtl of pipelined_cpu is
   signal if_id_instr : unsigned(15 downto 0);
   
   signal opcode      : unsigned(3 downto 0);
+  signal opcode_for_alu : unsigned(3 downto 0);  -- ADDED: Opcode or function for ALU control
   signal rs, rt, rd  : unsigned(2 downto 0);
-  signal imm_4bit    : unsigned(3 downto 0);
+  signal imm_6bit    : unsigned(5 downto 0);  -- FIXED: Was imm_4bit
+  signal funct       : unsigned(2 downto 0);  -- ADDED: Function field for R-type
   signal imm_extended: unsigned(15 downto 0);
   signal shamt       : unsigned(2 downto 0);
   signal jump_addr   : unsigned(11 downto 0);
@@ -79,10 +86,7 @@ architecture rtl of pipelined_cpu is
   
   signal stall, flush_if_id, flush_id_ex : std_logic;
   
-  -- ============================================================
-  -- FIXED COMPONENT DECLARATIONS - All ports explicitly declared
-  -- ============================================================
-  
+  -- Component declarations (unchanged)
   component register_file
     port(
       clk       : in  std_logic;
@@ -317,16 +321,25 @@ begin
       instr_out => if_id_instr
     );
   
+  -- ====================================================================
+  -- FIXED INSTRUCTION FIELD EXTRACTION
+  -- ====================================================================
   opcode <= if_id_instr(15 downto 12);
   rs <= if_id_instr(11 downto 9);
   rt <= if_id_instr(8 downto 6);
   rd <= if_id_instr(5 downto 3);
-  shamt <= if_id_instr(2 downto 0);
-  imm_4bit <= if_id_instr(3 downto 0);
+  funct <= if_id_instr(2 downto 0);    -- ADDED: Function field for R-type
+  shamt <= if_id_instr(2 downto 0);    -- Same as funct, used for shifts
+  imm_6bit <= if_id_instr(5 downto 0); -- FIXED: Was imm_4bit(3 downto 0)
   jump_addr <= if_id_instr(11 downto 0);
   
-  imm_extended <= x"FFF" & imm_4bit when imm_4bit(3) = '1' else
-                  x"000" & imm_4bit;
+  -- For ALU control: R-type instructions need function field, others need opcode
+  -- When opcode=0000 (R-type), pass zero-extended function field to ALU control
+  opcode_for_alu <= ("0" & funct) when opcode = "0000" else opcode;
+  
+  -- FIXED: Sign extension for 6-bit immediate
+  imm_extended <= x"FFF" & "11" & imm_6bit when imm_6bit(5) = '1' else
+                  x"000" & "00" & imm_6bit;
   
   branch_offset <= signed(imm_extended);
   branch_target <= unsigned(signed(if_id_pc) + shift_left(branch_offset, 1));
@@ -414,7 +427,7 @@ begin
       rs_in => rs,
       rt_in => rt,
       rd_in => rd,
-      opcode_in => opcode,
+      opcode_in => opcode_for_alu,  -- FIXED: Use function field for R-type
       shamt_in => shamt,
       reg_write_out => id_ex_reg_write,
       mem_to_reg_out => id_ex_mem_to_reg,

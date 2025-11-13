@@ -32,13 +32,13 @@ begin
     reg_write  <= '0';
     
     case opcode is
-      when "0000" =>
+      when "0000" =>  -- R-type
         reg_dst    <= '1';
         ALU_OP     <= "10";
         reg_write  <= '1';
         alu_src    <= '0';
         
-      when "0001" =>
+      when "0001" =>  -- LW
         reg_dst    <= '0';
         alu_src    <= '1';
         mem_to_reg <= '1';
@@ -46,46 +46,40 @@ begin
         mem_read   <= '1';
         ALU_OP     <= "00";
         
-      when "0010" =>
+      when "0010" =>  -- SW
         alu_src    <= '1';
         mem_write  <= '1';
         ALU_OP     <= "00";
         
-      when "0011" =>
+      when "0011" =>  -- ADDI
         reg_dst    <= '0';
         alu_src    <= '1';
         reg_write  <= '1';
         ALU_OP     <= "00";
         
-      when "0100" =>
+      when "0100" =>  -- BRANCH
         branch     <= '1';
-        alu_src    <= '1';
+        alu_src    <= '0';
         ALU_OP     <= "01";
-        reg_write  <= '0';
         
-      when "0101" =>
+      when "0101" =>  -- BGT
         branch     <= '1';
-        alu_src    <= '1';
+        alu_src    <= '0';
         ALU_OP     <= "01";
-        reg_write  <= '0';
         
-      when "0110" =>
+      when "0110" =>  -- BGE
         branch     <= '1';
-        alu_src    <= '1';
+        alu_src    <= '0';
         ALU_OP     <= "01";
-        reg_write  <= '0';
         
-      when "0111" =>
+      when "0111" =>  -- BEQ
         branch     <= '1';
-        alu_src    <= '1';
+        alu_src    <= '0';
         ALU_OP     <= "01";
-        reg_write  <= '0';
         
-      when "1111" =>
+      when "1000" =>  -- JUMP (FIXED: was 1111, now 1000)
         jump       <= '1';
         ALU_OP     <= "11";
-        reg_write  <= '0';
-        mem_write  <= '0';
         
       when others =>
         null;
