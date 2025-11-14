@@ -37,3 +37,53 @@ update_compile_order -fileset sources_1
 launch_simulation
 update_compile_order -fileset sources_1
 update_compile_order -fileset sources_1
+launch_simulation
+open_wave_config C:/Users/mackr/426_Finial/Lab_3_426/top_level_tb_behav.wcfg
+source tb_individual_instructions.tcl
+save_wave_config {C:/Users/mackr/426_Finial/Lab_3_426/top_level_tb_behav.wcfg}
+relaunch_sim
+relaunch_sim
+close_sim
+launch_simulation
+open_wave_config C:/Users/mackr/426_Finial/Lab_3_426/top_level_tb_behav.wcfg
+source tb_individual_instructions.tcl
+close_sim
+launch_simulation
+launch_simulation
+open_wave_config C:/Users/mackr/426_Finial/Lab_3_426/top_level_tb_behav.wcfg
+source tb_individual_instructions.tcl
+relaunch_sim
+close_sim
+launch_simulation
+open_wave_config C:/Users/mackr/426_Finial/Lab_3_426/top_level_tb_behav.wcfg
+source tb_individual_instructions.tcl
+relaunch_sim
+update_compile_order -fileset sources_1
+update_compile_order -fileset sources_1
+close_sim
+launch_simulation
+open_wave_config C:/Users/mackr/426_Finial/Lab_3_426/top_level_tb_behav.wcfg
+source tb_individual_instructions.tcl
+relaunch_sim
+close_sim
+launch_simulation
+open_wave_config C:/Users/mackr/426_Finial/Lab_3_426/top_level_tb_behav.wcfg
+source tb_individual_instructions.tcl
+relaunch_sim
+save_wave_config {C:/Users/mackr/426_Finial/Lab_3_426/top_level_tb_behav.wcfg}
+close_sim
+launch_simulation
+open_wave_config C:/Users/mackr/426_Finial/Lab_3_426/top_level_tb_behav.wcfg
+source tb_individual_instructions.tcl
+save_wave_config {C:/Users/mackr/426_Finial/Lab_3_426/top_level_tb_behav.wcfg}
+relaunch_sim
+save_wave_config {C:/Users/mackr/426_Finial/Lab_3_426/top_level_tb_behav.wcfg}
+close_sim
+launch_simulation
+open_wave_config C:/Users/mackr/426_Finial/Lab_3_426/top_level_tb_behav.wcfg
+source tb_individual_instructions.tcl
+close_sim
+launch_simulation
+open_wave_config C:/Users/mackr/426_Finial/Lab_3_426/top_level_tb_behav.wcfg
+source tb_individual_instructions.tcl
+relaunch_sim

@@ -2,20 +2,34 @@ library IEEE;
 use IEEE.std_logic_1164.all;
 use IEEE.numeric_std.all;
 
--- CRITICAL FIX: Function field encoding must match instruction_memory.vhd
--- R-type instructions use 3-bit function field [2:0]:
---   SLL: 010 (2)
---   SRL: 101 (5) 
---   XOR: 111 (7)
---   OR:  011 (3)
---   AND: 010 (but different from SLL - needs checking)
--- The opcode input will be zero-extended function field for R-type
+-- ALU_OP encoding:
+--   "00" ? ADD (lw, sw, addi)
+--   "01" ? SUB (branch compares)
+--   "10" ? R-type (use funct)
+
+-- Function field (funct) encoding (from instruction[2:0]):
+--   ADD = 000
+--   SUB = 001
+--   SLL = 010
+--   OR  = 011
+--   SRL = 101
+--   SRA = 110
+--   XOR = 111
+
+-- ALUctr output encoding (must match alu.vhd):
+--   0000 = ADD
+--   0001 = SUB
+--   0011 = OR
+--   0100 = XOR
+--   0101 = SLL
+--   0110 = SRL
+--   0111 = SRA
 
 entity alu_control is
   port(
-    opcode    : in  unsigned(3 downto 0);  -- Main opcode OR function field (for R-type)
-    ALU_OP    : in  unsigned(1 downto 0);  -- from main control
-    ALUctr    : out unsigned(3 downto 0)   -- To ALU
+    opcode    : in  unsigned(3 downto 0);  -- Contains funct field for R-type
+    ALU_OP    : in  unsigned(1 downto 0);  -- From main control
+    ALUctr    : out unsigned(3 downto 0)
   );
 end entity;
 
@@ -23,40 +37,53 @@ architecture rtl of alu_control is
 begin
   process(opcode, ALU_OP)
   begin
-    ALUctr <= "0000";  -- Default to ADD
-    
     case ALU_OP is
-      when "00" =>  -- LW/SW/ADDI - always ADD for address calculation
+
+      ------------------------------------------------------------------
+      -- 00 = ADD (lw, sw, addi)
+      ------------------------------------------------------------------
+      when "00" =>
         ALUctr <= "0000";
-        
-      when "01" =>  -- Branch - SUB for comparison
+
+      ------------------------------------------------------------------
+      -- 01 = SUB (branches)
+      ------------------------------------------------------------------
+      when "01" =>
         ALUctr <= "0001";
-        
-      when "10" =>  -- R-type - check function field
-        -- For R-type, opcode input should contain the function field
-        -- Function field is bits [2:0] of instruction
-        case opcode is
-          -- Match the actual function field encoding from instructions:
-          when "0000" =>  -- ADD - func = 000
+
+      ------------------------------------------------------------------
+      -- 10 = R-TYPE (decode funct field)
+      ------------------------------------------------------------------
+      when "10" =>
+        case opcode(2 downto 0) is      -- funct field
+          when "000" =>  -- ADD
             ALUctr <= "0000";
-          when "0001" =>  -- SUB - func = 001
+
+          when "001" =>  -- SUB
             ALUctr <= "0001";
-          when "0010" =>  -- SLL - func = 010
+
+          when "010" =>  -- SLL
             ALUctr <= "0101";
-          when "0011" =>  -- OR - func = 011
+
+          when "011" =>  -- OR
             ALUctr <= "0011";
-          when "0100" =>  -- Unused
-            ALUctr <= "0000";
-          when "0101" =>  -- SRL - func = 101
+
+          when "101" =>  -- SRL
             ALUctr <= "0110";
-          when "0110" =>  -- SRA - func = 110
+
+          when "110" =>  -- SRA
             ALUctr <= "0111";
-          when "0111" =>  -- XOR - func = 111
+
+          when "111" =>  -- XOR
             ALUctr <= "0100";
+
           when others =>
-            ALUctr <= "0000";
+            ALUctr <= "0000";  -- default ADD
         end case;
-        
+
+      ------------------------------------------------------------------
+      -- default
+      ------------------------------------------------------------------
       when others =>
         ALUctr <= "0000";
     end case;

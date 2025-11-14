@@ -32,72 +32,24 @@ architecture rtl of instruction_memory is
   
   
   signal mem : mem_array := (
-  -- 0x0000: addi $r2, $r2, -1
-  -- 0011 010 010 111111
-  0  => x"34BF",
-
-  -- 0x0002: lw $r4, 0($r1)
-  -- [0001][001][100][000000]  => 0001 001 100 000000
-  -- Correct hex: 0x1300
-  1  => x"1300",
-
-  -- 0x0004: lw $r6, 4($r0)
-  -- [0001][000][110][000100]  => 0001 000 110 000100
-  -- Correct hex: 0x1184
-  2  => x"1184",
-
-  -- 0x0006: bgt $r4, $r6, +5
-  -- [0101][100][110][000101]  => 0101 100 110 000101
-  -- Correct hex: 0x5985
-  3  => x"5985",
-
-  -- 0x0008: sll $r5, $r5, 2
-  -- [0000][101][000][101][010] => 0000 101 000 101 010
-  -- Correct hex: 0x0A2A
-  4  => x"0A2A",
-
-  -- 0x000A: xor $r3, $r3, $r5
-  -- [0000][011][101][011][111] => 0000 011 101 011 111
-  -- Correct hex: 0x075F
-  5  => x"075F",
-
-  -- 0x000C: lw $r7, 5($r0)
-  -- This one was already correct
-  6  => x"11C5",
-
-  -- 0x000E: sw $r7, 0($r1)
-  -- [0010][001][111][000000] => 0010 001 111 000000
-  -- Correct hex: 0x23C0  (base = $r1, data = $r7)
-  7  => x"23C0",
-
-  -- 0x0010: j 0x001A
-  8  => x"801A",
-
-  -- 0x0012: srl $r0, $r0, 3
-  9  => x"0003",
-
-  -- 0x0014: or $r3, $r3, $r0
-  10 => x"061B",
-
-  -- 0x0016: lw $r7, 6($r0)
-  11 => x"11C6",
-
-  -- 0x0018: sw $r7, 0($r1)
-  -- Same as at 0x000E
-  12 => x"23C0",
-
-  -- 0x001A: addi $r1, $r1, 4
-  -- To get: mem[16]=val, mem[17]=0, mem[18]=val, mem[19]=0, ...
-  -- R1 is a BYTE address, so +4 bytes = skip one word each time.
-  -- [0011][001][001][000100] => 0011 001 001 000100
-  -- Correct hex: 0x3244
-  13 => x"3244",
-
-  -- 0x001C: bgt $r2, $r0, -15  (back to WHILE)
-  14 => x"5431",
-
+  0  => x"34BF", -- addi $r2, $r2, -1
+  1  => x"1300", -- lw $r4, 0($r1)
+  2  => x"1188", -- lw $r6, 8($r0)   -- FIXED
+  3  => x"5985", -- bgt $r4, $r6, +5
+  4  => x"0A2A", -- sll $r5, $r5, 2
+  5  => x"075F", -- xor $r3, $r3, $r5
+  6  => x"11CA", -- lw $r7, 10($r0)  -- FIXED
+  7  => x"23C0", -- sw $r7, 0($r1)
+  8  => x"801A", -- j 0x001A
+  9  => x"0003", -- srl $r0, $r0, 3
+  10 => x"061B", -- or $r3, $r3, $r0
+  11 => x"11CC", -- lw $r7, 12($r0)  -- FIXED
+  12 => x"23C0", -- sw $r7, 0($r1)
+  13 => x"3244", -- addi $r1, $r1, 4
+  14 => x"5431", -- bgt $r2, $r0, -15
   others => (others => '0')
 );
+
 
   
   
@@ -201,8 +153,6 @@ architecture rtl of instruction_memory is
 --  );
   
 begin
-  -- Read instruction (combinational)
-  instruction <= mem(to_integer(address(7 downto 0))) 
-                 when to_integer(address) < 256 
-                 else (others => '0');
+  -- Read instruction (combinational, word addressed: PC steps by 2 bytes)
+  instruction <= mem(to_integer(address(7 downto 1)));
 end architecture;

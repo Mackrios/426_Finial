@@ -24,28 +24,25 @@ architecture rtl of data_memory is
   -- mem[26-255]  = 0x0000 (unused)
   
   signal mem : mem_array := (
-    -- Constants at addresses 4, 5, 6
-    -- These are loaded by: lw $r6, 4($r0)  etc.
-    4  => x"0100",  -- Comparison threshold (for BGT instruction)
-    5  => x"00FF",  -- ELSE branch value (00FF for left shift + XOR)
-    6  => x"FF00",  -- THEN branch value (FF00 for right shift + OR)
-    
-    -- Results storage area (word addresses 16-25)
-    -- These will be written to by SW instructions
-    -- Starting address R1 = 0x0020 (byte) ? word index 16
-    16 => x"0000",  -- Reserved for program results
-    17 => x"0000",
-    18 => x"0000",
-    19 => x"0000",
-    20 => x"0000",
-    21 => x"0000",
-    22 => x"0000",
-    23 => x"0000",
-    24 => x"0000",
-    25 => x"0000",
-    
+    -- 0x0000 - 0x0006: unused / zero
+    0  => x"0000",
+    1  => x"0000",
+    2  => x"0000",
+    3  => x"0000",
+
+    -- Constants used by the program (accessed via LW with byte offsets):
+    -- byte offset 8  -> word index 4
+    -- byte offset 10 -> word index 5
+    -- byte offset 12 -> word index 6
+    4  => x"0100",   -- comparison threshold
+    5  => x"00FF",   -- "else" store value
+    6  => x"FF00",   -- "then" store value
+
+    -- 0x000E..0x001E etc. (everything else default to 0)
     others => (others => '0')
   );
+
+
   
 begin
   -- Synchronous write

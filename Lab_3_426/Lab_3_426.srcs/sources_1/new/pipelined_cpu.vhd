@@ -19,7 +19,12 @@ entity pipelined_cpu is
     reg4   : out unsigned(15 downto 0);
     reg5   : out unsigned(15 downto 0);
     reg6   : out unsigned(15 downto 0);
-    reg7   : out unsigned(15 downto 0)
+    reg7   : out unsigned(15 downto 0);
+    -- DEBUG PORTS (simulation only)
+    dbg_if_id_instr      : out unsigned(15 downto 0);
+    dbg_id_ex_opcode     : out unsigned(3 downto 0);
+    dbg_ex_mem_alu_res   : out unsigned(15 downto 0);
+    dbg_mem_wb_write_reg : out unsigned(2 downto 0)
   );
 end entity;
 
@@ -263,26 +268,29 @@ architecture rtl of pipelined_cpu is
     );
   end component;
   
-  component hazard_unit
-    port(
-      rs_id          : in  unsigned(2 downto 0);
-      rt_id          : in  unsigned(2 downto 0);
-      write_reg_ex   : in  unsigned(2 downto 0);
-      write_reg_mem  : in  unsigned(2 downto 0);
-      write_reg_wb   : in  unsigned(2 downto 0);
-      mem_read_ex    : in  std_logic;
-      reg_write_ex   : in  std_logic;
-      reg_write_mem  : in  std_logic;
-      reg_write_wb   : in  std_logic;
-      branch_taken   : in  std_logic;
-      jump_taken     : in  std_logic;
-      stall          : out std_logic;
-      flush_if_id    : out std_logic;
-      flush_id_ex    : out std_logic;
-      forward_a      : out unsigned(1 downto 0);
-      forward_b      : out unsigned(1 downto 0)
-    );
-  end component;
+component hazard_unit
+  port(
+    rs_id          : in  unsigned(2 downto 0);
+    rt_id          : in  unsigned(2 downto 0);
+    rs_ex          : in  unsigned(2 downto 0);
+    rt_ex          : in  unsigned(2 downto 0);
+    write_reg_ex   : in  unsigned(2 downto 0);
+    write_reg_mem  : in  unsigned(2 downto 0);
+    write_reg_wb   : in  unsigned(2 downto 0);
+    mem_read_ex    : in  std_logic;
+    reg_write_ex   : in  std_logic;
+    reg_write_mem  : in  std_logic;
+    reg_write_wb   : in  std_logic;
+    branch_taken   : in  std_logic;
+    jump_taken     : in  std_logic;
+    stall          : out std_logic;
+    flush_if_id    : out std_logic;
+    flush_id_ex    : out std_logic;
+    forward_a      : out unsigned(1 downto 0);
+    forward_b      : out unsigned(1 downto 0)
+  );
+end component;
+
   
 begin
   
@@ -321,25 +329,29 @@ begin
       instr_out => if_id_instr
     );
   
-  -- ====================================================================
-  -- FIXED INSTRUCTION FIELD EXTRACTION
-  -- ====================================================================
-  opcode <= if_id_instr(15 downto 12);
-  rs <= if_id_instr(11 downto 9);
-  rt <= if_id_instr(8 downto 6);
-  rd <= if_id_instr(5 downto 3);
-  funct <= if_id_instr(2 downto 0);    -- ADDED: Function field for R-type
-  shamt <= if_id_instr(2 downto 0);    -- Same as funct, used for shifts
-  imm_6bit <= if_id_instr(5 downto 0); -- FIXED: Was imm_4bit(3 downto 0)
-  jump_addr <= if_id_instr(11 downto 0);
-  
-  -- For ALU control: R-type instructions need function field, others need opcode
-  -- When opcode=0000 (R-type), pass zero-extended function field to ALU control
-  opcode_for_alu <= ("0" & funct) when opcode = "0000" else opcode;
+-- ====================================================================
+-- FIXED INSTRUCTION FIELD EXTRACTION
+-- ====================================================================
+opcode     <= if_id_instr(15 downto 12);
+rs         <= if_id_instr(11 downto 9);
+rt         <= if_id_instr(8 downto 6);
+rd         <= if_id_instr(5 downto 3);
+funct      <= if_id_instr(2 downto 0);    -- Function field for R-type
+shamt      <= if_id_instr(2 downto 0);    -- Same as funct, used for shifts
+imm_6bit   <= if_id_instr(5 downto 0);    -- 6-bit immediate
+jump_addr  <= if_id_instr(11 downto 0);
+
+-- For ALU control: R-type instructions need function field, others need opcode
+-- When opcode = "0000" (R-type), use zero-extended funct[2:0]
+with opcode select
+  opcode_for_alu <=
+    unsigned("0" & std_logic_vector(funct)) when "0000",  -- R-type
+    opcode                                   when others;
+
   
   -- FIXED: Sign extension for 6-bit immediate
-  imm_extended <= x"FFF" & "11" & imm_6bit when imm_6bit(5) = '1' else
-                  x"000" & "00" & imm_6bit;
+imm_extended <= (15 downto 6 => imm_6bit(5)) & imm_6bit;
+
   
   branch_offset <= signed(imm_extended);
   branch_target <= unsigned(signed(if_id_pc) + shift_left(branch_offset, 1));
@@ -427,8 +439,10 @@ begin
       rs_in => rs,
       rt_in => rt,
       rd_in => rd,
-      opcode_in => opcode_for_alu,  -- FIXED: Use function field for R-type
+      opcode_in => opcode_for_alu,
       shamt_in => shamt,
+
+
       reg_write_out => id_ex_reg_write,
       mem_to_reg_out => id_ex_mem_to_reg,
       mem_write_out => id_ex_mem_write,
@@ -493,7 +507,7 @@ begin
       mem_read_in => id_ex_mem_read,
       branch_in => id_ex_branch,
       alu_result_in => alu_result,
-      write_data_in => forwarded_b,
+      write_data_in => id_ex_rd2,
       write_reg_in => write_reg_ex,
       zero_in => alu_zero,
       branch_addr_in => branch_target,
@@ -538,26 +552,38 @@ begin
   write_back_data <= mem_wb_mem_data when mem_wb_mem_to_reg = '1' 
                      else mem_wb_alu_result;
   
-  HAZARD: hazard_unit 
-    port map(
-      rs_id => rs,
-      rt_id => rt,
-      write_reg_ex => write_reg_ex,
-      mem_read_ex => id_ex_mem_read,
-      reg_write_ex => id_ex_reg_write,
-      write_reg_mem => ex_mem_write_reg,
-      reg_write_mem => ex_mem_reg_write,
-      write_reg_wb => mem_wb_write_reg,
-      reg_write_wb => mem_wb_reg_write,
-      branch_taken => branch_taken,
-      jump_taken => jump_taken,
-      stall => stall,
-      flush_if_id => flush_if_id,
-      flush_id_ex => flush_id_ex,
-      forward_a => forward_a,
-      forward_b => forward_b
-    );
+HAZARD: hazard_unit 
+  port map(
+    -- ID stage regs (for load-use stall)
+    rs_id        => rs,
+    rt_id        => rt,
+    -- EX stage regs (for forwarding)
+    rs_ex        => id_ex_rs,
+    rt_ex        => id_ex_rt,
+    -- dest registers / control
+    write_reg_ex => write_reg_ex,
+    mem_read_ex  => id_ex_mem_read,
+    reg_write_ex => id_ex_reg_write,
+    write_reg_mem=> ex_mem_write_reg,
+    reg_write_mem=> ex_mem_reg_write,
+    write_reg_wb => mem_wb_write_reg,
+    reg_write_wb => mem_wb_reg_write,
+    branch_taken => branch_taken,
+    jump_taken   => jump_taken,
+    stall        => stall,
+    flush_if_id  => flush_if_id,
+    flush_id_ex  => flush_id_ex,
+    forward_a    => forward_a,
+    forward_b    => forward_b
+  );
+
   
   pc_out <= pc;
-  
+    -- DEBUG PORT ASSIGNMENTS (for testbench visibility only)
+  dbg_if_id_instr      <= if_id_instr;
+  dbg_id_ex_opcode     <= id_ex_opcode;
+  dbg_ex_mem_alu_res   <= ex_mem_alu_result;
+  dbg_mem_wb_write_reg <= mem_wb_write_reg;
+
+
 end architecture rtl;

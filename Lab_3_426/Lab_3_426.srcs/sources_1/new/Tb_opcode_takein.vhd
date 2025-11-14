@@ -23,7 +23,13 @@ architecture testbench of tb_individual_instructions is
     signal pc : unsigned(15 downto 0);
     signal reg0, reg1, reg2, reg3 : unsigned(15 downto 0);
     signal reg4, reg5, reg6, reg7 : unsigned(15 downto 0);
-    
+
+    -- DEBUG SIGNALS FROM CPU
+    signal dbg_if_id_instr      : unsigned(15 downto 0);
+    signal dbg_id_ex_opcode     : unsigned(3 downto 0);
+    signal dbg_ex_mem_alu_res   : unsigned(15 downto 0);
+    signal dbg_mem_wb_write_reg : unsigned(2 downto 0);
+
     component pipelined_cpu
         port( 
             clk    : in  std_logic;
@@ -36,7 +42,13 @@ architecture testbench of tb_individual_instructions is
             reg4   : out unsigned(15 downto 0);
             reg5   : out unsigned(15 downto 0);
             reg6   : out unsigned(15 downto 0);
-            reg7   : out unsigned(15 downto 0)
+            reg7   : out unsigned(15 downto 0);
+
+            -- DEBUG PORTS
+            dbg_if_id_instr      : out unsigned(15 downto 0);
+            dbg_id_ex_opcode     : out unsigned(3 downto 0);
+            dbg_ex_mem_alu_res   : out unsigned(15 downto 0);
+            dbg_mem_wb_write_reg : out unsigned(2 downto 0)
         );
     end component;
     
@@ -67,17 +79,19 @@ architecture testbench of tb_individual_instructions is
     
     procedure check_register(
         constant reg_name : string;
-        signal reg_value : unsigned(15 downto 0);
+        signal reg_value  : unsigned(15 downto 0);
         constant expected : unsigned(15 downto 0);
-        signal passed : inout integer;
-        signal failed : inout integer
+        signal passed     : inout integer;
+        signal failed     : inout integer
     ) is
     begin
         if reg_value = expected then
-            report "  PASS: " & reg_name & " = 0x" & to_hex_string(reg_value) & " (expected 0x" & to_hex_string(expected) & ")" severity note;
+            report "  PASS: " & reg_name & " = 0x" & to_hex_string(reg_value) &
+                   " (expected 0x" & to_hex_string(expected) & ")" severity note;
             passed <= passed + 1;
         else
-            report "  FAIL: " & reg_name & " = 0x" & to_hex_string(reg_value) & " (expected 0x" & to_hex_string(expected) & ")" severity error;
+            report "  FAIL: " & reg_name & " = 0x" & to_hex_string(reg_value) &
+                   " (expected 0x" & to_hex_string(expected) & ")" severity error;
             failed <= failed + 1;
         end if;
     end procedure;
@@ -85,19 +99,25 @@ architecture testbench of tb_individual_instructions is
 begin
     
     -- DUT Instantiation
-    DUT: pipelined_cpu port map(
-        clk    => clk,
-        rst    => rst,
-        pc_out => pc,
-        reg0   => reg0,
-        reg1   => reg1,
-        reg2   => reg2,
-        reg3   => reg3,
-        reg4   => reg4,
-        reg5   => reg5,
-        reg6   => reg6,
-        reg7   => reg7
-    );
+    DUT: pipelined_cpu
+        port map(
+            clk    => clk,
+            rst    => rst,
+            pc_out => pc,
+            reg0   => reg0,
+            reg1   => reg1,
+            reg2   => reg2,
+            reg3   => reg3,
+            reg4   => reg4,
+            reg5   => reg5,
+            reg6   => reg6,
+            reg7   => reg7,
+            -- DEBUG PORTS
+            dbg_if_id_instr      => dbg_if_id_instr,
+            dbg_id_ex_opcode     => dbg_id_ex_opcode,
+            dbg_ex_mem_alu_res   => dbg_ex_mem_alu_res,
+            dbg_mem_wb_write_reg => dbg_mem_wb_write_reg
+        );
     
     -- Clock generation
     clk_process: process
@@ -109,6 +129,22 @@ begin
             wait for CLK_PERIOD/2;
         end loop;
         wait;
+    end process;
+
+    -- Pipeline monitor: prints internal debug signals every cycle
+    monitor_process : process(clk)
+    begin
+        if rising_edge(clk) then
+            report "----- CYCLE " &
+                   integer'image(integer(now / CLK_PERIOD)) & " -----" severity note;
+            report "PC              = 0x" & to_hex_string(pc) severity note;
+            report "IF/ID instr     = 0x" & to_hex_string(dbg_if_id_instr) severity note;
+            report "ID/EX opcode    = 0x" &
+                   to_hex_string(resize(dbg_id_ex_opcode, 16)) severity note;
+            report "EX/MEM ALU res  = 0x" & to_hex_string(dbg_ex_mem_alu_res) severity note;
+            report "MEM/WB writeReg = " &
+                   integer'image(to_integer(dbg_mem_wb_write_reg)) severity note;
+        end if;
     end process;
     
     -- Main test process
@@ -146,8 +182,9 @@ begin
         
         -- ====================================================================
         -- TEST 2: ADDI Instruction
-        -- Program: addi $r2, $r2, -1
-        -- Opcode: 0011 010 010 111111 = 0x34BF
+-- addi $r2, $r2, -1
+-- [0011][010][010][111111] = 0x34BF
+
         -- Expected: R2 = 0x000F - 1 = 0x000E
         -- ====================================================================
         report "----------------------------------------";
@@ -166,10 +203,11 @@ begin
         
         -- ====================================================================
         -- TEST 3: LW Instruction
-        -- Program: lw $r4, 0($r1)
-        -- Opcode: 0001 001 100 000000 = 0x1300
-        -- R1 = 0x0020 (byte address) = word index 16
-        -- Memory[16] should be loaded into R4
+-- lw $r4, 0($r1)
+-- [0001][001][100][000000] = 0x1300
+-- R1 = 0x0020 (byte address) -> word index 16
+-- mem[16] is 0x0000 initially
+
         -- ====================================================================
         report "----------------------------------------";
         report "TEST 3: LW Instruction";
@@ -187,19 +225,18 @@ begin
         check_register("R4 after LW", reg4, x"0000", test_passed, test_failed);
         report "";
         
-        -- ====================================================================
-        -- TEST 4: LW with offset
-        -- Program: lw $r6, 4($r0)
-        -- Opcode: 0001 000 110 000100 = 0x1184
-        -- R0 = 0x0000, offset = 4 bytes = word index 2
-        -- Memory[4] = 0x0100 (comparison threshold)
-        -- ====================================================================
+-- TEST 4: LW with offset
+-- lw $r6, 8($r0)
+-- [0001][000][110][001000] = 0x1188
+-- R0 = 0x0000, byte offset 8 -> word index 4
+-- mem[4] = 0x0100
+
         report "----------------------------------------";
         report "TEST 4: LW with Offset";
         report "----------------------------------------";
-        report "Instruction: lw $r6, 4($r0) (0x1184)";
+        report "Instruction: lw $r6, 8($r0) (0x1188)";
         report "R0 (base): 0x" & to_hex_string(reg0);
-        report "Offset: 4 bytes (word index 4)";
+        report "Offset: 8 bytes (word index 4)";
         report "Initial R6: 0x" & to_hex_string(reg6);
         
         wait_cycles(10);
@@ -254,15 +291,17 @@ begin
         
         -- ====================================================================
         -- TEST 7: LW - Load constant for SW test
-        -- Program: lw $r7, 5($r0)
-        -- Opcode: 0001 000 111 000101 = 0x11C5
-        -- Memory[5] = 0x00FF
+-- lw $r7, 10($r0)
+-- [0001][000][111][001010] = 0x11CA
+-- byte offset 10 -> word index 5 (0x00FF)
+
         -- ====================================================================
         report "----------------------------------------";
         report "TEST 7: LW - Load Constant";
         report "----------------------------------------";
-        report "Instruction: lw $r7, 5($r0) (0x11C5)";
+        report "Instruction: lw $r7, 10($r0) (0x11CA)";
         report "Expected: Load 0x00FF from memory[5]";
+
         
         wait_cycles(10);
         
@@ -332,9 +371,10 @@ begin
         
         -- ====================================================================
         -- TEST 11: ADDI - Increment pointer
-        -- Program: addi $r1, $r1, 4
-        -- Opcode: 0011 001 001 000100 = 0x3244
-        -- R1 = R1 + 4
+-- lw $r7, 12($r0)
+-- [0001][000][111][001100] = 0x11CC
+-- byte offset 12 -> word index 6 (0xFF00)
+
         -- ====================================================================
         report "----------------------------------------";
         report "TEST 11: ADDI - Pointer Increment";

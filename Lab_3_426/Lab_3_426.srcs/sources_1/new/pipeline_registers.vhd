@@ -23,19 +23,23 @@ begin
   process(clk, rst)
   begin
     if rst = '1' then
-      pc_out <= (others => '0');
+      pc_out    <= (others => '0');
       instr_out <= (others => '0');
+
     elsif rising_edge(clk) then
+
       if flush = '1' then
-        pc_out <= (others => '0');
+        -- Insert bubble; DO NOT clear PC
         instr_out <= (others => '0');
+
       elsif stall = '0' then
-        pc_out <= pc_in;
+        pc_out    <= pc_in;
         instr_out <= instr_in;
       end if;
     end if;
   end process;
 end architecture;
+
 
 -- ============================================================================
 -- ID/EX Pipeline Register
@@ -112,9 +116,11 @@ begin
       rd_out <= (others => '0');
       opcode_out <= (others => '0');
       shamt_out <= (others => '0');
+
     elsif rising_edge(clk) then
+
       if flush = '1' then
-        -- Insert NOP bubble
+        -- COMPLETE NOP (bubble)
         reg_write_out <= '0';
         mem_to_reg_out <= '0';
         mem_write_out <= '0';
@@ -123,7 +129,18 @@ begin
         alu_op_out <= (others => '0');
         alu_src_out <= '0';
         reg_dst_out <= '0';
+        pc_out <= (others => '0');
+        read_data1_out <= (others => '0');
+        read_data2_out <= (others => '0');
+        imm_out <= (others => '0');
+        rs_out <= (others => '0');
+        rt_out <= (others => '0');
+        rd_out <= (others => '0');
+        opcode_out <= (others => '0');
+        shamt_out <= (others => '0');
+
       elsif stall = '0' then
+        -- normal update
         reg_write_out <= reg_write_in;
         mem_to_reg_out <= mem_to_reg_in;
         mem_write_out <= mem_write_in;
@@ -142,9 +159,11 @@ begin
         opcode_out <= opcode_in;
         shamt_out <= shamt_in;
       end if;
+
     end if;
   end process;
 end architecture;
+
 
 -- ============================================================================
 -- EX/MEM Pipeline Register
