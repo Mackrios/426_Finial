@@ -35,7 +35,7 @@ architecture rtl of pipelined_cpu is
   signal pc_plus_2   : unsigned(15 downto 0);
   signal instruction : unsigned(15 downto 0);
   
-  signal if_id_pc    : unsigned(15 downto 0);
+  signal if_id_pc    : unsigned(15 downto 0 );
   signal if_id_instr : unsigned(15 downto 0);
   
   signal opcode      : unsigned(3 downto 0);
@@ -348,7 +348,6 @@ with opcode select
     unsigned("0" & std_logic_vector(funct)) when "0000",  -- R-type
     opcode                                   when others;
 
-  
   -- FIXED: Sign extension for 6-bit immediate
 imm_extended <= (15 downto 6 => imm_6bit(5)) & imm_6bit;
 

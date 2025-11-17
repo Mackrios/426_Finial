@@ -104,7 +104,7 @@ begin
       mem_write_out <= '0';
       mem_read_out <= '0';
       branch_out <= '0';
-      alu_op_out <= (others => '0');
+      alu_op_out <= "00";
       alu_src_out <= '0';
       reg_dst_out <= '0';
       pc_out <= (others => '0');
@@ -114,8 +114,8 @@ begin
       rs_out <= (others => '0');
       rt_out <= (others => '0');
       rd_out <= (others => '0');
-      opcode_out <= (others => '0');
-      shamt_out <= (others => '0');
+      opcode_out <= "0000";
+      shamt_out <= "000";
 
     elsif rising_edge(clk) then
 

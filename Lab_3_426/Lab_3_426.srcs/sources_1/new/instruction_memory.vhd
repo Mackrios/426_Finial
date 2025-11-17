@@ -12,147 +12,153 @@ end entity;
 architecture rtl of instruction_memory is
   type mem_array is array(0 to 255) of unsigned(15 downto 0);
   
-  -- ================================================================
-  -- PSEUDOCODE PROGRAM - CORRECTLY ENCODED
-  -- ================================================================
-  -- Register mapping:
-  -- $r0 = $v0 (0x0040), $r1 = $a0 (0x1010), $r2 = $a1 (0x000F)
-  -- $r3 = $v1 (0x00F0), $r4 = $t0 (0x0000), $r5 = $v2 (0x0010)
-  -- $r6 = $v3 (0x0005), $r7 = temp
+  -- ===========================================================
+  -- CORRECTED PROGRAM MATCHING ASSEMBLY CODE
+  -- ===========================================================
+  -- Register assignment:
+  -- r0 = v0    (0x0040)
+  -- r1 = v1    (0x1010)
+  -- r2 = v2    (0x000F)
+  -- r3 = v3    (0x00F0)
+  -- r4 = t0    (0x0000)
+  -- r5 = a0    (0x0010) - pointer to data array
+  -- r6 = a1    (0x0005) - loop counter
+  -- r7 = temp  (0x0000)
   --
-  -- Instruction Formats:
+  -- Memory layout:
+  -- mem[4] @ byte_addr 8  = 0x0100 (comparison constant)
+  -- mem[5] @ byte_addr 10 = 0x00FF (ELSE store value)
+  -- mem[6] @ byte_addr 12 = 0xFF00 (THEN store value)
+  -- mem[8-25] = data array (accessed via a0 starting at 0x0010)
+  --
+  -- Instruction formats:
   -- R-Format: [Opcode 4][Rs 3][Rt 3][Rd 3][Func 3]
   -- I-Format: [Opcode 4][Rs 3][Rt 3][Immediate 6]
   -- J-Format: [Opcode 4][Address 12]
   --
-  -- From Control Table:
+  -- Opcodes:
   -- R-type: 0000, LW: 0001, SW: 0010, ADDI: 0011
-  -- Branch: 0100, BGT: 0101, BGE: 0110, BEQ: 0111, Jump: 1000
-  -- ================================================================
-  
+  -- BGT: 0101, JUMP: 1000
+  -- ===========================================================
   
   signal mem : mem_array := (
-  0  => x"34BF", -- addi $r2, $r2, -1
-  1  => x"1300", -- lw $r4, 0($r1)
-  2  => x"1188", -- lw $r6, 8($r0)   -- FIXED
-  3  => x"5985", -- bgt $r4, $r6, +5
-  4  => x"0A2A", -- sll $r5, $r5, 2
-  5  => x"075F", -- xor $r3, $r3, $r5
-  6  => x"11CA", -- lw $r7, 10($r0)  -- FIXED
-  7  => x"23C0", -- sw $r7, 0($r1)
-  8  => x"801A", -- j 0x001A
-  9  => x"0003", -- srl $r0, $r0, 3
-  10 => x"061B", -- or $r3, $r3, $r0
-  11 => x"11CC", -- lw $r7, 12($r0)  -- FIXED
-  12 => x"23C0", -- sw $r7, 0($r1)
-  13 => x"3244", -- addi $r1, $r1, 4
-  14 => x"5431", -- bgt $r2, $r0, -15
-  others => (others => '0')
-);
-
-
-  
-  
---  signal mem : mem_array := (
---    -- ============================================================
---    -- WHILE LOOP START (Address 0x0000)
---    -- ============================================================
+    -- ============================================================
+    -- WHILE LOOP START (Address 0x00)
+    -- ============================================================
     
---    -- 0x0000: addi $r2, $r2, -1  ($a1 = $a1 - 1, decrement counter)
---    -- I-Format: [0011][010][010][111111] = 0011 010 010 111111
---    -- Opcode=0011 (ADDI), Rs=$r2, Rt=$r2, Imm=-1 (111111 in 6-bit 2's complement)
---    0  => x"34BF",  -- 0011 0100 1011 1111
+    -- 0x00: addi $r6, $r6, -1  ($a1 = $a1 - 1, decrement counter)
+    -- I-Format: [0011][110][110][111111]
+    0  => x"36BF",
     
---    -- 0x0002: lw $r4, 0($r1)  ($t0 = Mem[$a0])
---    -- I-Format: [0001][001][100][000000] = 0001 001 100 000000
---    -- Opcode=0001 (LW), Rs=$r1 (base), Rt=$r4 (dest), Offset=0
---    1  => x"1900",  -- 0001 1001 0000 0000
+    -- 0x02: lw $r4, 0($r5)  ($t0 = Mem[$a0], load from data array)
+    -- I-Format: [0001][101][100][000000]
+    1  => x"1A80",
     
---    -- 0x0004: lw $r6, 4($r0)  (Load comparison value 0x0100)
---    -- Note: Memory address 8 means offset 4 (byte address / 2 = word offset)
---    -- I-Format: [0001][000][110][000100] = 0001 000 110 000100
---    -- Opcode=0001 (LW), Rs=$r0 (base), Rt=$r6 (dest), Offset=4
---    2  => x"10C4",  -- 0001 0000 1100 0100
+    -- 0x04: sub $r7, $r7, $r7  ($r7 = 0, create zero register)
+    -- R-Format: [0000][111][111][111][001]
+    -- Rs=$r7, Rt=$r7, Rd=$r7, Func=001 (SUB)
+    2  => x"0FE1",
     
---    -- 0x0006: bgt $r4, $r6, +5  (if $t0 > 0x0100 goto THEN)
---    -- I-Format: [0101][100][110][000101] = 0101 100 110 000101
---    -- Opcode=0101 (BGT), Rs=$r4, Rt=$r6, Offset=+5 (to address 0x0012)
---    3  => x"5CC5",  -- 0101 1100 1100 0101
+    -- 0x06: lw $r7, 8($r7)  (Load 0x0100 from mem[4])
+    -- I-Format: [0001][111][111][001000]
+    3  => x"1F88",
     
---    -- ============================================================
---    -- ELSE BRANCH (Address 0x0008)
---    -- ============================================================
+    -- 0x08: bgt $r4, $r7, +6  (if $t0 > 0x0100 goto THEN)
+    -- I-Format: [0101][100][111][000110]
+    -- Branch to address 0x16 (skip ELSE branch + jump)
+    4  => x"5E66",
     
---    -- 0x0008: sll $r5, $r5, 2  ($v2 = $v2 × 4, shift left by 2)
---    -- R-Format: [0000][101][000][101][010] = 0000 101 000 101 010
---    -- Opcode=0000 (R-type), Rs=$r5, Rt=$r0 (unused), Rd=$r5, Func=010 (shamt)
---    -- Note: shamt field stores shift amount
---    4  => x"0A0A",  -- 0000 1010 0000 1010 (sll $r5, $r5, 2)
+    -- ============================================================
+    -- ELSE BRANCH (Address 0x0A)
+    -- ============================================================
     
---    -- 0x000A: xor $r3, $r3, $r5  ($v3 = $v3 ? $v2)
---    -- R-Format: [0000][011][101][011][111] = 0000 011 101 011 111
---    -- Opcode=0000 (R-type), Rs=$r3, Rt=$r5, Rd=$r3, Func=111 (XOR)
---    5  => x"0757",  -- 0000 0111 0101 0111
+    -- 0x0A: sll $r2, $r2, 2  ($v2 = $v2 × 4, shift left by 2)
+    -- R-Format: [0000][010][010][010][010]
+    -- Rs=$r2, Rt=$r2 (unused), Rd=$r2, Func=010 (SLL)
+    5  => x"0512",
     
---    -- 0x000C: lw $r7, 5($r0)  (Load 0x00FF from memory address 10)
---    -- I-Format: [0001][000][111][000101] = 0001 000 111 000101
---    -- Opcode=0001 (LW), Rs=$r0, Rt=$r7, Offset=5
---    6  => x"11C5",  -- 0001 0001 1100 0101
+    -- 0x0C: xor $r3, $r3, $r2  ($v3 = $v3 ? $v2)
+    -- R-Format: [0000][011][010][011][111]
+    -- Rs=$r3, Rt=$r2, Rd=$r3, Func=111 (XOR)
+    6  => x"0727",
     
---    -- 0x000E: sw $r7, 0($r1)  (Mem[$a0] = 0x00FF)
---    -- I-Format: [0010][001][111][000000] = 0010 001 111 000000
---    -- Opcode=0010 (SW), Rs=$r1 (base), Rt=$r7 (data), Offset=0
---    7  => x"27C0",  -- 0010 0111 1100 0000
+    -- 0x0E: lw $r7, 10($r7)  (Load 0x00FF from mem[5])
+    -- I-Format: [0001][111][111][001010]
+    -- Note: $r7 was zeroed, so base is 0, offset 10 accesses byte addr 10
+    7  => x"1F8A",
     
---    -- 0x0010: j 0x001A  (jump to ENDIF)
---    -- J-Format: [1000][000000011010] = 1000 0000 0001 1010
---    -- Opcode=1000 (JUMP), Address=0x001A (in bytes: 26, word addr: 13)
---    8  => x"801A",  -- 1000 0000 0001 1010
+    -- 0x10: sw $r7, 0($r5)  (Mem[$a0] = 0x00FF)
+    -- I-Format: [0010][101][111][000000]
+    8  => x"2BC0",
     
---    -- ============================================================
---    -- THEN BRANCH (Address 0x0012)
---    -- ============================================================
+    -- 0x12: j 0x20  (Jump to ENDIF)
+    -- J-Format: [1000][000000100000]
+    -- Jump to byte address 0x20 (word index 16)
+    9  => x"8020",
     
---    -- 0x0012: srl $r0, $r0, 3  ($v0 = $v0 ÷ 8, shift right by 3)
---    -- R-Format: [0000][000][000][000][011] = 0000 000 000 000 011
---    -- Opcode=0000 (R-type), Rs=$r0, Rt=$r0, Rd=$r0, Func=011 (shamt)
---    9  => x"0003",  -- 0000 0000 0000 0011 (srl $r0, $r0, 3)
+    -- ============================================================
+    -- THEN BRANCH (Address 0x14)
+    -- ============================================================
     
---    -- 0x0014: or $r3, $r3, $r0  ($v1 = $v1 | $v0)
---    -- R-Format: [0000][011][000][011][011] = 0000 011 000 011 011
---    -- Opcode=0000 (R-type), Rs=$r3, Rt=$r0, Rd=$r3, Func=011 (OR)
---    10 => x"061B",  -- 0000 0110 0001 1011
+    -- 0x14: srl $r0, $r0, 3  ($v0 = $v0 ÷ 8, shift right by 3)
+    -- R-Format: [0000][000][000][000][101]
+    -- Rs=$r0, Rt=$r0, Rd=$r0, Func=101 (SRL) - using shamt encoding
+    10 => x"0005",
     
---    -- 0x0016: lw $r7, 6($r0)  (Load 0xFF00 from memory address 12)
---    -- I-Format: [0001][000][111][000110] = 0001 000 111 000110
---    -- Opcode=0001 (LW), Rs=$r0, Rt=$r7, Offset=6
---    11 => x"11C6",  -- 0001 0001 1100 0110
+    -- 0x16: or $r1, $r1, $r0  ($v1 = $v1 | $v0)
+    -- R-Format: [0000][001][000][001][011]
+    -- Rs=$r1, Rt=$r0, Rd=$r1, Func=011 (OR)
+    11 => x"0883",
     
---    -- 0x0018: sw $r7, 0($r1)  (Mem[$a0] = 0xFF00)
---    -- I-Format: [0010][001][111][000000] = 0010 001 111 000000
---    -- Opcode=0010 (SW), Rs=$r1, Rt=$r7, Offset=0
---    12 => x"27C0",  -- 0010 0111 1100 0000
+    -- 0x18: sub $r7, $r7, $r7  ($r7 = 0, re-zero for loading)
+    -- R-Format: [0000][111][111][111][001]
+    12 => x"0FE1",
     
---    -- ============================================================
---    -- ENDIF (Address 0x001A)
---    -- ============================================================
+    -- 0x1A: lw $r7, 12($r7)  (Load 0xFF00 from mem[6])
+    -- I-Format: [0001][111][111][001100]
+    13 => x"1F8C",
     
---    -- 0x001A: addi $r1, $r1, 2  ($a0 = $a0 + 2, increment pointer)
---    -- I-Format: [0011][001][001][000010] = 0011 001 001 000010
---    -- Opcode=0011 (ADDI), Rs=$r1, Rt=$r1, Imm=+2
---    13 => x"3242",  -- 0011 0010 0100 0010
+    -- 0x1C: sw $r7, 0($r5)  (Mem[$a0] = 0xFF00)
+    -- I-Format: [0010][101][111][000000]
+    14 => x"2BC0",
     
---    -- 0x001C: bgt $r2, $r0, -14  (if $a1 > 0 goto WHILE)
---    -- Branch back to address 0x0000, offset = -14 (0x0000 - 0x001C = -28 bytes / 2 = -14 words)
---    -- I-Format: [0101][010][000][111110] = 0101 010 000 111110 (sign bit = 1)
---    -- Actually: PC-relative, from 0x001E to 0x0000 = -15 instructions
---    -- Offset in 6-bit 2's complement: -15 = 110001 (inverted 001110 + 1 = 110001)
---    14 => x"5431",  -- 0101 0100 0011 0001 (bgt $r2, $r0, -15)
+    -- 0x1E: j 0x20  (Jump to ENDIF - optional NOP)
+    -- J-Format: [1000][000000100000]
+    15 => x"8020",
     
---    others => (others => '0')
---  );
+    -- ============================================================
+    -- ENDIF (Address 0x20)
+    -- ============================================================
+    
+    -- 0x20: addi $r5, $r5, 2  ($a0 = $a0 + 2)
+    -- I-Format: [0011][101][101][000010]
+    16 => x"35A2",
+    
+    -- 0x22: sub $r7, $r7, $r7  ($r7 = 0, for comparison)
+    -- R-Format: [0000][111][111][111][001]
+    17 => x"0FE1",
+    
+    -- 0x24: bgt $r6, $r7, -18  (Loop back to WHILE if $a1 > 0)
+    -- I-Format: [0101][110][111][OFFSET]
+    -- From PC=0x26 back to 0x00: (0x00 - 0x26)/2 = -19 instructions
+    -- -19 in 6-bit 2's complement: ~18 = 45, 45+1 = 46 = 101110
+    -- Actually: -19 = 111101 in 6-bit two's complement
+    -- Let's verify: 19 decimal = 010011 binary
+    -- Invert: 101100, Add 1: 101101 (0x2D)
+    18 => x"5EED",
+    
+    -- ============================================================
+    -- RETURN / HALT (Address 0x26)
+    -- ============================================================
+    
+    -- 0x26: j 0x26  (Infinite loop)
+    -- J-Format: [1000][000000100110]
+    19 => x"8026",
+    
+    others => (others => '0')
+  );
   
 begin
-  -- Read instruction (combinational, word addressed: PC steps by 2 bytes)
+  -- Word addressing: PC increments by 2 (byte addresses)
   instruction <= mem(to_integer(address(7 downto 1)));
 end architecture;

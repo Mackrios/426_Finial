@@ -3,404 +3,88 @@
    <wave_state>
    </wave_state>
    <db_ref_list>
-      <db_ref path="tb_individual_instructions_behav.wdb" id="1">
+      <db_ref path="tb_program_behav.wdb" id="1">
          <top_modules>
-            <top_module name="tb_individual_instructions" />
+            <top_module name="tb_program" />
          </top_modules>
       </db_ref>
    </db_ref_list>
    <zoom_setting>
-      <ZoomStartTime time="412370fs"></ZoomStartTime>
-      <ZoomEndTime time="630871fs"></ZoomEndTime>
-      <Cursor1Time time="629370fs"></Cursor1Time>
+      <ZoomStartTime time="378510fs"></ZoomStartTime>
+      <ZoomEndTime time="597611fs"></ZoomEndTime>
+      <Cursor1Time time="639750fs"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
-      <NameColumnWidth column_width="228"></NameColumnWidth>
+      <NameColumnWidth column_width="222"></NameColumnWidth>
       <ValueColumnWidth column_width="88"></ValueColumnWidth>
    </column_width_setting>
-   <WVObjectSize size="96" />
-   <wvobject fp_name="/tb_individual_instructions/DUT/clk" type="logic">
+   <WVObjectSize size="17" />
+   <wvobject fp_name="/tb_program/clk" type="logic">
       <obj_property name="ElementShortName">clk</obj_property>
       <obj_property name="ObjectShortName">clk</obj_property>
    </wvobject>
-   <wvobject fp_name="/tb_individual_instructions/DUT/rst" type="logic">
+   <wvobject fp_name="/tb_program/rst" type="logic">
       <obj_property name="ElementShortName">rst</obj_property>
       <obj_property name="ObjectShortName">rst</obj_property>
    </wvobject>
-   <wvobject fp_name="/tb_individual_instructions/DUT/pc_out" type="array">
-      <obj_property name="ElementShortName">pc_out[15:0]</obj_property>
-      <obj_property name="ObjectShortName">pc_out[15:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_individual_instructions/DUT/reg0" type="array">
-      <obj_property name="ElementShortName">reg0[15:0]</obj_property>
-      <obj_property name="ObjectShortName">reg0[15:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_individual_instructions/DUT/reg1" type="array">
-      <obj_property name="ElementShortName">reg1[15:0]</obj_property>
-      <obj_property name="ObjectShortName">reg1[15:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_individual_instructions/DUT/reg2" type="array">
-      <obj_property name="ElementShortName">reg2[15:0]</obj_property>
-      <obj_property name="ObjectShortName">reg2[15:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_individual_instructions/DUT/reg3" type="array">
-      <obj_property name="ElementShortName">reg3[15:0]</obj_property>
-      <obj_property name="ObjectShortName">reg3[15:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_individual_instructions/DUT/reg4" type="array">
-      <obj_property name="ElementShortName">reg4[15:0]</obj_property>
-      <obj_property name="ObjectShortName">reg4[15:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_individual_instructions/DUT/reg5" type="array">
-      <obj_property name="ElementShortName">reg5[15:0]</obj_property>
-      <obj_property name="ObjectShortName">reg5[15:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_individual_instructions/DUT/reg6" type="array">
-      <obj_property name="ElementShortName">reg6[15:0]</obj_property>
-      <obj_property name="ObjectShortName">reg6[15:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_individual_instructions/DUT/reg7" type="array">
-      <obj_property name="ElementShortName">reg7[15:0]</obj_property>
-      <obj_property name="ObjectShortName">reg7[15:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_individual_instructions/DUT/dbg_if_id_instr" type="array">
-      <obj_property name="ElementShortName">dbg_if_id_instr[15:0]</obj_property>
-      <obj_property name="ObjectShortName">dbg_if_id_instr[15:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_individual_instructions/DUT/dbg_id_ex_opcode" type="array">
-      <obj_property name="ElementShortName">dbg_id_ex_opcode[3:0]</obj_property>
-      <obj_property name="ObjectShortName">dbg_id_ex_opcode[3:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_individual_instructions/DUT/dbg_ex_mem_alu_res" type="array">
-      <obj_property name="ElementShortName">dbg_ex_mem_alu_res[15:0]</obj_property>
-      <obj_property name="ObjectShortName">dbg_ex_mem_alu_res[15:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_individual_instructions/DUT/dbg_mem_wb_write_reg" type="array">
-      <obj_property name="ElementShortName">dbg_mem_wb_write_reg[2:0]</obj_property>
-      <obj_property name="ObjectShortName">dbg_mem_wb_write_reg[2:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_individual_instructions/DUT/pc" type="array">
+   <wvobject fp_name="/tb_program/pc" type="array">
       <obj_property name="ElementShortName">pc[15:0]</obj_property>
       <obj_property name="ObjectShortName">pc[15:0]</obj_property>
    </wvobject>
-   <wvobject fp_name="/tb_individual_instructions/DUT/pc_next" type="array">
-      <obj_property name="ElementShortName">pc_next[15:0]</obj_property>
-      <obj_property name="ObjectShortName">pc_next[15:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_individual_instructions/DUT/pc_plus_2" type="array">
-      <obj_property name="ElementShortName">pc_plus_2[15:0]</obj_property>
-      <obj_property name="ObjectShortName">pc_plus_2[15:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_individual_instructions/DUT/instruction" type="array">
-      <obj_property name="ElementShortName">instruction[15:0]</obj_property>
-      <obj_property name="ObjectShortName">instruction[15:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_individual_instructions/DUT/if_id_pc" type="array">
-      <obj_property name="ElementShortName">if_id_pc[15:0]</obj_property>
-      <obj_property name="ObjectShortName">if_id_pc[15:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_individual_instructions/DUT/if_id_instr" type="array">
-      <obj_property name="ElementShortName">if_id_instr[15:0]</obj_property>
-      <obj_property name="ObjectShortName">if_id_instr[15:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_individual_instructions/DUT/opcode" type="array">
-      <obj_property name="ElementShortName">opcode[3:0]</obj_property>
-      <obj_property name="ObjectShortName">opcode[3:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_individual_instructions/DUT/opcode_for_alu" type="array">
-      <obj_property name="ElementShortName">opcode_for_alu[3:0]</obj_property>
-      <obj_property name="ObjectShortName">opcode_for_alu[3:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_individual_instructions/DUT/rs" type="array">
-      <obj_property name="ElementShortName">rs[2:0]</obj_property>
-      <obj_property name="ObjectShortName">rs[2:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_individual_instructions/DUT/rt" type="array">
-      <obj_property name="ElementShortName">rt[2:0]</obj_property>
-      <obj_property name="ObjectShortName">rt[2:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_individual_instructions/DUT/rd" type="array">
-      <obj_property name="ElementShortName">rd[2:0]</obj_property>
-      <obj_property name="ObjectShortName">rd[2:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_individual_instructions/DUT/imm_6bit" type="array">
-      <obj_property name="ElementShortName">imm_6bit[5:0]</obj_property>
-      <obj_property name="ObjectShortName">imm_6bit[5:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_individual_instructions/DUT/funct" type="array">
-      <obj_property name="ElementShortName">funct[2:0]</obj_property>
-      <obj_property name="ObjectShortName">funct[2:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_individual_instructions/DUT/imm_extended" type="array">
-      <obj_property name="ElementShortName">imm_extended[15:0]</obj_property>
-      <obj_property name="ObjectShortName">imm_extended[15:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_individual_instructions/DUT/shamt" type="array">
-      <obj_property name="ElementShortName">shamt[2:0]</obj_property>
-      <obj_property name="ObjectShortName">shamt[2:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_individual_instructions/DUT/jump_addr" type="array">
-      <obj_property name="ElementShortName">jump_addr[11:0]</obj_property>
-      <obj_property name="ObjectShortName">jump_addr[11:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_individual_instructions/DUT/read_data1" type="array">
-      <obj_property name="ElementShortName">read_data1[15:0]</obj_property>
-      <obj_property name="ObjectShortName">read_data1[15:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_individual_instructions/DUT/read_data2" type="array">
-      <obj_property name="ElementShortName">read_data2[15:0]</obj_property>
-      <obj_property name="ObjectShortName">read_data2[15:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_individual_instructions/DUT/reg_dst" type="logic">
-      <obj_property name="ElementShortName">reg_dst</obj_property>
-      <obj_property name="ObjectShortName">reg_dst</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_individual_instructions/DUT/jump" type="logic">
-      <obj_property name="ElementShortName">jump</obj_property>
-      <obj_property name="ObjectShortName">jump</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_individual_instructions/DUT/branch" type="logic">
-      <obj_property name="ElementShortName">branch</obj_property>
-      <obj_property name="ObjectShortName">branch</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_individual_instructions/DUT/mem_read" type="logic">
-      <obj_property name="ElementShortName">mem_read</obj_property>
-      <obj_property name="ObjectShortName">mem_read</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_individual_instructions/DUT/mem_to_reg" type="logic">
-      <obj_property name="ElementShortName">mem_to_reg</obj_property>
-      <obj_property name="ObjectShortName">mem_to_reg</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_individual_instructions/DUT/alu_op" type="array">
-      <obj_property name="ElementShortName">alu_op[1:0]</obj_property>
-      <obj_property name="ObjectShortName">alu_op[1:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_individual_instructions/DUT/mem_write" type="logic">
-      <obj_property name="ElementShortName">mem_write</obj_property>
-      <obj_property name="ObjectShortName">mem_write</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_individual_instructions/DUT/alu_src" type="logic">
-      <obj_property name="ElementShortName">alu_src</obj_property>
-      <obj_property name="ObjectShortName">alu_src</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_individual_instructions/DUT/reg_write" type="logic">
-      <obj_property name="ElementShortName">reg_write</obj_property>
-      <obj_property name="ObjectShortName">reg_write</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_individual_instructions/DUT/branch_offset" type="array">
-      <obj_property name="ElementShortName">branch_offset[15:0]</obj_property>
-      <obj_property name="ObjectShortName">branch_offset[15:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_individual_instructions/DUT/branch_target" type="array">
-      <obj_property name="ElementShortName">branch_target[15:0]</obj_property>
-      <obj_property name="ObjectShortName">branch_target[15:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_individual_instructions/DUT/branch_condition" type="logic">
-      <obj_property name="ElementShortName">branch_condition</obj_property>
-      <obj_property name="ObjectShortName">branch_condition</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_individual_instructions/DUT/id_ex_reg_write" type="logic">
-      <obj_property name="ElementShortName">id_ex_reg_write</obj_property>
-      <obj_property name="ObjectShortName">id_ex_reg_write</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_individual_instructions/DUT/id_ex_mem_to_reg" type="logic">
-      <obj_property name="ElementShortName">id_ex_mem_to_reg</obj_property>
-      <obj_property name="ObjectShortName">id_ex_mem_to_reg</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_individual_instructions/DUT/id_ex_mem_write" type="logic">
-      <obj_property name="ElementShortName">id_ex_mem_write</obj_property>
-      <obj_property name="ObjectShortName">id_ex_mem_write</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_individual_instructions/DUT/id_ex_mem_read" type="logic">
-      <obj_property name="ElementShortName">id_ex_mem_read</obj_property>
-      <obj_property name="ObjectShortName">id_ex_mem_read</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_individual_instructions/DUT/id_ex_branch" type="logic">
-      <obj_property name="ElementShortName">id_ex_branch</obj_property>
-      <obj_property name="ObjectShortName">id_ex_branch</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_individual_instructions/DUT/id_ex_alu_src" type="logic">
-      <obj_property name="ElementShortName">id_ex_alu_src</obj_property>
-      <obj_property name="ObjectShortName">id_ex_alu_src</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_individual_instructions/DUT/id_ex_reg_dst" type="logic">
-      <obj_property name="ElementShortName">id_ex_reg_dst</obj_property>
-      <obj_property name="ObjectShortName">id_ex_reg_dst</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_individual_instructions/DUT/id_ex_alu_op" type="array">
-      <obj_property name="ElementShortName">id_ex_alu_op[1:0]</obj_property>
-      <obj_property name="ObjectShortName">id_ex_alu_op[1:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_individual_instructions/DUT/id_ex_pc" type="array">
-      <obj_property name="ElementShortName">id_ex_pc[15:0]</obj_property>
-      <obj_property name="ObjectShortName">id_ex_pc[15:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_individual_instructions/DUT/id_ex_rd1" type="array">
-      <obj_property name="ElementShortName">id_ex_rd1[15:0]</obj_property>
-      <obj_property name="ObjectShortName">id_ex_rd1[15:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_individual_instructions/DUT/id_ex_rd2" type="array">
-      <obj_property name="ElementShortName">id_ex_rd2[15:0]</obj_property>
-      <obj_property name="ObjectShortName">id_ex_rd2[15:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_individual_instructions/DUT/id_ex_imm" type="array">
-      <obj_property name="ElementShortName">id_ex_imm[15:0]</obj_property>
-      <obj_property name="ObjectShortName">id_ex_imm[15:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_individual_instructions/DUT/id_ex_rs" type="array">
-      <obj_property name="ElementShortName">id_ex_rs[2:0]</obj_property>
-      <obj_property name="ObjectShortName">id_ex_rs[2:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_individual_instructions/DUT/id_ex_rt" type="array">
-      <obj_property name="ElementShortName">id_ex_rt[2:0]</obj_property>
-      <obj_property name="ObjectShortName">id_ex_rt[2:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_individual_instructions/DUT/id_ex_rd" type="array">
-      <obj_property name="ElementShortName">id_ex_rd[2:0]</obj_property>
-      <obj_property name="ObjectShortName">id_ex_rd[2:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_individual_instructions/DUT/id_ex_opcode" type="array">
-      <obj_property name="ElementShortName">id_ex_opcode[3:0]</obj_property>
-      <obj_property name="ObjectShortName">id_ex_opcode[3:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_individual_instructions/DUT/id_ex_shamt" type="array">
-      <obj_property name="ElementShortName">id_ex_shamt[2:0]</obj_property>
-      <obj_property name="ObjectShortName">id_ex_shamt[2:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_individual_instructions/DUT/alu_input_a" type="array">
-      <obj_property name="ElementShortName">alu_input_a[15:0]</obj_property>
-      <obj_property name="ObjectShortName">alu_input_a[15:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_individual_instructions/DUT/alu_input_b" type="array">
-      <obj_property name="ElementShortName">alu_input_b[15:0]</obj_property>
-      <obj_property name="ObjectShortName">alu_input_b[15:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_individual_instructions/DUT/alu_control_signal" type="array">
-      <obj_property name="ElementShortName">alu_control_signal[3:0]</obj_property>
-      <obj_property name="ObjectShortName">alu_control_signal[3:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_individual_instructions/DUT/alu_result" type="array">
-      <obj_property name="ElementShortName">alu_result[15:0]</obj_property>
-      <obj_property name="ObjectShortName">alu_result[15:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_individual_instructions/DUT/alu_zero" type="logic">
-      <obj_property name="ElementShortName">alu_zero</obj_property>
-      <obj_property name="ObjectShortName">alu_zero</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_individual_instructions/DUT/alu_overflow" type="logic">
-      <obj_property name="ElementShortName">alu_overflow</obj_property>
-      <obj_property name="ObjectShortName">alu_overflow</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_individual_instructions/DUT/alu_carryout" type="logic">
-      <obj_property name="ElementShortName">alu_carryout</obj_property>
-      <obj_property name="ObjectShortName">alu_carryout</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_individual_instructions/DUT/forward_a" type="array">
-      <obj_property name="ElementShortName">forward_a[1:0]</obj_property>
-      <obj_property name="ObjectShortName">forward_a[1:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_individual_instructions/DUT/forward_b" type="array">
-      <obj_property name="ElementShortName">forward_b[1:0]</obj_property>
-      <obj_property name="ObjectShortName">forward_b[1:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_individual_instructions/DUT/forwarded_a" type="array">
-      <obj_property name="ElementShortName">forwarded_a[15:0]</obj_property>
-      <obj_property name="ObjectShortName">forwarded_a[15:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_individual_instructions/DUT/forwarded_b" type="array">
-      <obj_property name="ElementShortName">forwarded_b[15:0]</obj_property>
-      <obj_property name="ObjectShortName">forwarded_b[15:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_individual_instructions/DUT/write_reg_ex" type="array">
-      <obj_property name="ElementShortName">write_reg_ex[2:0]</obj_property>
-      <obj_property name="ObjectShortName">write_reg_ex[2:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_individual_instructions/DUT/ex_mem_reg_write" type="logic">
-      <obj_property name="ElementShortName">ex_mem_reg_write</obj_property>
-      <obj_property name="ObjectShortName">ex_mem_reg_write</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_individual_instructions/DUT/ex_mem_mem_to_reg" type="logic">
-      <obj_property name="ElementShortName">ex_mem_mem_to_reg</obj_property>
-      <obj_property name="ObjectShortName">ex_mem_mem_to_reg</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_individual_instructions/DUT/ex_mem_mem_write" type="logic">
-      <obj_property name="ElementShortName">ex_mem_mem_write</obj_property>
-      <obj_property name="ObjectShortName">ex_mem_mem_write</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_individual_instructions/DUT/ex_mem_mem_read" type="logic">
-      <obj_property name="ElementShortName">ex_mem_mem_read</obj_property>
-      <obj_property name="ObjectShortName">ex_mem_mem_read</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_individual_instructions/DUT/ex_mem_branch" type="logic">
-      <obj_property name="ElementShortName">ex_mem_branch</obj_property>
-      <obj_property name="ObjectShortName">ex_mem_branch</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_individual_instructions/DUT/ex_mem_alu_result" type="array">
-      <obj_property name="ElementShortName">ex_mem_alu_result[15:0]</obj_property>
-      <obj_property name="ObjectShortName">ex_mem_alu_result[15:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_individual_instructions/DUT/ex_mem_write_data" type="array">
-      <obj_property name="ElementShortName">ex_mem_write_data[15:0]</obj_property>
-      <obj_property name="ObjectShortName">ex_mem_write_data[15:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_individual_instructions/DUT/ex_mem_write_reg" type="array">
-      <obj_property name="ElementShortName">ex_mem_write_reg[2:0]</obj_property>
-      <obj_property name="ObjectShortName">ex_mem_write_reg[2:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_individual_instructions/DUT/ex_mem_zero" type="logic">
-      <obj_property name="ElementShortName">ex_mem_zero</obj_property>
-      <obj_property name="ObjectShortName">ex_mem_zero</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_individual_instructions/DUT/ex_mem_branch_addr" type="array">
-      <obj_property name="ElementShortName">ex_mem_branch_addr[15:0]</obj_property>
-      <obj_property name="ObjectShortName">ex_mem_branch_addr[15:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_individual_instructions/DUT/mem_read_data" type="array">
-      <obj_property name="ElementShortName">mem_read_data[15:0]</obj_property>
-      <obj_property name="ObjectShortName">mem_read_data[15:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_individual_instructions/DUT/branch_taken" type="logic">
-      <obj_property name="ElementShortName">branch_taken</obj_property>
-      <obj_property name="ObjectShortName">branch_taken</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_individual_instructions/DUT/jump_taken" type="logic">
-      <obj_property name="ElementShortName">jump_taken</obj_property>
-      <obj_property name="ObjectShortName">jump_taken</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_individual_instructions/DUT/mem_wb_reg_write" type="logic">
-      <obj_property name="ElementShortName">mem_wb_reg_write</obj_property>
-      <obj_property name="ObjectShortName">mem_wb_reg_write</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_individual_instructions/DUT/mem_wb_mem_to_reg" type="logic">
-      <obj_property name="ElementShortName">mem_wb_mem_to_reg</obj_property>
-      <obj_property name="ObjectShortName">mem_wb_mem_to_reg</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_individual_instructions/DUT/mem_wb_mem_data" type="array">
-      <obj_property name="ElementShortName">mem_wb_mem_data[15:0]</obj_property>
-      <obj_property name="ObjectShortName">mem_wb_mem_data[15:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_individual_instructions/DUT/mem_wb_alu_result" type="array">
-      <obj_property name="ElementShortName">mem_wb_alu_result[15:0]</obj_property>
-      <obj_property name="ObjectShortName">mem_wb_alu_result[15:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_individual_instructions/DUT/mem_wb_write_reg" type="array">
-      <obj_property name="ElementShortName">mem_wb_write_reg[2:0]</obj_property>
-      <obj_property name="ObjectShortName">mem_wb_write_reg[2:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_individual_instructions/DUT/write_back_data" type="array">
-      <obj_property name="ElementShortName">write_back_data[15:0]</obj_property>
-      <obj_property name="ObjectShortName">write_back_data[15:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_individual_instructions/DUT/stall" type="logic">
-      <obj_property name="ElementShortName">stall</obj_property>
-      <obj_property name="ObjectShortName">stall</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_individual_instructions/DUT/flush_if_id" type="logic">
-      <obj_property name="ElementShortName">flush_if_id</obj_property>
-      <obj_property name="ObjectShortName">flush_if_id</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_individual_instructions/DUT/flush_id_ex" type="logic">
-      <obj_property name="ElementShortName">flush_id_ex</obj_property>
-      <obj_property name="ObjectShortName">flush_id_ex</obj_property>
+   <wvobject fp_name="/tb_program/r0" type="array">
+      <obj_property name="ElementShortName">r0[15:0]</obj_property>
+      <obj_property name="ObjectShortName">r0[15:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_program/r1" type="array">
+      <obj_property name="ElementShortName">r1[15:0]</obj_property>
+      <obj_property name="ObjectShortName">r1[15:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_program/r2" type="array">
+      <obj_property name="ElementShortName">r2[15:0]</obj_property>
+      <obj_property name="ObjectShortName">r2[15:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_program/r3" type="array">
+      <obj_property name="ElementShortName">r3[15:0]</obj_property>
+      <obj_property name="ObjectShortName">r3[15:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_program/r4" type="array">
+      <obj_property name="ElementShortName">r4[15:0]</obj_property>
+      <obj_property name="ObjectShortName">r4[15:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_program/r5" type="array">
+      <obj_property name="ElementShortName">r5[15:0]</obj_property>
+      <obj_property name="ObjectShortName">r5[15:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_program/r6" type="array">
+      <obj_property name="ElementShortName">r6[15:0]</obj_property>
+      <obj_property name="ObjectShortName">r6[15:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_program/r7" type="array">
+      <obj_property name="ElementShortName">r7[15:0]</obj_property>
+      <obj_property name="ObjectShortName">r7[15:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_program/dbg_if_id_instr" type="array">
+      <obj_property name="ElementShortName">dbg_if_id_instr[15:0]</obj_property>
+      <obj_property name="ObjectShortName">dbg_if_id_instr[15:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_program/dbg_id_ex_opcode" type="array">
+      <obj_property name="ElementShortName">dbg_id_ex_opcode[3:0]</obj_property>
+      <obj_property name="ObjectShortName">dbg_id_ex_opcode[3:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_program/dbg_ex_mem_alu_res" type="array">
+      <obj_property name="ElementShortName">dbg_ex_mem_alu_res[15:0]</obj_property>
+      <obj_property name="ObjectShortName">dbg_ex_mem_alu_res[15:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_program/dbg_mem_wb_write_reg" type="array">
+      <obj_property name="ElementShortName">dbg_mem_wb_write_reg[2:0]</obj_property>
+      <obj_property name="ObjectShortName">dbg_mem_wb_write_reg[2:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_program/CLK_PERIOD" type="other">
+      <obj_property name="ElementShortName">CLK_PERIOD</obj_property>
+      <obj_property name="ObjectShortName">CLK_PERIOD</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_program/MAX_LOOPS" type="other">
+      <obj_property name="ElementShortName">MAX_LOOPS</obj_property>
+      <obj_property name="ObjectShortName">MAX_LOOPS</obj_property>
    </wvobject>
 </wave_config>

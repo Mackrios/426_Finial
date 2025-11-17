@@ -23,24 +23,28 @@ architecture rtl of data_memory is
   -- mem[16-25]   = Results storage area (will be filled by program)
   -- mem[26-255]  = 0x0000 (unused)
   
-  signal mem : mem_array := (
-    -- 0x0000 - 0x0006: unused / zero
-    0  => x"0000",
-    1  => x"0000",
-    2  => x"0000",
-    3  => x"0000",
+signal mem : mem_array := (
+  -- 0..3 unused
+  0  => x"0000",
+  1  => x"0000",
+  2  => x"0000",
+  3  => x"0000",
 
-    -- Constants used by the program (accessed via LW with byte offsets):
-    -- byte offset 8  -> word index 4
-    -- byte offset 10 -> word index 5
-    -- byte offset 12 -> word index 6
-    4  => x"0100",   -- comparison threshold
-    5  => x"00FF",   -- "else" store value
-    6  => x"FF00",   -- "then" store value
+  -- constants region (if you still want 0x0100, 0x00FF, 0xFF00 here)
+  4  => x"0100",  -- threshold
+  5  => x"00FF",  -- else store value
+  6  => x"FF00",  -- then store value
 
-    -- 0x000E..0x001E etc. (everything else default to 0)
-    others => (others => '0')
-  );
+  -- test data starting at $a0 = 0x0010
+  8  => x"0101",  -- Mem[$a0]
+  9  => x"0110",  -- Mem[$a0+2]
+  10 => x"0011",  -- Mem[$a0+4]
+  11 => x"00F0",  -- Mem[$a0+6]
+  12 => x"00FF",  -- Mem[$a0+8]
+
+  others => (others => '0')
+);
+
 
 
   
