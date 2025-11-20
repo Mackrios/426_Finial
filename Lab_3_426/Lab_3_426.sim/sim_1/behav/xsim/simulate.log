@@ -1,0 +1,12 @@
+Vivado Simulator 2020.2
+Time resolution is 1 ps
+Note: ================ INITIAL STATE (HW) ================
+Time: 95 ns  Iteration: 1  Process: /tb_program/stim_proc  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/Tb_opcode_takein.vhd
+Note: R0=0080  R1=1010  R2=000F  R3=00F0
+Time: 95 ns  Iteration: 1  Process: /tb_program/stim_proc  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/Tb_opcode_takein.vhd
+Note: R4=0000  R5=0010  R6=0005  R7=0000
+Time: 95 ns  Iteration: 1  Process: /tb_program/stim_proc  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/Tb_opcode_takein.vhd
+Error: Initial R0 mismatch. Exp=0040 got=0080
+Time: 95 ns  Iteration: 1  Process: /tb_program/stim_proc  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/Tb_opcode_takein.vhd
+Note: ---------- GOLDEN LOOP 1 (a1=0005) ----------
+Time: 95 ns  Iteration: 1  Process: /tb_program/stim_proc  File: C:/Users/mackr/426_Finial/Lab_3_426/Lab_3_426.srcs/sources_1/new/Tb_opcode_takein.vhd
