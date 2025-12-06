@@ -29,7 +29,6 @@ begin
     elsif rising_edge(clk) then
 
       if flush = '1' then
-        -- Insert bubble; DO NOT clear PC
         instr_out <= (others => '0');
 
       elsif stall = '0' then

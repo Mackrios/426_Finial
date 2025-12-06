@@ -1,6 +1,6 @@
 ----------------------------------------------------------------------
--- FINAL SELF-CHECKING TESTBENCH FOR FULL PROGRAM EXECUTION
---  - Models the pseudocode in VHDL (golden model)
+-- FINAL TESTBENCH FOR FULL PROGRAM EXECUTION
+--  - Models the pseudocode in VHDL 
 --  - After each loop iteration, compares HW regs to expected regs
 --  - Uses ASSERT statements to pinpoint bugs
 ----------------------------------------------------------------------
@@ -17,7 +17,7 @@ end entity;
 architecture behavior of tb_program is
     
     constant CLK_PERIOD : time := 10 ns;
-    constant MAX_LOOPS  : integer := 10;  -- safety limit
+    constant MAX_LOOPS  : integer := 10;  
 
     signal clk    : std_logic := '0';
     signal rst    : std_logic := '1';
@@ -26,7 +26,7 @@ architecture behavior of tb_program is
     signal pc : unsigned(15 downto 0);
     signal r0,r1,r2,r3,r4,r5,r6,r7 : unsigned(15 downto 0);
 
-    -- Debug signals (optional)
+    -- Debug signals
     signal dbg_if_id_instr      : unsigned(15 downto 0);
     signal dbg_id_ex_opcode     : unsigned(3 downto 0);
     signal dbg_ex_mem_alu_res   : unsigned(15 downto 0);
@@ -75,22 +75,10 @@ architecture behavior of tb_program is
         return s;
     end function;
 
-    -- Golden memory model type (matches data_memory)
+   
     type mem_array is array(0 to 255) of unsigned(15 downto 0);
 
-    ------------------------------------------------------------------
-    -- Golden model of ONE loop iteration of the pseudocode
-    --
-    -- Register mapping (expected model):
-    --   v0  -> exp_r0
-    --   v1  -> exp_r1
-    --   v2  -> exp_r2
-    --   v3  -> exp_r3
-    --   t0  -> exp_r4
-    --   a0  -> exp_r5
-    --   a1  -> exp_r6
-    --   temp-> exp_r7  (unused)
-    ------------------------------------------------------------------
+
     procedure step_model(
         variable exp_r0 : inout unsigned(15 downto 0);
         variable exp_r1 : inout unsigned(15 downto 0);
@@ -182,7 +170,7 @@ begin
     -- MAIN TEST
     ----------------------------------------------------------------------
     stim_proc : process
-        -- golden expected registers
+        -- expected registers
         variable exp_r0,exp_r1,exp_r2,exp_r3 : unsigned(15 downto 0);
         variable exp_r4,exp_r5,exp_r6,exp_r7 : unsigned(15 downto 0);
         -- golden memory
@@ -190,15 +178,12 @@ begin
         -- loop counter
         variable loop_count : integer := 0;
     begin
-        ------------------------------------------------------------------
-        -- Initialize golden model to match your REG + MEM reset state
-        ------------------------------------------------------------------
         -- Clear memory
         for i in 0 to 255 loop
             exp_mem(i) := (others => '0');
         end loop;
 
-        -- Constants region (if used by program)
+        -- Constants region
         exp_mem(4)  := x"0100";
         exp_mem(5)  := x"00FF";
         exp_mem(6)  := x"FF00";
@@ -210,7 +195,6 @@ begin
         exp_mem(11) := x"00F0";  -- Mem[$a0+6]
         exp_mem(12) := x"00FF";  -- Mem[$a0+8]
 
-        -- Golden registers: match your register_file reset
         -- r0=v0, r1=v1, r2=v2, r3=v3, r4=t0, r5=a0, r6=a1, r7=temp
         exp_r0 := x"0040";  -- v0
         exp_r1 := x"1010";  -- v1
@@ -221,9 +205,6 @@ begin
         exp_r6 := x"0005";  -- a1
         exp_r7 := x"0000";  -- temp
 
-        ------------------------------------------------------------------
-        -- Reset DUT
-        ------------------------------------------------------------------
         rst <= '1';
         wait_cycles(5);
         rst <= '0';
@@ -236,7 +217,7 @@ begin
                "  R6=" & hex(r6) & "  R7=" & hex(r7) severity note;
 
         ------------------------------------------------------------------
-        -- Check initial registers vs golden model
+        -- asserting if initial registers matches what is shown in the simulation
         ------------------------------------------------------------------
         assert r0 = exp_r0 report "Initial R0 mismatch. Exp=" &
               hex(exp_r0) & " got=" & hex(r0) severity error;
@@ -256,8 +237,7 @@ begin
               hex(exp_r7) & " got=" & hex(r7) severity error;
 
         ------------------------------------------------------------------
-        -- Run loop according to GOLDEN MODEL (not hardware),
-        -- checking HW vs expected after each iteration.
+        -- Run loop according to the correct outputs
         ------------------------------------------------------------------
         while (exp_r6 /= x"0000") and (loop_count < MAX_LOOPS) loop
 
@@ -266,17 +246,15 @@ begin
             report "---------- GOLDEN LOOP " & integer'image(loop_count) &
                    " (a1=" & hex(exp_r6) & ") ----------" severity note;
 
-            -- Advance golden model by ONE iteration of the while loop
+            
             step_model(exp_r0, exp_r1, exp_r2, exp_r3,
                        exp_r4, exp_r5, exp_r6, exp_r7,
                        exp_mem);
 
-            -- Now let the hardware catch up for one full loop.
-            -- Adjust this count if timing changes.
             wait_cycles(200);
 
             -- Compare each register to expected; if any mismatch,
-            -- we know exactly which loop + which register failed.
+            -- assert incorrect output.
             assert r0 = exp_r0 report
                 "Loop " & integer'image(loop_count) &
                 ": R0 (v0) mismatch. Exp=" & hex(exp_r0) &
@@ -336,21 +314,20 @@ begin
             "Final a1 (R6) is not zero; loop did not terminate correctly"
             severity error;
 
-        -- (Optional) You can compare final HW regs to the precomputed
-        -- golden final state: v0=0001, v1=1019, v2=03C0, v3=03FC,
+        -- exp final state: v0=0001, v1=1019, v2=03C0, v3=03FC,
         -- a0=001A, a1=0000, t0=00FF, temp=0000.
         assert r0 = x"0001" report
-            "Final R0 mismatch vs known golden result (0001)" severity error;
+            "Final R0 mismatch vs known expected result (0001)" severity error;
         assert r1 = x"1019" report
-            "Final R1 mismatch vs known golden result (1019)" severity error;
+            "Final R1 mismatch vs known expected result (1019)" severity error;
         assert r2 = x"03C0" report
-            "Final R2 mismatch vs known golden result (03C0)" severity error;
+            "Final R2 mismatch vs known expected result (03C0)" severity error;
         assert r3 = x"03FC" report
-            "Final R3 mismatch vs known golden result (03FC)" severity error;
+            "Final R3 mismatch vs known expected result (03FC)" severity error;
         assert r5 = x"001A" report
-            "Final R5 (a0) mismatch vs known golden result (001A)" severity error;
+            "Final R5 (a0) mismatch vs known expected result (001A)" severity error;
         assert r6 = x"0000" report
-            "Final R6 (a1) mismatch vs known golden result (0000)" severity error;
+            "Final R6 (a1) mismatch vs known expected result (0000)" severity error;
 
         report "============== PROGRAM CHECK COMPLETE ==============" severity note;
 

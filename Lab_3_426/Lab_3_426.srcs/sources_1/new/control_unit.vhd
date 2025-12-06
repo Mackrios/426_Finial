@@ -77,7 +77,7 @@ begin
         alu_src    <= '0';
         ALU_OP     <= "01";
         
-      when "1000" =>  -- JUMP (FIXED: was 1111, now 1000)
+      when "1000" =>  -- JUMP 
         jump       <= '1';
         ALU_OP     <= "11";
         

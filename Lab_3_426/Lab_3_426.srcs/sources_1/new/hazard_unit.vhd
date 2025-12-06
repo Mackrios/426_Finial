@@ -1,4 +1,3 @@
-
 library IEEE;
 use IEEE.std_logic_1164.all;
 use IEEE.numeric_std.all;
@@ -33,6 +32,7 @@ entity hazard_unit is
   );
 end entity;
 
+
 architecture rtl of hazard_unit is
 begin
   process(rs_id, rt_id, rs_ex, rt_ex,
@@ -49,12 +49,10 @@ begin
     forward_b   <= "00";
 
     -- ------------ load-use stall (ID vs EX) ------------
-    -- When EX stage has a load and the result is needed in ID stage
     if (mem_read_ex = '1') and 
        (write_reg_ex /= "000") and
        ((write_reg_ex = rs_id) or (write_reg_ex = rt_id)) then
       stall       <= '1';
-      flush_if_id <= '1'; 
       flush_id_ex <= '1';
     end if;
 
@@ -65,23 +63,22 @@ begin
     end if;
 
     -- ------------ forwarding (EX vs MEM/WB) ------------
-    -- A input (uses rs_ex)
+    -- A input (using rs_ex)
     if (reg_write_mem = '1') and (write_reg_mem /= "000") and
        (write_reg_mem = rs_ex) then
-      forward_a <= "10";      -- from EX/MEM (closest, highest priority)
+      forward_a <= "10";      -- from EX/MEM
     elsif (reg_write_wb = '1') and (write_reg_wb /= "000") and
           (write_reg_wb = rs_ex) then
-      forward_a <= "01";      -- from MEM/WB (lower priority)
+      forward_a <= "01";      -- from MEM/WB
     end if;
 
-    -- B input (uses rt_ex)
+    -- B input (using rt_ex)
     if (reg_write_mem = '1') and (write_reg_mem /= "000") and
        (write_reg_mem = rt_ex) then
-      forward_b <= "10";      -- from EX/MEM
+      forward_b <= "10";
     elsif (reg_write_wb = '1') and (write_reg_wb /= "000") and
           (write_reg_wb = rt_ex) then
-      forward_b <= "01";      -- from MEM/WB
+      forward_b <= "01";
     end if;
-
   end process;
 end architecture;

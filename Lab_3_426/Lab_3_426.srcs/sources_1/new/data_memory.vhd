@@ -17,30 +17,30 @@ architecture rtl of data_memory is
   type mem_array is array(0 to 255) of unsigned(15 downto 0);
   
   -- Memory layout:
-  -- mem[0-3]     = 0x0000 (unused)
+  -- mem[0-3]     = 0x0000 (not used)
   -- mem[4-6]     = Constants (0x0100, 0x00FF, 0xFF00)
-  -- mem[7-15]    = 0x0000 (unused)
+  -- mem[7-15]    = 0x0000 (not used)
   -- mem[16-25]   = Results storage area (will be filled by program)
-  -- mem[26-255]  = 0x0000 (unused)
+  -- mem[26-255]  = 0x0000 (not used)
   
 signal mem : mem_array := (
-  -- 0..3 unused
-  16  => x"0000",
-  17  => x"0100",
-  18  => x"00FF",
-  19  => x"FF00",
+  -- 0..3 not used
+  0  => x"0000",
+  1  => x"0000",
+  2  => x"0000",
+  3  => x"0000",
 
-  -- constants region (if you still want 0x0100, 0x00FF, 0xFF00 here)
-  20  => x"0101",  -- threshold
-  21  => x"0110",  -- else store value
-  22  => x"0011",  -- then store value
+  -- constants region 
+  4  => x"0100",  -- threshold
+  5  => x"00FF",  -- else store value
+  6  => x"FF00",  -- then store value
 
-  -- test data starting at $a0 = 0x0010
-  23  => x"00F0",  -- Mem[$a0]
-  24  => x"00FF",  -- Mem[$a0+2]
-  --10 => x"0011",  -- Mem[$a0+4]
-  --11 => x"00F0",  -- Mem[$a0+6]
-  --12 => x"00FF",  -- Mem[$a0+8]
+  -- testing data starting at $a0 = 0x0010
+  8  => x"0101",  -- Mem[$a0]
+  9  => x"0110",  -- Mem[$a0+2]
+  10 => x"0011",  -- Mem[$a0+4]
+  11 => x"00F0",  -- Mem[$a0+6]
+  12 => x"00FF",  -- Mem[$a0+8]
 
   others => (others => '0')
 );

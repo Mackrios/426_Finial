@@ -19,7 +19,7 @@ architecture structural of adder_16bit is
     );
   end component;
   
-  signal carry : std_logic_vector(16 downto 0);  -- Changed from 15 to 16!
+  signal carry : std_logic_vector(16 downto 0);
   
 begin
   carry(0) <= Cin;
@@ -35,6 +35,6 @@ begin
       );
   end generate;
   
-  Cout <= carry(16);  -- Changed from carry(15) to carry(16)
+  Cout <= carry(16);  -- the 17th bit holds carry out bit, which is why it was changed
   
 end architecture;

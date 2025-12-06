@@ -39,10 +39,10 @@ architecture rtl of pipelined_cpu is
   signal if_id_instr : unsigned(15 downto 0);
   
   signal opcode      : unsigned(3 downto 0);
-  signal opcode_for_alu : unsigned(3 downto 0);  -- ADDED: Opcode or function for ALU control
+  signal opcode_for_alu : unsigned(3 downto 0);  -- Opcode or function for ALU control
   signal rs, rt, rd  : unsigned(2 downto 0);
-  signal imm_6bit    : unsigned(5 downto 0);  -- FIXED: Was imm_4bit
-  signal funct       : unsigned(2 downto 0);  -- ADDED: Function field for R-type
+  signal imm_6bit    : unsigned(5 downto 0);  -- Was imm_4bit
+  signal funct       : unsigned(2 downto 0);  -- Function field for R-type
   signal imm_extended: unsigned(15 downto 0);
   signal shamt       : unsigned(2 downto 0);
   signal jump_addr   : unsigned(11 downto 0);
@@ -91,7 +91,7 @@ architecture rtl of pipelined_cpu is
   
   signal stall, flush_if_id, flush_id_ex : std_logic;
   
-  -- Component declarations (unchanged)
+  -- Component declarations 
   component register_file
     port(
       clk       : in  std_logic;
@@ -330,14 +330,14 @@ begin
     );
   
 -- ====================================================================
--- FIXED INSTRUCTION FIELD EXTRACTION
+-- INSTRUCTION FIELD EXTRACTION
 -- ====================================================================
 opcode     <= if_id_instr(15 downto 12);
 rs         <= if_id_instr(11 downto 9);
 rt         <= if_id_instr(8 downto 6);
 rd         <= if_id_instr(5 downto 3);
 funct      <= if_id_instr(2 downto 0);    -- Function field for R-type
-shamt      <= if_id_instr(2 downto 0);    -- Same as funct, used for shifts
+shamt      <= if_id_instr(2 downto 0);    -- used for shifts
 imm_6bit   <= if_id_instr(5 downto 0);    -- 6-bit immediate
 jump_addr  <= if_id_instr(11 downto 0);
 
@@ -348,7 +348,7 @@ with opcode select
     unsigned("0" & std_logic_vector(funct)) when "0000",  -- R-type
     opcode                                   when others;
 
-  -- FIXED: Sign extension for 6-bit immediate
+  -- Sign extension for 6-bit immediate
 imm_extended <= (15 downto 6 => imm_6bit(5)) & imm_6bit;
 
   
@@ -578,7 +578,7 @@ HAZARD: hazard_unit
 
   
   pc_out <= pc;
-    -- DEBUG PORT ASSIGNMENTS (for testbench visibility only)
+ -- created debug signals for troubleshooting incorrect outputs
   dbg_if_id_instr      <= if_id_instr;
   dbg_id_ex_opcode     <= id_ex_opcode;
   dbg_ex_mem_alu_res   <= ex_mem_alu_result;

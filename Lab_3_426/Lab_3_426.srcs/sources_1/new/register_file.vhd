@@ -28,7 +28,7 @@ architecture rtl of register_file is
   type reg_array is array(0 to 7) of unsigned(15 downto 0);
   
 signal Regs : reg_array := (
-    0 => x"0000",  -- R0 = v0
+    0 => x"0040",  -- R0 = v0
     1 => x"1010",  -- R1 = v1   
     2 => x"000F",  -- R2 = v2
     3 => x"00F0",  -- R3 = v3
